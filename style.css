@@ -1,0 +1,298 @@
+/* Portfolio::Profile -- CSS Styling*/
+/* Gavin Zimmeerman */
+
+
+/* Main */
+body {
+    font-family: 'Noto Serif JP','Shippori Mincho',  serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Navigation Bar */
+.navbar {
+    z-index: 10;
+    display: inline-block;
+    width: 100%;
+    top: 0;
+    background-color: rgba(20,20,20,0.35);
+    color: white;
+    position: relative;
+}
+
+.navbar>.home {
+    color: inherit;
+    width: max-content;
+    position: relative;
+    float: left;
+    text-decoration: none;
+    margin: 0px 20px;
+}
+.navbar>.home>h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+.navbar>.home>h2 {
+    font-size: medium;  
+    margin: 0; 
+    padding-bottom: 10px;
+}
+.navbar>.home>h1>.logo {
+    width: 110px;
+    position: absolute;
+    top: 20px;
+    right: -90px;
+}
+.navbar>.content {
+    position: relative;
+    float: right;
+    width: max-content;
+    font-size: x-large;
+    margin-right: 40px;
+    bottom: 0;
+    display: flex;
+}
+.navbar>.content h3 {
+    position: relative;
+    bottom: 0px;
+    width: max-content;
+    margin: 36px 20px 8px 0px;
+    padding-bottom: 8px;
+    font-size: x-large;
+    border-bottom: 4px solid rgba(0,0,0,0);
+    color: white;
+}
+.navbar>.content a {
+    text-decoration: none;
+}
+
+.navbar>.content h3:hover {
+    border-bottom: 4px solid rgb(52, 235, 255);
+}
+
+
+.navbar>.content>.dropdown>.dropdown-content {
+    visibility: visible;
+    position: absolute;
+    background-color: rgba(40,40,40,.92);
+    visibility: hidden;
+    font-size: large;
+    padding: 8px;
+}
+.navbar>.content>.dropdown:hover>.dropdown-content {
+    visibility: visible;
+}
+.navbar>.content>.dropdown>.dropdown-content a {
+    padding: 4px 24px;
+    display: inline-block;
+    width: calc(100% - 48px);
+    color: white;
+}
+.navbar>.content>.dropdown>.dropdown-content a:hover {
+    background-color: rgba(100,100,100,.5);
+    display: inline-block;
+}
+
+
+
+
+
+.cover {
+    width: 100%;
+    position: absolute;
+    top:0;
+    display: inline-block;
+    text-align: center;
+}
+.cover>img {
+    padding-top: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    max-height: 526px;
+    z-index: -10;
+    margin: auto;
+}
+
+.cover-fit {
+    width: 100%;
+    position: absolute;
+    top:0;
+    display: inline-block;
+    text-align: center;
+}
+.cover-fit>img {
+    padding-top: 0;
+    max-height: fit-content;
+    max-width: 100%;
+    z-index: -10;
+    margin: auto;
+}
+.cover-fit>.vert_title {
+    position: absolute;
+    width: 400px;
+    height:200px;
+    transform: rotate(-90deg);
+    bottom: 120px;
+    left: -110px;
+    text-align: left;
+}
+.cover-fit>.vert_title h2 {
+    font-size: xx-large;
+    padding: 10px;
+}
+
+.scroll {
+    display: inline-block;
+    position: relative;
+    border: 1px solid black;
+    background-color: white;
+    width: 76%;
+    margin: 0 12% 100px;
+    top: 280px;
+}
+
+.reel {
+    min-width: 560px;
+    width: 80%;
+    margin: 20px auto 10px;
+}
+
+.album{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    display: inline-block;
+    margin: 20px 10%;
+}
+.album a {
+    color: black;
+    text-decoration: none;
+}
+
+.disc-selection {
+    display: inline-block;
+    width: 50%;
+    float: right;
+    text-align: left;
+    font-size: large;
+}
+.disk-cover {
+    width: 40%;
+}
+
+
+
+#vertical_title {
+    color: black;
+    font-size: xx-large;
+    position: absolute;
+    text-align: left;
+    z-index:100;
+    left: -60px;
+    top:375px;
+    transform: rotate(-90deg);
+    width: 200px;
+    height:60px;
+    display: inline-block;
+}
+#vertical_title h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    display: inline-block;
+    position: relative;
+    margin-top: 200px;
+    background-color: rgb(20, 20, 23);
+    width: 100%;
+}
+.social-links {
+    display: inline-block;
+    width: 50%;
+    margin: 30px 25% 10px;
+    text-align: center;
+}
+.social-links svg {
+    max-height: 24px;
+    max-width: 28px;
+    margin: 16px 8px;
+    width: fit-content;
+    vertical-align: middle;
+    transition: sll 1s;
+    transform-origin: 50% 50%;
+}
+.social-links svg:hover {
+    transform: scale(1.2);
+}
+.project-links {
+    color: white;
+    font-size: large;
+    text-align: center;
+    width: 70%;
+    margin: 0px 15% 20px;
+    display: inline-block;
+}
+.project-links a {
+    color: white;
+    margin: 8px 32px;
+    display: inline-block;
+}
+
+
+.info-box {
+    width: 280px;
+    padding: 0 20px;
+    min-height: 100px;
+    background: rgba(50,50,50,.8);
+    border: solid white .5px;
+    position: relative;
+    top: -66px;
+    left: -50px;
+    color: white;
+    display: inline-block;
+    float: left;
+    margin: -20px -15px;
+}
+.info-box a {
+    color: white;
+}
+.fl {
+    float: left;
+}
+
+
+.scroll>.content {
+    margin: auto;
+    width: 80%;
+    display: inline-block;
+    margin: 20px 10%;
+}
+.scroll>.content-2 {
+    margin: auto;
+    width: 90%;
+    display: inline-block;
+    margin: 20px 5%;
+}
+.project-reel {
+    display: inline-block;
+    width: calc(100% - 320px);   
+}
+.scroll img {
+    max-width: 90%;
+}
+code {
+    background: lightgray;
+    margin: 16px;
+    padding: 5px;
+    font: medium;
+}
+
+.pass {
+    width: 45%;
+    padding: 12px 2px;
+    text-align: center;
+    display: inline-block;
+
+}

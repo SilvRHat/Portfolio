@@ -1,0 +1,367 @@
+<!--
+    Welcome to my website!
+    If you're seeing this message on the dev console, 
+    then you must be here to find which font I used.
+    Feel free to grab that right below :D
+    - Gavin_
+
+    Hosted at: github.com/SilvRHat/gzimm4.github.io
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SP//dr_wbs</title>
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Noto+Serif+JP:wght@300;400&family=Shippori+Mincho&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- HEADER -->
+        <div class="navbar">
+            <a class="home" href="../..">
+                <h1>Gavin Zimmerman<img class='logo' src="../../img/logo.png"></h1>
+                <h2>Technical Art · Direction // Programming</h2>
+            </a>
+            <div class="content">
+                <div class="dropdown">
+                    <a href=""><h3>Tech Art</h3></a>
+                    <div class="dropdown-content">
+                        <a href="../Ukyio/">Project::Ukiyo「浮世」</a><br>
+                        <a href="../grav-flux/">Gr@v:f/UX</a><br>
+                        <a href="../blackhole/">BlackH01e</a><br>
+                        <a href="../SPdr/">SP//dr_wbs</a><br>
+                        <a href="../Ramen/">Tech·Katsu:Ramen</a><br>
+                        <a href="../do-witchcraft/">Do WitchCraft</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href=""><h3>Project</h3></a>
+                    <div class="dropdown-content">
+                        <a href="../Ukyio/">Mv:RE(Rendering Engine)</a><br>
+                        <a href="../noir/">Noir~ Game</a><br>
+                        <a href="../Diced/">Diced</a><br>
+                        <a href="../light-stealer/">Light Stealer</a><br>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="../../Profile/"><h3>Profile</h3></a>
+                </div>
+                <div class="dropdown">
+                    <a href="../../Archive/"><h3>Archive</h3></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COVER -->
+        <div class="cover-fit">
+            <img src="cover.png">
+            <div class="vert_title">
+                <h2 style="color:white;">SP//dr_wbs</h2>
+            </div>
+        </div>
+
+
+        <!-- MAIN -->
+        <div class="scroll">
+            <!-- youtube -->
+            <div class="content-2">
+                <div class="info-box">
+                    <h2>SP//dr_wbs</h2>
+                    <img><br>
+
+                    <table style="text-align: center; margin: auto;">
+                        <tr>
+                            <td><strong>Producers:</strong></td>
+                            <td><small>Gavin Zimmerman</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Developed:</strong></td>
+                            <td><small>Oct 2020 - Feb 2021</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Media:</strong></td>
+                            <td><small>Procedural Anim, Spiderweb Simulation</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tech:</strong></td>
+                            <td><small>Python, Roblox/Luau</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Links:</strong></td>
+                            <td><small>N/A</small></td>
+                        </tr>
+                    </table>
+
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="">SP//dr_wbs</a>
+                            <ul>
+                                <li><a href="#video">Video</a></li>
+                                <li><a href="#intro">Intro</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#breakdown">Breakdown/ Technical Walkthrough</a>
+                            <ul>
+                                <li><a href="#anim_breakdown">Animation Breakdown</a></li>
+                                <li><a href="#physics1">Simple Physics</a></li>
+                                <li><a href="#noise1">Custom Noise</a></li>
+                                <li><a href="#3d_overlay">3D Overlay</a></li>
+                                <li><a href="#anim1">Animation I</a>
+                                    <ul>
+                                        <li><a href="#anim1_1">Soft 'IK'</a></li>
+                                        <li><a href="#anim1_2">Velocity</a></li>
+                                        <li><a href="#anim1_3">Putting it Together</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#conc">Conclusions</a></li>
+                    </ul>
+                </div>
+                <h1 id="project_ukiyo">SP//dr_wbs</h1>
+                <div id="video" class="project-reel">
+                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/AUWrs5MZWcw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div><br><br>
+                <h2 id="intro">Intro</h2>
+                This was the project that introduced me to technical art, through procedural animation. 
+                I began this project by reverse engineering stylized spiderman web animations (literally reverse-engineer, frame by frame trying to make sense of the chaotic movement).
+                <br><br>
+                I outlined 4 steps to this project and successfully completed the first step (the thwip of the animation). 
+                Creating a good-looking algorithm to describe this first animation took around a month, after which my winter break concluded and I had no spare time to continue. 
+                I continue to keep this as a portfolio piece, which should becomes obvious after reading the breakdown below. But now recently graduated, I look forward to the chance of seeing this through to completion after gaining quite a bit of 3D skills.
+                <br><br>
+                The motivation for this project were to create SP//dr from "Spider-Man: Into the Spider-Verse".
+                Thus, this project was initially a subproject, in that creating the spiderweb flinging was 1 of many character verbs for a full game.
+                Maybe one day we'll get there, but probably not soon.
+                <br><br>
+                From the top of my technical notes on this project:<br>
+                "Can you rewire a mainframe while being shot at?" (Peni Parker, Spider-Man Into the Spider-Verse)
+                <br><br><br>
+
+
+                <h1 id="breakdown">Breakdown/ Technical Walkthrough</h1>
+                The following breakdown has been transcribed from my own technical notes and workbook. 
+                I hope that it may serve anyone interested in procedural animation or stylizing physics. 
+                I'm happy to answer any questions regarding the following process, so please feel free to reach out.
+                <br><br><br>
+
+                <h2 id="anim_breakdown">Animation Breakdown</h2>
+                First, lets identify what were animating. This will help illustrate the general animation structure and "keyframes".
+                <h3>References</h3>
+                <img style="width:45%" src="https://media.giphy.com/media/mYdOLUFQVzqzdoxqq4/giphy.gif">
+                <img style="width:45%" src="https://c.tenor.com/OEu6B_Yf884AAAAC/spiderman-spiderverse.gif">
+                <img style="width:45%" src="http://images6.fanpop.com/image/photos/42900000/Spider-Man-Into-the-Spider-Verse-2018-spider-man-42995119-540-300.gif">
+                <img style="width:45%" src="https://i.pinimg.com/originals/61/72/49/6172499581ae4a88280a26521d5992d8.gif">
+                <br>
+                Here I found 4 "keyframes" for 4 modes of animation. Note that, since this is a procedural animation, we aren't
+                actually keyframing poses - rather we keyframe state to represent how the animation should behave.<br>
+                Those "keyframes" states are:
+                <ol>
+                    <li>Web shooting (THWIP)</li>
+                    <li>Web Backlash (THWAP)</li>
+                    <li>Followtrhough (WHOOSH)</li>
+                    <li>Release (ZIPP)</li>
+                </ol>
+
+                For now we'll focus on the first state, shooting the web. 
+                In the second reference image, there is a delay between firing the web and it connecting with some target geometry.<br>
+                <br>
+                But why would we want this in a GAME? Usually, UX (user experience) depends on quick reaction to input - and this may feel
+                counter-intuitive for game feel. And this is exactly the route insomniac games has done, they do not worry about the web flying
+                before usability.<br>
+                <br>
+                Well, the web animation here is the reaction to user input - it actually tacks on a value to the character verb. Rather than quickly
+                being able to change direction at a moments notice, there is now a time delay which make the feature more expensive to use and garner
+                a bit more strategy in its use. This also provides a 'real' feel, that allow the feature to seem tangible and accurate.
+                Nonetheless, if executed well then short distances will be near instanteous anyway, but allow for a effect on the thwap effect for a
+                nice camera shake.
+                <br><br><br>
+
+                <h2 id="physics1">Simple Physics</h2>
+                Gravity is a key factor in the tension force which drives the actual momentum - thus we would also want to consider it in the basic
+                trajectory of our web shooting. This is a relatively trivial calculation where we apply a configurable but constant downward acceleration
+                on the webs path.<br><br>
+                <img style="width:80%; " src="img/trajectory.png">
+                <br><br>
+                <em>Important Note:</em> For the best UX, we must ensure that the web hits where the user desires or indicates.
+                They shouldn't have to aim higher to approximate the web hitting where they want, that would put to much variablity on the player and decrease
+                the overall fun factor.
+                <br><br>
+                Thus we constrain the path to the smallest elevation/ altitude angle where the arc passes both through the origin and target points. This can be
+                done using the quadratic equation with some trig maths.<br>
+                <br><br><br>
+
+                <h2 id="noise1">Custom Noise</h2>
+                Next, we want to overlay some noise over the trajectory path to represent wind/ the chaotic element of our web-shooting animation.
+                Many forms of noise algorithms exist [perlin, simplex, voronoi, etc.]. Typically, you'll find noise with detail parameters representing how many
+                octaves of a fBM (fractal brownian motion) to use which make the noise rougher. We do not want rough noise, rather it should be very smooth.
+
+                At the time, I did not know much about noise and disregarded existing functions rather quickly because of their fBM representations.
+                But lets consider the smoothest 1D perlin noise we can find on google:<br>
+                <img src="https://i.stack.imgur.com/9Vgoc.png">
+                <br><br>
+                This may seem like a good candidate for wind, but if we were to draw it out quickly we would find this is simply too random. 
+                The transition between x=10.5 and x=11.5 would appear abrupt. 
+                Rather than natural wind, it would look like a snake intentionally slithering past a rock.
+                We would also want the noise to only have a few hills [1-3], otherwise there is no uniforminity in the wind- it'd just be chaotic turbulence everywhere.
+                <br><br>
+                Finally, we want the noise to start and end at 0 and have a range of [-1,1]. The start and end at 0 is so that the trajectory passes
+                through the origin and target points accurately. 
+                There are plenty of ways to handle this, the most popular would be multipling some curve which can dampen the height of the noise.
+                Or you could take the end point and bring it up to the start point (change the slope), which is the method I implemented.
+                <br><br>
+                So, at this point I decided to create a custom noise function with this all in mind.
+                It's important to note this is not continuous or deterministic (thus fails for most applications of noise- in reality its 'smooth randomness').
+                Though, this is purely because it depends on a random seed- it CAN be deterministic and continuous; though have a complexity of O(n) for n points. Thus it still isn't ideal for graphics (GPU) implementations.
+                The algorithm is as follows:
+                <ol>
+                    <li>Generate n random points along the range [0, 1]</li>
+                    <li>For 3 iterations:
+                        <ol>
+                            <li>Take the approximate integral by Tapezoidal Euler Summation</li>
+                            <li>Normalize y back to range [-1,1]</li>
+                            <li>Let ry = y at -1</li>
+                            <li>For each point x add x/ry</li>
+                        </ol>
+                    </li>
+                </ol>
+
+                Result:<br>
+                <img src="img/randomness.png">
+                <br><br>
+                What'd we do?<br>
+                Well we used the fact that integrals smooth out functions to create a smooth curve from a random seed.
+                Then we normalize and change the slope to correct our range. And bam, perfect smooth randomness! 
+                <br><br><br>
+
+
+                <h2 id="3d_overlay">3D Overlay</h2>
+                The 3D overlay step is fairly easy. First, we refactor the basic physics into a 3D problem. Then apply the noise.
+                <br><br>
+                For this implementation, we simply need two "noise paths" generated from the algorithm above. One for horizontal offset, and another for vertical offset.
+                The height ranged between [-1,1] represents those offsets. 
+                The offsets are then applied perpendicular the the direction the web is travelling at a certain point.
+                Thus the travel vector is the normal vector of the plane representing our noise offsets.<br>
+                This part may involve some space transformations from the noise UV local space to world space.
+                <img src="img/3d_overlay_graph.png">
+                <br><br><br>
+
+
+                <h2 id="anim1">Animation I</h2>
+                Now, the part where the web traveling along the trajectory path changes over time. 
+                This is the hard part which took a month to work out.
+                <br><br>
+
+                <h3 >So what should this look like ideally?</h3>
+                Well rest assured, there are two forces guiding how points on the web move relative to eachother.
+                <ol>
+                    <li>First, its a web and string-like object. 
+                        Thus points pull on eachother, moving a string brings the rest of the string with it.
+                        This is basically IK, but overall we want less constrained movement since the web is stretchy.
+                    </li>
+                    <li>Second, the web is travelling so fast that different curvatures are going to seperate more over time and stretch out.
+                        Imagine waves on the ocean, stuff travling in one direction continues along that direction and the arc/shaping grows.
+                    </li>
+                </ol>
+                You might think that the two above forces conflict with eachother. Yes, they do. This makes a very interesting visual contrast.
+                Essentially we want a soft IK where stretching is due to changes in the trajectory. 
+                <br>
+                A decent way to visualize these two qualities, is two actually draw the web changing frame by frame for a stylistic effect.
+                The first property constrains the physics, while the second employs the animation principles 'follow through' and 'exaggeration'.
+                <br><br>
+                <img src="img/fr_by_fr.jpg">
+                <br><br>
+
+
+                <h3 id="anim1_1">Soft Inverse Kinematics (Which is basically an Oxymoron)</h3>
+                Let's first attempt to implement the soft IK. 
+                Because the IK may stretch, there is no fixed length between two points. 
+                Now, for anyone familiar with IK- thats kind of the point... you'll have fixed lengths between points and solve reverse kinematics.
+                So quickly disregard the idea that this is in anyway IK- other than it uses IK approaches in a unique application.
+                <br><br>
+                So how do points on the web travel? Simply as they would if we didn't have inverse kinematics at all, they move forward on the trajectory over time.
+                In this sense, the x (factor along trajectory line) is constrained and predictable. 
+                The only other predicatable measurement is the y (height) of the root point which follows the known trajectory.<br>
+                <img style="width:60%;" src="img/sketch1.png">
+                <br>
+                How is this similar to IK? Well the setup is nearly the same, we have a set of points and a goal point for the end of the web to hit on the next time frame.
+                Thus, we can use something similar to the forward-reaching step from the FABRIK (forward and backward reaching IK) alogirthm to solve for every other point.
+                Since, the web is continuously forming new points, the backward-reaching step is irrelevant.
+                <br><br>
+                To be honest, when designing this algorithm I did not use IK algorithms at all (nor did I know about them).
+                Yet it's a very similar tangent and for anyone dedicated in understanding this breakdown - I suggest using knowledge about that algorithm as a foothold (as I'm using it as a foothold to describe this process which has (seemingly) never been done before).
+                Where, it does't work is that IK is dependent on the rigid lengths, and creating many points or small timesteps will dilute the movement of the entire body. 
+                Rather, there needs to be a sense of 'center of gravity' in the web.
+                <br><br>
+                If we think about it, point x is pulled by the movement of everything in front of it. 
+                If point n is the head point of the web (on the trajectory), then point n-1 will be pulled between where point n was on timestep n and where it will be on timestep n+1.
+                <br><br>
+                Thus we draw a magenta line between those two points. This is where point n-1 will be pulled, so we can draw a green line.
+                Since, the x value is constrained the intersection of x=n and the green line is where the 2nd point will be at timestep n+1.
+                <br><br>
+                Now for the next point, we find the middle of the green line which is between where point n-1 was being pulled and where it was.
+                This is the updated center of pull, and we draw a similar line between point n-2 and this point represented as an orange line.
+                <br><br>
+                This process is repeated again, for the next point we find the center of the orange line and draw a new 'pull vector' towards that point.
+                <br>
+                <img style="width:45%;" src="img/sketch2.png">
+                <img style="width:45%;" src="img/sketch3.png">
+                <img style="width:45%;" src="img/sketch4.png">
+                <img style="width:45%;" src="img/sketch5.png">
+                <br><br>
+                Thus he have something very similar to the Forward-reaching IK algorithm, just lines are drawn differently and points are constrained differently.
+                This now acts behaves similarly between different timesteps and variable spacing between points. Note that timesteps and spacing do not have to match,
+                but do so here for the sake of simplicity.
+                <br><br>
+                This alone gives us an animation like:<br>
+                <img src="img/bouncy2.gif">
+                <img src="img/bouncy3.gif">
+                <br><br>
+
+                <h3 id="anim1_2">Velocity Factor</h3>
+                Remember, points on the web want to travel in the direction they are already going.
+                There are certaintly a few ways to do this, but the general direction is forward (right?). 
+                So let's draw a triangle and use that to project where point's will be on the next timeframe.<br>
+                <img style="width:60%;" src="img/velocity.png">
+                <br><br>
+
+                <h3 id="anim1_3">Putting it together</h3>
+                Now, we simply blend these two forces together. Just lerp between the two to get a final velocity or y deviation.
+                <br>
+                <img style="width:60%;" src="img/full-anim.gif">
+                <br><br><br>
+
+                
+                <h2 id="conc">Conclusions</h2>
+                And that is how I learned 3D math, vectors, and various animation principles - especially for frame by frame animating opposed from pose to pose animating.
+                Even now, I love creating webs with this simulation - it doesn't stack up to the visual expertiece of my other projects but may definetly be the most technical.
+            </div>    
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="social-links">
+                <a href = "https://www.artstation.com/silvrhat/profile" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.29 68.46"><path d="M7162.88,7218.5a.87.87,0,0,0-.78,1.25c1.79,3.59,6.4,13.75,12.4,13.75H7217a.86.86,0,0,0,.74-1.31l-8-13.27a.86.86,0,0,0-.74-.42Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/><path d="M7192.13,7166.6l37.73,65.79a.8.8,0,0,0,1.35,0c2.11-3.29,8.29-10.93,5.29-17.93-1.76-4.11-23.65-41.47-26-45-4-6-14.08-4.28-17.74-4.08A.79.79,0,0,0,7192.13,7166.6Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/><path d="M7169,7206.5h31.91a.9.9,0,0,0,.78-1.35l-16.41-28.27a.9.9,0,0,0-1.57,0l-15.5,28.26A.9.9,0,0,0,7169,7206.5Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/></svg></a>
+                <a href = "https://github.com/SilvRHat" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.75 66.55"><path d="M7188.5,7241.12V7232a.38.38,0,0,0-.45-.37c-2,.4-10.21,1.58-13.55-5.1-3-6-3.17-4.17-6-7a3.1,3.1,0,0,1-1-2s0-4,5,0,4,5,7,7c2.61,1.74,7.48,1.21,8.71,1a.37.37,0,0,0,.32-.3c.24-1.4,2-5.74,3-5.74s-18.31-.06-20-17a20.94,20.94,0,0,1,4.8-15.79.36.36,0,0,0,0-.44c-.64-1-2.78-4.89.16-10.77,1-2,8.78,1.89,11.88,3.92a.32.32,0,0,0,.27,0c1.38-.32,12.38-2.74,21.71,0a.37.37,0,0,0,.27,0c1.21-.65,10.79-5.73,11.87-3.93,2.65,4.41.62,9.6.11,10.76a.38.38,0,0,0,.08.42c1.1,1.08,6.51,7.11,3.81,18.82-2.45,10.6-13,13.72-18.28,14a.38.38,0,0,0-.28.6,18.57,18.57,0,0,1,2.56,4.42c.91,2.72.17,14.47,0,16.65a.37.37,0,0,1-.37.35h-21.27A.38.38,0,0,1,7188.5,7241.12Z" transform="translate(-7167.5 -7174.95)" style="fill:#fff"/></svg></a>
+                <a href = "https://www.linkedin.com/in/gavinzimmerman/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.69 73.49"><path d="M7203.91,7236.13H7188.7v-49h14.58v6.49l.19.06c.12-.15.27-.29.38-.45a15.34,15.34,0,0,1,11.38-7.16,22.76,22.76,0,0,1,10.2.86c4.76,1.5,7.67,4.82,9.21,9.45a34.16,34.16,0,0,1,1.56,10.66c.07,9.49.05,19,.06,28.49a5.15,5.15,0,0,1-.06.62H7221V7235c0-8.08,0-16.15,0-24.23a30,30,0,0,0-.61-5.76c-.73-3.67-3-5.52-6.74-5.72-2.85-.15-5.46.41-7.36,2.75a10,10,0,0,0-2.06,5.44c-.16,1.63-.26,3.27-.26,4.9,0,7.56,0,15.12,0,22.68Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/><path d="M7163.86,7187.1H7179v49h-15.15Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/><path d="M7171.43,7162.64a8.84,8.84,0,1,1-8.86,8.84A8.81,8.81,0,0,1,7171.43,7162.64Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/></svg></a>
+                <a href = "mailto: gzimm4@gmail.com" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116 80"><polyline points="9 9 58 40 106 10" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:10px"/><rect x="5" y="5" width="106" height="70" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:10px"/></svg></a>
+                <a href = "https://silvrship.dev/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 62"><path d="M7178.92,7230.5h-9.42a31,31,0,0,1,0-62h9.82v15h-9.82a16,16,0,0,0,0,32h9.42v15Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/><path d="M7231.5,7230.5h-13v-15h13a16,16,0,0,0,0-32h-13.4v-15h13.4a31,31,0,0,1,0,62Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/><path d="M7231.5,7207h-65v-15h65Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/></svg></a>
+            </div>
+            <div class="project-links">
+                <a href="../Ukyio/">Project::Ukiyo「浮世」</a>
+                <!--<a href="../Portfolio/Ramen/">Tech·Katsu:Ramen</a>-->
+                <a href="../grav-flux/">Gr@v:f/UX</a>
+                <a href="../blackhole/">BlackH01e</a>
+                <a href="../SPdr/">SP//dr_wbs</a>
+                <a href="../MvRE/">Mv:RE(Rendering Engine)</a>
+            </div>
+        </div>
+    </body>
+</html>

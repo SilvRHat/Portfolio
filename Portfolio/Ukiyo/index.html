@@ -1,0 +1,538 @@
+<!--
+    Welcome to my website!
+    If you're seeing this message on the dev console, 
+    then you must be here to find which font I used.
+    Feel free to grab that right below :D
+    - Gavin_
+
+    Hosted at: github.com/SilvRHat/gzimm4.github.io
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>「浮世」</title>
+        <link rel="icon" href="../../favicon.ico">
+        <link rel="stylesheet" href="../../style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Noto+Serif+JP:wght@300;400&family=Shippori+Mincho&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- HEADER -->
+        <div class="navbar">
+            <a class="home" href="../..">
+                <h1>Gavin Zimmerman<img class='logo' src="../../img/logo.png"></h1>
+                <h2>Technical Art · Direction // Programming</h2>
+            </a>
+            <div class="content">
+                <div class="dropdown">
+                    <a href=""><h3>Tech Art</h3></a>
+                    <div class="dropdown-content">
+                        <a href="../Ukyio/">Project::Ukiyo「浮世」</a><br>
+                        <a href="../grav-flux/">Gr@v:f/UX</a><br>
+                        <a href="../blackhole/">BlackH01e</a><br>
+                        <a href="../SPdr/">SP//dr_wbs</a><br>
+                        <a href="../Ramen/">Tech·Katsu:Ramen</a><br>
+                        <a href="../do-witchcraft/">Do WitchCraft</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href=""><h3>Project</h3></a>
+                    <div class="dropdown-content">
+                        <a href="../Ukyio/">Mv:RE(Rendering Engine)</a><br>
+                        <a href="../noir/">Noir~ Game</a><br>
+                        <a href="../Diced/">Diced</a><br>
+                        <a href="../light-stealer/">Light Stealer</a><br>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="../../Profile/"><h3>Profile</h3></a>
+                </div>
+                <div class="dropdown">
+                    <a href="../../Archive/"><h3>Archive</h3></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COVER -->
+        <div class="cover-fit">
+            <img src="cover.png">
+            <div class="vert_title">
+                <h2 style="color:white;">Project::Ukiyo「浮世」</h2>
+            </div>
+        </div>
+
+
+        <!-- MAIN -->
+        <div class="scroll">
+            <!-- youtube -->
+            <div class="content-2">
+                <div class="info-box">
+                    <h2>Project::Ukiyo「浮世」</h2>
+                    <img><br>
+
+                    <table style="text-align: center; margin: auto;">
+                        <tr>
+                            <td><strong>Producers:</strong></td>
+                            <td><small>Gavin Zimmerman</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Developed:</strong></td>
+                            <td><small>Apr 2022 - May 2022</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Media:</strong></td>
+                            <td><small>Indie Animation, Ukiyo-e</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tech:</strong></td>
+                            <td><small>Blender 3.1, Substance Painter</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Links:</strong></td>
+                            <td><small>Blender file on request</small></td>
+                        </tr>
+                    </table>
+
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#project_ukiyo">Project::Ukiyo「浮世」</a>
+                            <ul>
+                                <li><a href="#video">Video</a></li>
+                                <li><a href="#concept">Concept</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#breakdown">Breakdown</a>
+                            <ul>
+                                <li><a href="#scene">3D Scene</a></li>
+                                <li><a href="#shaders">Shaders</a>
+                                    <ul>
+                                        <li><a href="#lantern">Lantern</a></li>
+                                        <li><a href="#fabric">Fabric</a></li>
+                                        <li><a href="#smoke">Smoke</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#geometry">Procedural Flower</a></li>
+                                <li><a href="#assets">Assets</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#td">Technical Direction</a>
+                            <ul>
+                                <li><a href="#lighting">Lighting, Color, Rendering Passes</a></li>
+                                <ul>
+                                    <li><a href="#lighting">Passes</a></li>
+                                    <li><a href="#emit">Emission</a></li>
+                                    <li><a href="#color">Color Scheme</a></li>
+                                    <li><a href="#transparency">Transparency</a></li>
+                                    <li><a href="#light">Lighting</a></li>
+                                    <li><a href="#post">Post-Process/ Compositing</a></li>
+                                </ul>
+                                <li><a href="#simulation">Simulation</a></li>
+                                <li><a href="#camera_anim">Animation</a></li>
+                                <ul>
+                                    <li><a href="#cam">Camera Angles</a></li>
+                                    <li><a href="#anim">Lantern Keyframe</a></li>
+                                </ul>
+                                <li><a href="#renderproc">Rendering Process</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#wrap_up">Wrap Up</a></li>
+                    </ul>
+                </div>
+                <h1 id="project_ukiyo">Project::Ukiyo「浮世」</h1>
+                <div id="video" class="project-reel">
+                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/nszzhBlWNhw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <br><br>
+
+                This project was completed as part of a final for "Early Modern Literature: The Floating World of Play and Passion", 
+                a course taught by Prof. Clarence Lee at University of Colorado, Boulder. <br><br>
+                Adapted from Asai Ryoi's "Hand Puppet's",  Project::Ukiyo「浮世」 is a modern haunting of the peony lantern.
+                Here the lantern decorated with peonys represents the presence of the ghost from the "original" work.
+
+                <h2 id="concept">Concept</h2>
+                <img style="width:50%;" src="img/peonylanternconcept.png">
+                
+                <h1 id="breakdown">Breakdown</h1>
+                I've included a thorough breakdown containing images, concepts, and code to better help the reader understand the process of Project::Ukiyo「浮世」's making.
+                
+                <h2 id="scene">Scene Breakdown</h2>
+                <img src="scene.png">
+                <img style="width:40%;" src="img/lantern.png">
+                <img style="width:47%;" src="img/cam_rig.png">
+                <br><br>
+                <h3>Object [Parent-Child] Heirarchy</h3>
+                <ul>
+                    <li>Background</li>
+                    <li>Smoke</li>
+                    <li>Lantern Body
+                        <ul>
+                            <li>Flower</li>
+                            <li>Fabric/ Cloth</li>
+                            <li>Outer Light</li>
+                            <li>Inner Light</li>
+                            <li>Lantern Text</li>
+                            <li>Lantern Handle</li>
+                        </ul>
+                    </li>
+                    <li>Camera Setup (Empty)
+                        <ul>
+                            <li>Camera
+                                <ul><li>Pink Text</li></ul>
+                            </li>
+                            <li>Focus Point (Empty)</li>
+                        </ul>
+                    </li>
+                </ul>
+                The following showcases the object heirarchy, which is responsible for what coordinate systems objects are relative to.
+                Children will move relative to their parent object. Here I have two 'rigs' for the camera setup and lantern. 
+                The lantern is a rigid body, so the children of the lantern move with the lantern. <br><br>
+                The camera system includes a variety of elements, first the pink text is parented onto the camera so that it stays in the same window position through different camera positions.
+                An empty is added to this system, where a modifier is applied to constrain the camera pointing towards it- this gives freedom in adjusting camera angles.<br><br>
+                Finally, the background and smoke are layered visual elements and are not dynamic- although the background is repositioned per camera angle.
+
+                <br><br>
+                <h2 id="shaders">Shaders</h2>
+                Shaders drive nearly every visual aspect of this project. 
+                I've included breakdowns for shaders on the lantern-body, fabric, and smoke.
+
+                <h3 id="lantern">Lantern</h3>
+                <img src="img/lantern-shader-mini.gif">
+                <br><br>
+
+                The "original" peony lantern is described as hand-painted; thus it was important to also include a 'hand-painted' (stylus-pen-painted) quality to the lantern's look.
+                Thus, the base diffuse color is from a texture painted in substance painter.<br>
+                <img style="width:40%;" src="img/texture.png">
+                <br><br>
+                Next, we want the edges to be transparent to suggest the 'ghostly' qualities of this japanese ghost lantern. 
+                Since the object is round, a fresnel effect is perfect for this. 
+                But, we want some varience in the fresnel so that the transparency-fade doesn't appear to uniform.
+                This can be done by mixing some noise with the true normal vector (left).
+                Passing this into a fresnsel then gives (middle). 
+                Finally, to emphaisze the effect we pass that through a float curve and map-range (right).
+                <br><br>
+                <img style="width:30%;" src="img/l1.png">
+                <img style="width:30%;" src="img/l2.png">
+                <img style="width:30%;" src="img/l3.png">
+                <br><br><br>
+                A similar mapping of the fresnsel effect can be used to mask out an outline (left). Put together, this gives us the alpha value (middle). 
+                The outline mask can also be used as a mixing factor for the outline color and diffuse texture (right).
+                <br><br>
+                <img style="width:25%;" src="img/outline.png">  
+                <img style="width:33%;" src="img/transparency.png"> 
+                <img style="width:35%;" src="img/outmix.png">                
+                <br><br><br>
+                
+                Next, we want to create a highlight in the center of the lantern. 
+                The idea is to have a shadow (outline), base color (texture), and highlight (this)- where the highlight will bring out the brightness inside of the lit lantern.
+                Again we'll use a fresnsel, this time with a MUCH lower index of refraction and take the power of it to some large number to get something close to a [0,1] color mask.
+                <img style="width:60%;" src="img/hl-nodes.png">  
+                <img style="width:28%;" src="img/hl-fres.png"> 
+                <br><br><br>
+                
+                Finally, everything up until now has provided an incredibly glossy texture (especially the highlight).
+                This looks much more like a potery lantern than a paper one. So, the last detail we need to add is the rings which emphasize both the paper lantern's imperfect shape and thin material.
+                <br><br>
+                <img src="img/glossy-lantern.gif"> 
+                <br><br>
+
+                This is fairly easy- what we do is take the z-coordinate (up), multiply it by the ring frequency we want, take the sine of that, and take the absolute value.
+                We do this twice, once for the highlight (left) and once again for the shadow (right) with an offset coordinate. 
+                <br><br>
+                <img style="width:35%;" src="img/r1.png">  
+                <img style="width:32%;" src="img/r2.png"> 
+                <br><br>
+                After Combining them we get a gradient value which we can mix into the base color to imply how lighting works (which is very very fake lighting).
+                <br><br>
+                <img style="width:45%;" src="img/r3.png"> 
+                <img style="width:45%;" src="img/r4.png"> 
+                <br><br>
+                For reference, here is the node setup of this part. Notice, there are also a few additional operations to map the values providing a greater visual contrast.
+                <br><br>
+                <img style="width:90%;" src="img/r5.png"> 
+
+                <h3 id="fabric">Fabric</h3>
+                <img style="width:30%;" src="img/fabrik.png"> <br><br>
+                Here, we want the fabric to slowly fade out, similar to a ghost tail. We also want to have a nice white-blue-violet gradient.
+                The first step is finding a coordinate system to use, we can't use actual positions since this will deform- so we use a UV map.
+                <br><br>
+                Since, were not mapping a texture to this, the islands may overlap since the UVmap is only used to get a relative height of the fabric.<br><br>
+                <img style="width:40%;" src="img/fmap.png"><br><br><br>
+
+                Then, a wave texture (left) (created with the UV position) is applied ontop of the height (right). 
+                This is plugged directly into the alpha channel of our shader.<br>
+                <img style="width:40%;" src="img/f1.png">
+                <img style="width:40%;" src="img/f2.png">
+                <br><br><br>
+
+                Next, a basic noise texture (left) is also added onto the height to create a second 'height' (middle) will be used for the color ramp (right). 
+                This is then applied to the diffuse and emission channels, with emission set at 1.<br><br>
+                <img style="width:30%;" src="img/f3.png">
+                <img style="width:30%;" src="img/f4.png">
+                <img style="width:30%;" src="img/f5.png">
+                <br><br><br>
+
+                <h3 id="smoke">Smoke</h3>
+                <img style="width:48%;" src="img/smoke-move.gif">
+                <img style="width:40%;" src="img/sgeom.png">
+                <br><br>
+                For our smoke effect, we apply a line cross-section to a bezier curve to get a scroll-type geometry, this will auto-generate a UV.
+                Since we also want to animate this, we'll create two additional coordinate values (T, and X+T) representing time and the position along the curve over time.
+                <br><br>
+                <img style="width:30%;" src="img/smoke-uv.png">
+                <img style="width:60%;" src="img/smoke-coord.png">
+                <br><br>
+                Along the curve, we want the center of the smoke to move around (left-right) in a zig-zag motion. 
+                This will recreate a turbulence effect and really bump up the dynamics of our animation.
+                <br><br>
+                To accomplish this, we'll feed in the rolling vertical position (X+T) to a 1D noise function (left) which represents the horizontal offset of the center.
+                We'll multiply this offset with a float curve so that the offset is small at the beginning and grows towards the end of the curve. 
+                This is then added onto the horizontal center of our smoke geometry (right).
+                <br><br>
+                <img style="width:45%;" src="img/sm-1d.png">
+                <img style="width:45%;" src="img/sm-off.png">
+                <img style="width:90%;" src="img/sm-code.png">
+                <br><br>
+                In actuality, we want two "centers" to highlight the transparent middle where the centers fork off into different directions on each side.
+                To do this, we take the sign (left) of which side were on and multiply that by a second float curve, adding it ontop the original 'center' (right).
+                <br><br>
+                <img style="width:45%;" src="img/sm-sign.png">
+                <img style="width:45%;" src="img/sm-2cen.png">
+                <img style="width:90%;" src="img/sm-code2.png">
+                <br><br>
+                Next, the absolute value is taken of the 'two-center-mapping' (right above). <br>
+                This gives a distance function from each center (left-most).<br>
+                Then we generate noise (middle-left) using the rolling coordinates (X+T,Y,T). Notice that this is a vector3, using T as another dimension allows the noise to change over time.<br>
+                Next, the noise is overlayed ontop of the distance field (middle-right).<br>
+                Finally, we perform a check on the distance to see if it is within a certain range which creates a mask (right-most) we can use as the alpha channel.
+                <br><br>
+                <img style="width:24%;" src="img/sm1.png">
+                <img style="width:25%;" src="img/sm2.png">
+                <img style="width:25%;" src="img/sm3.png">
+                <img style="width:24%;" src="img/sm4.png">
+                <br><br><br>
+
+                <h2 id="geometry">Procedural Flower</h2>
+                The peony flower featured in the Peony lantern is entirely procedural here (except the pedals).
+                This allows for significant customization.<br><br>
+                <img style="width:24%;" src="img/fl1.png">
+                <img style="width:25%;" src="img/fl2.png">
+                <img style="width:25%;" src="img/fl3.png">
+                <img style="width:24%;" src="img/fl4.png">
+
+                <br><br>
+                The method for accomplishing this is by first implementing the phyllotaxis algorithm.
+                I referred heavily to Erindale.xyz's <a href="https://www.youtube.com/watch?v=FELFjIw-0d8&t=130s">tutorial</a> for the concepts, however made significant changes to the inner radius parameter and translated this into blender's geometry nodes feature.
+                This gives a spiral to seed flower petals off of.
+                <br><br>
+                <img style="width:65%;" src="img/phyllo.png">
+                <img style="width:30%;" src="img/spiral.png">
+                <br><br>
+                We then customize various other transformation's including z-offset (up), rotation, and scale.<br><br>
+                <br><br>
+                For the z-offset a float-curve is plugged into the fac output of the phyllotaxis setup ([0-1] range describing distance from center).
+                <br><br>
+                <img style="width:90%;" src="img/z-off.png">
+                <br><br>
+                For rotation, we have 3 values to compute (roll, pitch, and yaw).
+                The flower's generally are bent towards the center, so the roll value is negligable- although in this setup I plugged a minimal amount of noise into it.
+                <br>
+                For pitch, we can use a float curve similar to the z-offset calculation and map that to a [0, -90] degree range.
+                <br>
+                Finally, for the yaw, we simply take the atan2 of the x/y relative positions. <br>
+                Plugging all this into a rotate euler node, gives us the desired rotation.
+                <br><br>                
+                <img style="width:45%;" src="img/rot-code.png">
+                <img style="width:45%;" src="img/rot.png">
+                <br><br>
+                As for scale, another float-curve similar to above is used. 
+                A white noise texture is used to create varience between sizes as well.<br>
+
+                <br><br>
+                <h2 id="assets">Assets</h2>
+                NOT EVERYTHING in this project is my work, this includes the background and sound assets used.
+                <br><br>
+                As for the background, it is a background cel taken from Studio Ghibli's Spirited Away developed by Kazuo Oga, 
+                and commented on in Spirited Awaya's Art Book by Takeshige (Miyazaki "The Art of Spirited Away"; page 60).<br>
+                In this scene there is minor recoloring- and the entire background cel is not featured (omitting the mini house statues).
+                <br><br>
+                As for sounds, I wanted traditional Japanese instruments to accompany the project.<br>
+                But could not find anything googling with English searches; 
+                but upon a japanese search I quickly found a beautiful sound repository at: <a href="https://otologic.jp/free/se/instruments-japanese01.html">otologic.jp</a>
+                and at <a href="https://commons.nicovideo.jp/">commons.nicovideo.jp .</a>
+
+                <br><br><br>
+                <h1 id="td">Technical Direction</h1>
+                Below, I've included various TD design choices and commentary on the project.
+                This includes color theory analysis, compositing/post-processing tricks, scene composition, animation and camera work, and lighting setup.
+                <br><br>
+                <h2 id="lighting">Lighting, Color, Rendering Passes</h2>
+                Let's start with the rendering passes.<br><br>
+                <div style="width:fit-content; margin:auto;">
+                    <div class="pass">
+                        <img src="img/combined.png">
+                        <p>Combined/ Final</p>
+                    </div>
+                    <div class="pass">
+                        <img src="img/difcol.png">
+                        <p>Diffuse Color</p>
+                    </div>
+                    <div class="pass">
+                        <img src="img/emit.png">
+                        <p>Emission Color</p>
+                    </div>
+                    <div class="pass">
+                        <img src="img/shadow.png">
+                        <p>Shadow</p>
+                    </div>
+                    <div class="pass">
+                        <img src="img/glosscol.png">
+                        <p>Gloss Color</p>
+                    </div>
+                    <div class="pass">
+                        <img src="img/bloom.png">
+                        <p>Bloom</p>
+                    </div>
+                </div>
+                <br>
+                <h3 id="emit">Emission and Bloom</h3>
+                Many components in our scene are lit in some form with emission light [Background, Fabric, Smoke, Lantern, and textual elements].
+                <br><br>
+                This served two purposes: to saturate the colors and provide a bloom effect. 
+                If we were to simply increase the global ambient light/color, then the bloom effect would not come across as well.
+                The reason for having a bloom effect is that the objects in this scene are "ghostly". 
+                If we look at original Ukiyo-e depictions of the lantern, we can see that color is brightest on these objects.<br><br>
+                <img style="width:32%;" src='https://data.ukiyo-e.org/mfa/images/sc145739.jpg'>
+                <img style="width:30%;" src='https://d7hftxdivxxvm.cloudfront.net/?resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2FSpFtF5FbxLLyPQbabS4vew%252FKuniyoshi_oiwa.jpg&width=600&quality=80'>
+                <br><br>
+
+                <h3 id="color">Color Scheme</h3>
+                We also notice that the background and foreground vary color-wise; although pigments were less saturated during the creation of the "originals" above.<br>
+                This inspired a similar contrast in our diffuse colors. 
+                <br>
+                The background exhibits [greens, green-yellows, blues, browns, greys] whereas the foreground showcases [red, pinks, purples, and blues].
+                This is roughly close to complimentary colors on the color spectrum, especially with pinks on dark green elements.<br>
+                <br><br>
+
+                <h3 id="transparency">Transparency</h3>
+                Most elements in the scene are also transparent [Smoke, Fabric, Lantern].
+                Two different implementations are transparency are used here (Alpha hashed, and alpha-blending). 
+                Alpha hashed has a notable grainy result, akin to ray-tracing and provides relatively accurate forms of transparency. 
+                This is used in both the smoke and fabric. 
+                This was mainly to add texture to both elements and a gradient transparency to the fabric which cannot be done with alpha-clipping.
+                <br><br>
+                Then, alpha-blending was used on the lantern. 
+                This is why the lantern is not visible in the render passes, as transparent objects are deffered after the initial render. 
+                Whereas, alpha-hashing can provide a gradient- it cannot be used jointly with emission; you can see above that the smoke is not transparent but is emissive.<br>
+                The lantern uses both emission (because lighting is faked internally) and transparency, thus alpha-lending was choosen.
+                <br><br>
+
+                <h3 id="light">Lighting</h3>
+                Beyond emission, this scene also utilizes two small light sources parented under the lantern. 
+                The first is colored inkish-red, and the second is a light blue. 
+                Together, these form the light gradient on the flower (which has zero emission).
+                The flower, uses a translucent shader which allow light from within the lantern to bleed through the layers of petals.
+                Here a bias parameter was adjusted to prevent light from blocking out to early.
+                <br><br>
+
+                <h3 id="post">Post-Process/ Compositing</h3>
+                You'll notice, that noise is overlayed ontop of the flower texture. 
+                This noise was overlayed on each element changing the saturation, hue, and value of underlying colors. 
+                Its most apparent on the flower, due to motion and lack of emission - but is meant to texture the entire scene similar to original ukiyo-e paintings as a cohesive visual quality.
+                This is done closer to a post-processing technique, but is performed at the end of each respective shader.
+                <br><br><br>
+
+                <h2 id="simulation">Simulation</h2>
+                The cloth utilizes a cloth simulation. 
+                Here a vertex group is created of the top-most vertices which are used to pin the cloth. 
+                Since the cloth is parented under the lantern, the animated lantern also drives the positioning of the pinned vertices which create motion in the cloth physics.
+                <br><br>
+                Two forces are primarily used for the cloth simulation: gravity and wind. 
+                The wind angle points top-left erpendicular to the camera angle. 
+                This is done so that the motion of the cloth is clear and most visible from the camera angle.
+                And because the cloth is light, the amount of gravity and mass of cloth vertices are both decreased.
+                <br><br>
+                After the physics were tuned, the simulation is baked.
+                <br><br><br>
+
+                <h2 id="camera_anim">Animation</h2>
+                <h3 id="cam">Camera Angles</h3>
+                The subject of the scene is the lantern. 
+                The goal is to portray the lantern as something exotic, interesting, and supernatural (in this case an extension of nature).
+                <br><br>
+                To accomplish this, multiple camera angles were setup to "document" the lantern.
+                This perspective would have been lost if the camera was animated between angles, as the camera becomes an additional subject of the scene
+                and the lantern is no longer isolated in its own environment.<br>
+                This was realized after attempting to animate the camera, which I had initially wantd to showcase the dynamic transparency of the lantern.
+                <br><br>
+                Discrete camera angles also allowed for sudden transitions in the animation and layering the various visual aspects so that the animation never became boring.
+                The primary visual of the first shot is the smoke coming from the lantern.<br>
+                Then in the second shot, the viewer notices the subtle details of the flower and lantern which were too small before; its something new.<br>
+                Finally in the last shot, we get a side profile of the scene which better place it in 3D and contribute to the "documentation" of the peony lantern.
+                <br><br><br>
+                
+                <h3 id="anim">Lantern Keyframe</h3>
+                The lantern uses a key animation on 40s to swing back and forth between roughly two angles. 
+                This was to showcase its physical nature as a lantern which swings on the pivot of the handle. 
+                Without this animation, the stationary object would have been confusing because no physics would be involved. 
+                The presence of actual physics also suggest that the lantern is accurately floating and is held by some invisible object.
+                Of course a ghibli-style hand holding the handle and fading out at the wrist would have also been a nice touch for this quality, but out of my animation skillset.
+                <br><br>
+                At one point, I actually attempted 2D animating the smoke to no avail (releazied the skillset and timeframe were not realistic), thus began a shader-based implementation on that animation.
+                <br><br><br>
+
+                <h2 id="renderproc">Rendering Process</h2>
+                There were many renders, there were several a day for at least an entire week (~40 renders start to finish).<br><br>
+                To expedite the rendering process, I set the frame rate to 12. 
+                On the final render this could have been set higher, but I found the more choppy motion more representative of the theme.<br><br>
+                A dedicated laptop was used as a sole rendering farm, with fairly modern technology averaging a frame every 4 seconds.
+                <br><br>
+                Oftentimes, segments of the entire video were rendered to analyze certain components. 
+                For example, only the first camera angle was used to check if the smoke animation was carried out as desired.
+                <br><br>
+                Miniature renders were used to analyze color-setting, accurate motion, desired line-art thickness, textual placing, simulation correctness, and many other elements of this project.
+                <br><br><br>
+
+                <h1 id="wrap_up">Wrap Up / Final Notes</h1>
+                I'm personally beyond impressed with this project.
+                It was my first production project, everything else has nearly focused on specific aspects which would be pieces of an entire product.
+                But here I've implemented simulation, animation, post-processing, lighting with my knowledge of animation production as a whole.
+                <br><br>
+                I can say that there is nothing like waiting on renders/bakes to finish while doing another task. 
+                The workflow can be very diverse, the things one works on are different throughout the project, and there is immense room for creativity.
+                Applications of principles in art, tech, animation, and production all come together in these projects which is a great learning boost.
+                The scope is also incredibly managable (opposed to my previous projects attempting to make whole 3D games).
+                <br><br>
+                Ultimatly, this stands at the top of my favorite projects and the class for which I made this stands at the top of my favorite courses.
+                Surprisingly, this came about with ABSOLUTELY NO animation courses, film courses, or 3D courses. 
+                So as something largely created out of self-discipline and learning, I'm truly very proud to say I have produced this small animation of the infamous Japanese Peony Lantern.
+
+            </div>    
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="social-links">
+                <a href = "https://www.artstation.com/silvrhat/profile" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.29 68.46"><path d="M7162.88,7218.5a.87.87,0,0,0-.78,1.25c1.79,3.59,6.4,13.75,12.4,13.75H7217a.86.86,0,0,0,.74-1.31l-8-13.27a.86.86,0,0,0-.74-.42Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/><path d="M7192.13,7166.6l37.73,65.79a.8.8,0,0,0,1.35,0c2.11-3.29,8.29-10.93,5.29-17.93-1.76-4.11-23.65-41.47-26-45-4-6-14.08-4.28-17.74-4.08A.79.79,0,0,0,7192.13,7166.6Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/><path d="M7169,7206.5h31.91a.9.9,0,0,0,.78-1.35l-16.41-28.27a.9.9,0,0,0-1.57,0l-15.5,28.26A.9.9,0,0,0,7169,7206.5Z" transform="translate(-7162.01 -7165.04)" style="fill:#fff"/></svg></a>
+                <a href = "https://github.com/SilvRHat" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.75 66.55"><path d="M7188.5,7241.12V7232a.38.38,0,0,0-.45-.37c-2,.4-10.21,1.58-13.55-5.1-3-6-3.17-4.17-6-7a3.1,3.1,0,0,1-1-2s0-4,5,0,4,5,7,7c2.61,1.74,7.48,1.21,8.71,1a.37.37,0,0,0,.32-.3c.24-1.4,2-5.74,3-5.74s-18.31-.06-20-17a20.94,20.94,0,0,1,4.8-15.79.36.36,0,0,0,0-.44c-.64-1-2.78-4.89.16-10.77,1-2,8.78,1.89,11.88,3.92a.32.32,0,0,0,.27,0c1.38-.32,12.38-2.74,21.71,0a.37.37,0,0,0,.27,0c1.21-.65,10.79-5.73,11.87-3.93,2.65,4.41.62,9.6.11,10.76a.38.38,0,0,0,.08.42c1.1,1.08,6.51,7.11,3.81,18.82-2.45,10.6-13,13.72-18.28,14a.38.38,0,0,0-.28.6,18.57,18.57,0,0,1,2.56,4.42c.91,2.72.17,14.47,0,16.65a.37.37,0,0,1-.37.35h-21.27A.38.38,0,0,1,7188.5,7241.12Z" transform="translate(-7167.5 -7174.95)" style="fill:#fff"/></svg></a>
+                <a href = "https://www.linkedin.com/in/gavinzimmerman/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.69 73.49"><path d="M7203.91,7236.13H7188.7v-49h14.58v6.49l.19.06c.12-.15.27-.29.38-.45a15.34,15.34,0,0,1,11.38-7.16,22.76,22.76,0,0,1,10.2.86c4.76,1.5,7.67,4.82,9.21,9.45a34.16,34.16,0,0,1,1.56,10.66c.07,9.49.05,19,.06,28.49a5.15,5.15,0,0,1-.06.62H7221V7235c0-8.08,0-16.15,0-24.23a30,30,0,0,0-.61-5.76c-.73-3.67-3-5.52-6.74-5.72-2.85-.15-5.46.41-7.36,2.75a10,10,0,0,0-2.06,5.44c-.16,1.63-.26,3.27-.26,4.9,0,7.56,0,15.12,0,22.68Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/><path d="M7163.86,7187.1H7179v49h-15.15Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/><path d="M7171.43,7162.64a8.84,8.84,0,1,1-8.86,8.84A8.81,8.81,0,0,1,7171.43,7162.64Z" transform="translate(-7162.57 -7162.64)" style="fill:#fff"/></svg></a>
+                <a href = "mailto: gzimm4@gmail.com" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 116 80"><polyline points="9 9 58 40 106 10" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:10px"/><rect x="5" y="5" width="106" height="70" style="fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:10px"/></svg></a>
+                <a href = "https://silvrship.dev/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 62"><path d="M7178.92,7230.5h-9.42a31,31,0,0,1,0-62h9.82v15h-9.82a16,16,0,0,0,0,32h9.42v15Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/><path d="M7231.5,7230.5h-13v-15h13a16,16,0,0,0,0-32h-13.4v-15h13.4a31,31,0,0,1,0,62Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/><path d="M7231.5,7207h-65v-15h65Z" transform="translate(-7138.5 -7168.5)" style="fill:#fff"/></svg></a>
+            </div>
+            <div class="project-links">
+                <a href="../Ukyio/">Project::Ukiyo「浮世」</a>
+                <!--<a href="../Portfolio/Ramen/">Tech·Katsu:Ramen</a>-->
+                <a href="../grav-flux/">Gr@v:f/UX</a>
+                <a href="../blackhole/">BlackH01e</a>
+                <a href="../SPdr/">SP//dr_wbs</a>
+                <a href="../MvRE/">Mv:RE(Rendering Engine)</a>
+            </div>
+        </div>
+
+    </body>
+</html>
