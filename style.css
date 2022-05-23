@@ -112,7 +112,6 @@ body {
     max-height: 526px;
     z-index: -10;
     margin: auto;
-    position: absolute;
 }
 
 .cover-fit {
@@ -128,7 +127,6 @@ body {
     max-width: 100%;
     z-index: -10;
     margin: auto;
-    position: absolute;
 }
 .cover-fit>.vert_title {
     position: absolute;
