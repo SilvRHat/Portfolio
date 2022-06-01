@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <td><strong>Media:</strong></td>
-                            <td><small>Rig; Realtime; Tech Art</small></td>
+                            <td><small>Realtime VFX</small></td>
                         </tr>
                         <tr>
                             <td><strong>Tech:</strong></td>
@@ -102,30 +102,91 @@
                                 <li><a href="#about">About</a></li>
                             </ul>
                         </li>
-                        <li>Breakdown
+                        <li><a href="#breakdown">Breakdown</a>
                             <ul>
                                 <li><a href="#sdf">Magic Card SDFs</a></li>
-                                <li><a href="#lg">Light Glyph</a>
+                                <li><a href="#lm">Light Magic</a>
                                     <uL>
-                                        <li><a href="#lg-concept">VFX Storyboard/ Concept</a></li>
-                                        <li><a href="#lg-frag">Fragment Shader</a></li>
-                                        <li><a href="#lg-geom">Geometry Shader/Animation</a></li>
+                                        <li><a href="#l-concept">Concept Breakdown</a></li>
+                                        <li><a href="#l-frag">Shaders (Fragment)</a></li>
+                                        <li><a href="#l-geom">Geometry</a></li>
                                     </uL>
                                 </li>
-                                <li><a href="#ig">Ice Glyph</a>
+                                <li><a href="#im">Ice Magic</a>
                                     <uL>
-                                        <li><a href="#ig-concept">VFX Storyboard/ Concept</a></li>
-                                        <li><a href="#ig-geom">Geometry Shader/Animation</a></li>
-                                        <li><a href="#ig-frag">Ice Shader</a></li>
-                                        <li><a href="#ig-frag">Magic Swirl Shader</a></li>
+                                        <li><a href="#i-concept">Concept Breakdown</a></li>
+                                        <li><a href="#i-frag">Shaders (Fragment)</a></li>
+                                        <li><a href="#i-geom">Geometry</a></li>
+                                    </uL>
+                                </li>
+                                <li><a href="#pm">Plant Magic</a>
+                                    <uL>
+                                        <li><a href="#p-concept">Concept Breakdown</a></li>
+                                        <li><a href="#p-frag">Shaders (Fragment)</a></li>
+                                        <li><a href="#p-geom">Geometry</a></li>
+                                    </uL>
+                                </li>
+                                <li><a href="#fm">Fire Magic</a>
+                                    <uL>
+                                        <li><a href="#f-concept">Concept Breakdown</a></li>
+                                        <li><a href="#f-frag">Shaders (Fragment)</a></li>
+                                        <li><a href="#f-geom">Geometry</a></li>
                                     </uL>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <h1 id="project">Do Witchcraft</h1>
-                Coming Soon!
+                <h1 id="project">Do Witchcraft (Current Project)</h1>
+                <div id="video" class="project-reel">
+                    <video controls width="99%;" src="witchcraft-6-1-progress.mov"></video>
+                </div>
+
+                <h2 id="about">About</h2>
+                Do Witchcraft is a personal project to explore/practice SDFs, bezier curves, animation curves,
+                procedural geometry, timing, and of course magic. The concept is taken from "The Owl House"
+                animation series by Dana Terrace and produced by Disney Television Animation.
+                <br><br>
+                Each card contains a glyph/symbol on them responsible for performing a spell,
+                with four base symbols for: light, ice, plant, and fire magic.
+                <br><br>
+                These effects are recreated entirely procedurally in Blender using both Shader Nodes and Geometry Nodes.
+                A handle (empty object) is then mapped to the Z-axis of each card providing a timeline for the animation.
+                This makes queuing an animation customizable (and also allows the user to move the timeline themselves for fun).
+                In both shader and geometry programs, curves are provided and labeled which allow for customization of individual
+                movements, sizing, instancing and more.
+
+                <h1 id="breakdown">Breakdown</h1>
+                As usual with my projects, I've provided a breakdown containing the design choices, method of approach,
+                and a technical explanation of the key components. 
+                <br><br>
+                Since this isn't a full tutorial, I don't breakdown things like animating the handles responsible for driving
+                each VFX timeline. However, if you as a reader have any questions about the process or content here then please don't hesitate to ask.
+                <br><br>
+
+                (Breakdown Writing In Progress, Check back soon; For reference, a current outline is under the project information box)
+                <!--
+                <h2 id="sdf">Magic Card SDFs</h2>
+
+
+                <h2 id="lm">Light Magic</h2>
+                <h3 id="l-concept">Concept Breakdown</h3>
+                <h3 id="l-frag">Shaders (Fragment)</h3>
+                <h3 id="l-geom">Geometry</h3>
+                <h2 id="lm">Ice Magic</h2>
+                <h3 id="i-concept">Concept Breakdown</h3>
+                <h3 id="i-frag">Shaders (Fragment)</h3>
+                <h3 id="i-geom">Geometry</h3>
+                <h2 id="lm">Plant Magic</h2>
+                <h3 id="p-concept">Concept Breakdown</h3>
+                <h3 id="p-frag">Shaders (Fragment)</h3>
+                <h3 id="p-geom">Geometry</h3>
+                <h2 id="lm">Fire Magic</h2>
+                TODO
+                <h3 id="f-concept">Concept Breakdown</h3>
+                <h3 id="f-frag">Shaders (Fragment)</h3>
+                <h3 id="f-geom">Geometry</h3>
+                -->
             </div>    
         </div>
 
