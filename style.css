@@ -277,6 +277,18 @@ body {
     display: inline-block;
     margin: 20px 5%;
 }
+.scroll>.content-2>h1{
+    display: -webkit-box;
+    border-bottom: solid 5px;
+}
+.scroll>.content-2>h2{
+    display: -webkit-box;
+    border-bottom: solid 2px;
+}
+.scroll>.content-2>h3{
+    display: -webkit-box;
+    border-bottom: solid 1px;
+}
 .project-reel {
     display: inline-block;
     width: calc(100% - 320px);   

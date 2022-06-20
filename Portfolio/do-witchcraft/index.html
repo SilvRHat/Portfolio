@@ -78,7 +78,7 @@
                         </tr>
                         <tr>
                             <td><strong>Developed:</strong></td>
-                            <td><small>May 2022 - Current</small></td>
+                            <td><small>May 2022 - June 2022</small></td>
                         </tr>
                         <tr>
                             <td><strong>Media:</strong></td>
@@ -133,13 +133,14 @@
                                         <li><a href="#f-geom">Geometry</a></li>
                                     </uL>
                                 </li>
+                                <li><a href="#render">Rendering</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <h1 id="project">Do Witchcraft (Current Project)</h1>
                 <div id="video" class="project-reel">
-                    <video controls width="99%;" src="witchcraft-6-1-progress.mov"></video>
+                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/c3052u2BIJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <h2 id="about">About</h2>
@@ -151,38 +152,261 @@
                 with four base symbols for: light, ice, plant, and fire magic.
                 <br><br>
                 These effects are recreated entirely procedurally in Blender using both Shader Nodes and Geometry Nodes.
-                A handle (empty object) is then mapped to the Z-axis of each card providing a timeline for the animation.
-                This makes queuing an animation customizable (and also allows the user to move the timeline themselves for fun).
-                In both shader and geometry programs, curves are provided and labeled which allow for customization of individual
+                A handle (empty object) is then mapped to the Z-axis of each card, which is used as a custom timeline for the animation (Z Position = time).
+                This makes queuing an animation customizable and also allows the user to move the timeline themselves for fun.
+                In both shader and geometry programs, float curve nodes are used for each individual animation component including
                 movements, sizing, instancing and more.
 
                 <h1 id="breakdown">Breakdown</h1>
                 As usual with my projects, I've provided a breakdown containing the design choices, method of approach,
                 and a technical explanation of the key components. 
+                At the very bottom is a new section on the iteration of test renders - as it explains how I approach rendering
+                and iteration in this step of the project.
                 <br><br>
                 Since this isn't a full tutorial, I don't breakdown things like animating the handles responsible for driving
-                each VFX timeline. However, if you as a reader have any questions about the process or content here then please don't hesitate to ask.
+                each VFX timeline or a piece on customizing blender settings for a tech art workflow. 
+                However, if you as a reader have any questions about the process or content here then please don't hesitate to ask.
                 <br><br>
 
-                (Breakdown Writing In Progress, Check back soon; For reference, a current outline is under the project information box)
-                <!--
                 <h2 id="sdf">Magic Card SDFs</h2>
+                This first step is to create the cards themselves. 
+                The geometry here is fairly simple - and only requires a plane (which may be subdivided later for deforming the card).
+                Thus, the first major challenge is to texture the glyph pattern onto each card.
+                <br><br>
+                Because each glyph pattern features only simple geometry (line, circle, triangle, quadratic bezier curve, etc), we can generate SDFs mathematically to represent the patterns.
+                An SDF is a signed distance field, where each position or fragment (in glsl terms) holds a signed value. 
+                The values of every position make up a field, which then can make up a shape. For example a voronoi texture is an SDF representing the distance to the closest points.
+                <br><br>
+                SDF's may also be combined with maximum and mimimum operations for intersections and unions.
+                So from SDFs of circles, lines, (quad) bezier curves, and triangles we'll be able to generate a SDF for the glyph patterns.
+                <br><br>
+                <img width="99%" src="img/sdf.png">
+                <br><br>
+                For this breakdown, I'll touch on the making of the Ice glyph (second from the left).
 
+                <h3>Circle SDF</h3>
+                The SDF for a circle is very simple - it is simply the length from the circle's center. 
+                However, we want this SDF to be hollow. This can be done by subtracting the radius of the circle and then taking the absolute value of that.
+                What happens is at radius R where the SDF value would be equal to R, after the subtraction the value is then 0. 
+                Taking the absolute value, then inverses the inner part of the circle so that its positive.
+                <br><br>
+                <img width="99%" src="img/circle-sdf.png">
+                <br><br>
+                The center here so happens to be at (0,0) - but using the distance operation instead of the length operation can be used to offset the circle.
+                <br><br>
+                <h3>Rectangle SDF</h3>
+                For the rotated square in the middle, I use a rectangle SDF since it allows for easier customization over 4 line SDFs.
+                This is also fairly simple and demonstrates the technique for combining SDFs. 
+                <br><br>
+                For customization, we let the SDF function take in parameters for width and height. 
+                For positioning, lets assume the center is always at (0,0) - the passed in coordinates to this SDF function can be changed to offset its location.
+                <br><br>
+                Now similar to the circle, 0 should be the value at each edge. The idea is to do this for each edge - which is simply offsetting the coordinate system 4 ways.
+                Maximum operations can then be used for unioning.
+                <br><br>
+                <img width="23%" src="img/r0.png">
+                <img width="24%" src="img/r1.png">
+                <img width="23%" src="img/r2.png">
+                <img width="23%" src="img/r3.png">
+                <br><br>
 
+                <h3>Line SDFs (simple and quadratic bezier)</h3>
+                Some SDFs are significantly more mathmatical. 
+                A line with rounded edges for example has 3 different cases for what the distance may be - and a bezier curve is a bezier curve.
+                Luckily, such mathematical functions are readily available on the <a tagrte="_blank" href="https://iquilezles.org/articles/distfunctions/">internet</a>.
+                Just be prepared to transcribe glsl code to blender nodes - which may only be readble in mathmatical notation.
+                <br><br>
+                <img width="96%" src="img/bezier-sdf.png">
+                <br><br>
+                <h3>Putting it together</h3>
+                To union SDFs, a minimum operation may be used. A smooth minimum operation can also result in smooth combinations of SDFs.
+                For organization of the whole SDF into a readable node tree, we have the coordinate system (middle purple line) and distance field (middle grey line)
+                pass through the entire tree where they are used as inputs and updated from outputs.
+                <br><br>
+                <img width="96%" src="img/nodes.png">
+                
+
+                
+                <br><br><br>
                 <h2 id="lm">Light Magic</h2>
+                The first magic VFX is the light magic spell, which generates a ball of floating light.
+                
+                <br><br>
                 <h3 id="l-concept">Concept Breakdown</h3>
+                The light spell works by transforming the piece of paper the glyph is written on into a ball of light.
+                The tranformation of geometry from a plane into a sphere cause the paper to look like its crumbling into a ball- whilst
+                simultaneously emitting more and more light. The ball then levitates in the air - thus when the paper first starts crumbling
+                it has already started levitating somewhat.
+                <br><br>
+                Below is a simple VFX storyboard. The left-most column is time, the next column is the frame, and then notes are placed on the right.
+                <br><br>
+                <img width="40%" src="img/light-st.png">
+
+                
+                <br><br>
                 <h3 id="l-frag">Shaders (Fragment)</h3>
+                There are two pieces of geometry to shader here- the paper and the ball of light. 
+                Shaders or materials can often be a limited resource in game development; so allocating two materials here may be overkill in some contexts.
+                This is just something to be aware of in practice, but not constrained here.
+                <br><br>
+                The light material is simply an emission material and nothing more (which may be used for many lit objects in a game).
+                <br><br>
+                For the paper, there is a bit more work here.
+                <br>
+                First, on creating the paper texture - the UV map is plugged into a 2D noise texture. 
+                Note that the node here actually uses the 2D setting instead of the default 3D input which is more computationally expensive.
+                The factor of this texture is then plugged into a color ramp.
+                <br><br>
+                This noise is then reused and overlayed (added) onto the glyph SDF mentioned in the earlier section. 
+                A comparison operation is then used as a factor in blending the paper color and ink color.
+                <br><br>
+                <img width="99%" src="img/light1.png">
+                <br><br>
+                For the emission, we need some concept of time so that the emission can be applied at the correct time.
+                We also want some easy way of mapping time to values.
+                <br><br>
+                For time, we'll create a uniform (attribute in blender)- how this is set will be explained in the geometry section (since it has to be done on the CPU side).
+                For mapping time to values, we'll construct a setup of two map range nodes and a float curve.
+                The float curve allows values to be customized (since these are animating the effects we want to be able to ease the effects via curves).
+                The mapping ranges are then placed around this to map the time range to the float curve input and then remap its outputs correctly.<br><br>
+                To organize all this, I created a group node which does no operations but makes hooking the nodes together easier.
+                <br><br>
+                <img width="99%" src="img/light2.png">
+                <br><br>
+                That wraps up the shaders for this effect - the next piece is animating the paper crumbling into a ball.
+
+                <br><br>
                 <h3 id="l-geom">Geometry</h3>
+                The geometry trees for this project get quite big.
+                <br><br>
+                <img width="99%" src="img/big-geom.png">
+                <br><br>
+                So I've included a list of what is animated (components which change) as a simple breakdown. 
+                The following text then iterates more on each animated value and component.
+                <ul>
+                    <li>Curve on edges
+                        <ul>
+                            <li>Radius of curve</li>
+                            <li>How much of the edge is curved (factor)</li>
+                        </ul>
+                    </li>
+                    <li>Crumble (Noise Height offset)
+                        <ul>
+                            <li>Amplitude</li>
+                            <li>Roughness (Distortion)</li>
+                        </ul>
+                    </li>
+                    <li>Float
+                        <ul>
+                            <li>Float Height</li>
+                            <li>Oscillation Amount</li>
+                        </ul>
+                    </li>
+                    <li>Scale of the big sphere</li>
+                    <li>Particles
+                        <ul>
+                            <li>Scaling</li>
+                            <li>Distance away</li>
+                        </ul>
+                    </li>
+                </ul>
+                <br><br>
+
+                Before all else, in the geometry step we need to create the notion of a timeline as mentioned in the previous section.
+                To do this, we use the Z coordinate of an empty (middle) parented under our light 3D object. This node tree (left) is the leftmost in our geometry tree,
+                since we also use this value to animate the geometry. After which, it is mapped to an attribute in the modifier settings. 
+                To do this, you must also create an attribute- which ultimately acts as a uniform to the shader (right).
+                <br><br>
+                <img width="52%" src="img/time-nodes.png">
+                <img width="14%" src="img/empty.png">
+                <img width="33%" src="img/mods.png">
+
+                <br><br>
+                Now onto deformation.
+                <br><br>
+                To properly deform the mesh, first we need vertices to represent the amount of detail we're looking for. 
+                The default 4 will not cut it, thus the very first operation is to subdivide the mesh.
+                <br><br>
+                <img width="35%" src="img/g1.png">
+                <br><br>
+                Next we want to crumble the edges of the plane inwards. To start, lets design a 2D test model.
+                <img width="99%" src="img/lg2.png">
+                <br><br>
+                Basically, we'll start by curving the end around some arbitrary circle. 
+                The circle's size and where curving begins is animated, which allows for customization.
+                <br><br>
+                Our 3D scenario translates easily to our 2D model - we can consider the X value in the 2D model as the distance from the center of our paper geometry.
+                The up value then doesn't change. 
+                <br><br>
+                Next, we must define where the circle (or curvature) begins. 
+                To do this, we constrain the max X value in the 2D model it can be placed. 
+                This is equal to the distance of the corners from the center - which is 1.7 here.
+                <br><br>
+                Next we create an animatable parameter which is the factor along this length that the circle is placed.
+                Using the vertex position, we then want to find how much is curved and how much is flat of its distance from the center.
+                <br><br>
+                <img width="99%" src="img/node-bd1.png">
+                <br><br>
+                Next, we want to get the radius which is also animatable. For this parameter, the circumfrence may actually make more sense in terms of units and values
+                since the paper is wrapped around the surface of the circle. 
+                The animation parameter I use here is called 'curvature' and translates to how many radians the max length is wrapped up in. 
+                So if its 2π, that mean wrapping the max length 1.7 will give a complete circle.
+                <br><br>
+                The amount its curved by can then be divided by the total length and multiplied by this parameter to get the angle to rotate by.
+                <br><br>
+                Rotation here is done by axis angle, where the axis is the in/out axis of our 2D model. 
+                The rotated vector is at (0,0) and the center is at (0, radius). Afterwards, the flat component is added to produce the final position in the 2D model space.
+                <br><br>
+                <img width="99%" src="img/geom-bd2.png">
+                <img width="99%" src="img/geom-bd3.png">
+                <br><br>
+                Next, we have to put this in 3D space via another axis angle rotation. 
+                This time the axis is the up vector, the center is (0,0), and the vector rotated in the result of the 2D model above. 
+                The angle is determined via an azimuth angle generated from the oiginal position.
+                <br><br>
+                <img width="66%" src="img/geom-bd4.png">
+                <img width="30%" src="img/geom-bd5.png">
+                <br><br>
+                Next, we add some noise to get a more realistic crumble. 
+                For noise, we use the initial position and add the scene time to the Z axis - this lets the noise change over time.
+                For animation parameters we want to animate: how much noise is applied, and how rough the noise is (change distortion).
+                You'll also see there is an animation for the floating height in the following screenshot - this is done to condense
+                setting the position once.
+                <br><br>
+                <img width="99%" src="img/geom-bd6.png">
+                <br><br>
+                There's also a related animation for how much to apply the oscillation effect.
+                <br><br>
+                <img width="70%" src="img/geom-bd7.png">
+                <br><br>
+                For other geometry, the instance on points geometry node is used to instance exisiting 3D models such as a glowing sphere.
+                That geometry is then joined with the exisiting plane geometry and used as the final output geometry.
+                <br><br>
+                <img width="70%" src="img/geom-bd8.png">
+                <br><br>
+                For particles, random values are generated and used for direction, scale multiplier, and a distance multiplier.
+                <br><br>
+                <img width="50%" src="img/geom-bd9.png">                
+                <br><br>
+                And thats the first effect.
+
+
+
+
+
+                <br><br><br>
                 <h2 id="lm">Ice Magic</h2>
+
                 <h3 id="i-concept">Concept Breakdown</h3>
                 <h3 id="i-frag">Shaders (Fragment)</h3>
                 <h3 id="i-geom">Geometry</h3>
+                
+                <!--
                 <h2 id="lm">Plant Magic</h2>
                 <h3 id="p-concept">Concept Breakdown</h3>
                 <h3 id="p-frag">Shaders (Fragment)</h3>
                 <h3 id="p-geom">Geometry</h3>
                 <h2 id="lm">Fire Magic</h2>
-                TODO
                 <h3 id="f-concept">Concept Breakdown</h3>
                 <h3 id="f-frag">Shaders (Fragment)</h3>
                 <h3 id="f-geom">Geometry</h3>
