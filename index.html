@@ -67,30 +67,12 @@
         <!-- MAIN -->
         <div class="scroll">
             <!-- youtube -->
-            <div class="content" style="margin-bottom: 0;">
-                <h1>Spring 2022 Reel Coming Soon!</h1>
-                <p>
-                    Over the next few days (June 18th-24th) I will be adding a new reel showcasing my newest projects.
-                    So please check back soon!
-                    <br><br>
-                    Until then, check out the individual sites for:
-                    <div style="width: 40%;">
-                        <ol>
-                            <li><a href="#witchcraft">Do Witchcraft</a></li>
-                            <li><a href="#ukiyo">Project::Ukiyo「浮世」</a></li>
-                            <li><a href="#gravity">Gr@v:f/UX</a></li>
-                            <li><a href="#blackhole">BlackH01e</a></li>
-                            <li><a href="#spdr">SP//dr_wbs</a></li>
-                        </ol>
-                    </div>
-                </p>
-                <h1>Spring 2021 Reel</h1>
-            </div>
             <div class="reel">
-                <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/UpvX9RPmAX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <video style="width: 100%;" controls src="reel-su22-2.mov"></video>
+                <!--<iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/UpvX9RPmAX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
             </div>
             
-            <!--
+            
             <div class="album">
                 <h1>Technical Direction・Art Reel</h2>
                 <h2>DISK ZERO / GAVIN ZIMMERMAN</h3>
@@ -99,66 +81,84 @@
                         <li><a href="#witchcraft">Do Witchcraft</a></li>
                         <li><a href="#ukiyo">Project::Ukiyo「浮世」</a></li>
                         <li><a href="#gravity">Gr@v:f/UX</a></li>
-                        <li><a href="#blackhole">BlackH01e</a></li>
-                        <li><a href="#spdr">SP//dr_wbs</a></li>
+                        <li><a href="#blackhole">Blackh01e</a></li>
                     </ol>
                 </div>
                 <img class="disk-cover" src="img/disk-cover.png">
             </div>
             
             <div class="content">
-                <h3 id="witchcraft">Do Witchcraft</h3>
-                Produced entirely from node-programming, equivalent to geometry and fragment shaders.
-                Geometry shaders deform the shape over time for geometry-based animation. Fragment shaders animate
-                VFX effects superimposed onto static geometry.
-                <br><br>
-                Symbols on the cards are created from a custom SDF function.
-                The project is designed for realtime execution and features rigging handles for customization on the animation speed.
-                <br><br>
-                <a href="./Portfolio/do-witchcraft/">Full Breakdown and Video (Coming Soon)</a>
+                <h2>Reel Breakdown</h2>
+                Thanks for checking out my reel!<br><br>
+                Here I go into some more detail on the creation behind these projects. Each project is also complete
+                with a full animation (or game link) and technical writeup if interested.
+                Note that all work is my own, other than concept and background illustration credited appropriately.
                 <br><br><br>
 
-                <h3 id="ukiyo">Project::Ukiyo「浮世」</h3>
-                Produced a mini animation adapting The Peony Lantern, specifically Asai Ryoi's "original" literature. The production
-                involves custom shaders, hand-painted textures, cloth simulation, procedural geometry, animation, among camera/lighting/composition work.
+                <h3 id="witchcraft" style="margin-bottom: 2px;">Do Witchcraft</h3>
+                <h5 style="margin-top: 6px;">Shading, Procedural Animation-Modeling, Lighting</h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 24px; width: 50%; float:right;">
+                        Shoft film produced entirely from procedural programming; 
+                        3D modeling and animation are coded using Blender's geometry nodes feature and
+                        all materials/textures are programmed with custom fragment shaders (also node-based).
+                        <br><br>
+                        <a href="./Portfolio/do-witchcraft/">Full Writeup, Breakdown, and Animation</a>
+                    </div>
+                    <img width="40%;" src="img/witchcraft.png">
+                </div>
                 <br><br>
-                Custom shaders leverage knowledge on fresenl effect, methods of implementing transparency, lighting angles, and material type (translucent, specular, etc.).
-                3D scene was designed for easy modifications such as: using bezier curve for smoke, procedural geometry for flower with parameters of control, and reusable shader functions.
-                <br><i>Created for Early Japanese Literature Course at University of Colorado, Boulder.</i>
-                <br><br>
-                <a href="./Portfolio/Ukiyo/">Full Breakdown and Video</a>
-                <br><br><br>
 
-                <h3 id="gravity">Gr@v:f/UX</h3>
-                Fully coded from OpenGL, C, and GLSL to create an asteroid field without meshes or textures.
-                Full vertex-processing pipeline is utilized to tesselate icospheres into desired shape.
-                A ridged multifracta musgrave texture is utilized for height along original normal for new position, with gourad method to recalculate normals.
-                <br><br>
-                Optimizations include camera-culling, dyanamic level of detail on tesselation, backface culling, and 3D texture sampling of simplex noise for procedural musgrave texture function (opposed to glsl simplex function).
-                <br><br>
-                Also employs a post-processing step for a grainy and tradition cel-animation look.
-                <br><i>Created for Advanced Graphics Course at University of Colorado, Boulder.</i>
-                <br><br>
-                <a href="./Portfolio/grav-flux/">Full Breakdown and Video</a>
-                <br><br><br>
 
-                <h3 id="blackhole">BlackH01e</h3>
-                The blackhole is entirely shader-based and fully reactive to scene. Normals are reconstructed on a sphere
-                based on viewing angle for accurate refractions. 
-                Accretion disk is also shader-based with n disk layers to provide depth of accretion gas (which can be configured for efficiency).
-                <br><i>Created for Blackholes course at University of Colorado, Boulder.</i>
+                <h3 id="ukiyo" style="margin-bottom: 2px;">Project:Ukiyo「浮世」</h3>
+                <h5 style="margin-top: 6px;">Shading, Lighting, Modeling, Composition + Layout</h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 24px; width: 50%; float:right;">
+                        Short film developed for a great course on Japanese Literature, adapting an early ghost story.
+                        Materials, composition, lighting, color, and framing here refrence the "original" work, historical context,
+                        and literary influence. 
+                        <br><br>
+                        A broad use of technology is used here including: cloth simulation, substance painter,
+                        procedural textures (node-based), geometry shaders (node-based), grease pencil (2D/3D text), and various lighting setups.
+                        <br><br>
+                        <a href="./Portfolio/Ukiyo/">Full Writeup, Breakdown, and Video</a>
+                    </div>
+                    <img width="40%;" src="img/ukiyo.png">
+                </div>
                 <br><br>
-                <a href="./Portfolio/blackhole/">Full Breakdown and Video</a>
-                <br><br><br>
 
-                <h3 id="spdr">SP//dr_wbs</h3>
-                Designed a custom noise function and mathmatical algorithm for responsive 'loose' rope physics.
-                Concepts created in python notebook and transcribed to Roblox game engine for realtime execution.
+                <h3 id="ukiyo" style="margin-bottom: 2px;">Blackh01e</h3>
+                <h5 style="margin-top: 6px;">Shading</h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 24px; width: 50%; float:right;">
+                        The blackhole is entirely shader-based, realtime, and reactive to scene. Normals are reconstructed on a sphere
+                        based on viewing angle for accurate refractions. 
+                        Accretion disk is created procedural with parameters for color, speed, accretion amount, and sharpness.
+                        <br><br>
+                        <a href="./Portfolio/blackhole/">Full Writeup, Breakdown, and Video</a>
+                    </div>
+                    <img width="40%;" src="img/blackhole.png">
+                </div>
                 <br><br>
-                <a href="./Portfolio/SPdr/">Full Writeup and Video</a>
+
+
+                <h3 id="ukiyo" style="margin-bottom: 2px;">Gr@v:f\UX</h3>
+                <h5 style="margin-top: 6px;">Rendering Pipeline, Shaders, Procedural Geometry, Post Processing Shaders, Optimization</h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 24px; width: 50%; float:right;">
+                        Completely coded from OpenGL, C, and GLSL to create an asteroid field without mesh or texture assets.
+                        Full vertex-processing pipeline is utilized to tesselate icospheres into desired shape.
+                        A ridged multifractal musgrave texture is utilized for displacement, with gourad method to recalculate normals. 
+                        All shaders here were programmed from scratch (vertex, tesselection control+evaluation, and fragment).
+                        <br><br>
+                        Optimizations include camera-culling, dyanamic level of detail on tesselation, backface culling, and 3D texture sampling of simplex noise for procedural musgrave texture function (opposed to glsl simplex function).
+                        <br><br>
+                        <a href="./Portfolio/grav-flux/">Full Breakdown and Video</a>
+                    </div>
+                    <img width="40%;" src="img/gravity.png">
+                </div>
                 <br><br>
             </div>
-            -->
         </div>
 
         <!-- FOOTER -->
