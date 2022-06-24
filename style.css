@@ -280,14 +280,17 @@ body {
 .scroll>.content-2>h1{
     display: -webkit-box;
     border-bottom: solid 5px;
+    margin-top: 60px;
 }
 .scroll>.content-2>h2{
     display: -webkit-box;
     border-bottom: solid 2px;
+    margin-top: 50px;
 }
 .scroll>.content-2>h3{
     display: -webkit-box;
     border-bottom: solid 1px;
+    margin-top: 40px;
 }
 .project-reel {
     display: inline-block;

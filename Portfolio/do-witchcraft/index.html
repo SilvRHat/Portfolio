@@ -56,9 +56,9 @@
 
         <!-- COVER -->
         <div class="cover-fit">
-            <img src="../../img/cover.png">
+            <img src="cover.png">
             <div class="vert_title">
-                <h2 style="color:rgb(16, 16, 16);">Do Witchcraft</h2>
+                <h2 style="color:white;">Do Witchcraft</h2>
             </div>
         </div>
 
@@ -86,7 +86,7 @@
                         </tr>
                         <tr>
                             <td><strong>Tech:</strong></td>
-                            <td><small>Blender 3.1</small></td>
+                            <td><small>Blender 3.2</small></td>
                         </tr>
                         <tr>
                             <td><strong>Links:</strong></td>
@@ -104,48 +104,25 @@
                         </li>
                         <li><a href="#breakdown">Breakdown</a>
                             <ul>
-                                <li><a href="#sdf">Magic Card SDFs</a></li>
-                                <li><a href="#lm">Light Magic</a>
-                                    <uL>
-                                        <li><a href="#l-concept">Concept Breakdown</a></li>
-                                        <li><a href="#l-frag">Shaders (Fragment)</a></li>
-                                        <li><a href="#l-geom">Geometry</a></li>
-                                    </uL>
-                                </li>
-                                <li><a href="#im">Ice Magic</a>
-                                    <uL>
-                                        <li><a href="#i-concept">Concept Breakdown</a></li>
-                                        <li><a href="#i-frag">Shaders (Fragment)</a></li>
-                                        <li><a href="#i-geom">Geometry</a></li>
-                                    </uL>
-                                </li>
-                                <li><a href="#pm">Plant Magic</a>
-                                    <uL>
-                                        <li><a href="#p-concept">Concept Breakdown</a></li>
-                                        <li><a href="#p-frag">Shaders (Fragment)</a></li>
-                                        <li><a href="#p-geom">Geometry</a></li>
-                                    </uL>
-                                </li>
-                                <li><a href="#fm">Fire Magic</a>
-                                    <uL>
-                                        <li><a href="#f-concept">Concept Breakdown</a></li>
-                                        <li><a href="#f-frag">Shaders (Fragment)</a></li>
-                                        <li><a href="#f-geom">Geometry</a></li>
-                                    </uL>
-                                </li>
+                                <li><a href="#vfx">VFX Storyboards</a></li>
+                                <li><a href="#material">Material Shaders</a></li>
+                                <li><a href="#glyphs">Glyph Shaders</a></li>
+                                <li><a href="#geom">Procedural Geometry</a></li>
+                                <li><a href="#anim_set">Animation Setup</a></li>
+                                <li><a href="#anim_bd">Animation Breakdown</a></li>
                                 <li><a href="#render">Rendering</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <h1 id="project">Do Witchcraft (Current Project)</h1>
+                <h1 id="project">Do Witchcraft</h1>
                 <div id="video" class="project-reel">
-                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/c3052u2BIJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/_1Ni1kh8UYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <h2 id="about">About</h2>
-                Do Witchcraft is a personal project to explore/practice SDFs, bezier curves, animation curves,
-                procedural geometry, timing, and of course magic. The concept is taken from "The Owl House"
+                Do Witchcraft is a personal project exploring SDFs, bezier curves, animation curves,
+                procedural geometry, timing, and of course magic. The concept behind the magic spells is taken from "The Owl House"
                 animation series by Dana Terrace and produced by Disney Television Animation.
                 <br><br>
                 Each card contains a glyph/symbol on them responsible for performing a spell,
@@ -158,15 +135,28 @@
                 movements, sizing, instancing and more.
 
                 <h1 id="breakdown">Breakdown</h1>
-                As usual with my projects, I've provided a breakdown containing the design choices, method of approach,
-                and a technical explanation of the key components. 
+                As with all my projects, I've included a detailed breakdown on the making of this animation.
+                The breakdown includes: various design choices, methods of approach, code, concept images, math notes, 
+                and a technical explanation of key components. <br><br>
                 At the very bottom is a new section on the iteration of test renders - as it explains how I approach rendering
                 and iteration in this step of the project.
                 <br><br>
-                Since this isn't a full tutorial, I don't breakdown things like animating the handles responsible for driving
-                each VFX timeline or a piece on customizing blender settings for a tech art workflow. 
-                However, if you as a reader have any questions about the process or content here then please don't hesitate to ask.
+                If you as a reader have any questions about the process or content here then please don't hesitate to ask.
                 <br><br>
+
+
+                <h2 id="vfx">VFX Storyboards</h2>
+
+                <br><br>
+                <img width="47%;" src="img/light-st.png">
+                <div style="display: inline-block; width: 5%;"></div>
+                <img width="47%;" src="img/ice-st.png">
+                <br><br>
+                <img width="47%;" src="img/plant-st.png">
+                <div style="display: inline-block; width: 5%;"></div>
+                <img width="47%;" src="img/fire-st.png">
+
+
 
                 <h2 id="sdf">Magic Card SDFs</h2>
                 This first step is to create the cards themselves. 
@@ -411,7 +401,114 @@
                 <h3 id="f-frag">Shaders (Fragment)</h3>
                 <h3 id="f-geom">Geometry</h3>
                 -->
-            </div>    
+
+                <h3>Rendering</h3>
+                This section is fairly unique across my projects and explains what I did between test renders, what I thought could be improved, why, and how I attempted to correct it in the next iteration.
+                I think this skill is especially important to demonstrate - as it gives some context in how one spots short-comings and handles them.
+                <br><br>
+                The timeline for this project largely put rendering towards the very end. 
+                The majority of time was spent making each VFX look great in realtime and not until each effect was done had I thoroughly
+                explored composition, layout, camera animation, background, etc. 
+                Thus, rendering was in a short enough timeline that documenting a comprehensive outline on this iterative process was very easy.
+                <br><br>
+                
+                <h3>Roughly Halfway</h3>
+                <video controls width="80%;" src="witchcraft-6-1-progress.mov"></video>
+                <br><br>
+                First, here is an early screen recording of the development process. 
+                You can see that I'm currently working on the plant animation. 
+                The general process was to create the magic card, then animate the geometry, then color that geometry, and return to animating the geometry with color, and repeating.
+                <br>
+
+                <h3>First Render</h3>
+                <video controls width="80%;" src="witch-render-1.mp4"></video>
+                <br><br>
+                Here's what I thought wasn't great:
+                <ul>
+                    <li>The light is just a bit overscaled compared to the other animations</li>
+                    <li>The splash on the ice dissipates to quick</li>
+                    <li>The stem color on the flower was too faded (same with leaf)</li>
+                    <li>The subsurface radius/color did not match the petal colors at all</li>
+                    <li>Petals are overdetailed compared to other components</li>
+                    <li>The edges on the fire had to much fade and the noise on these edges was to fine and the moving of this noise was to fast</li>
+                </ul>
+                <br>
+
+                <h3>Second Render</h3>
+                <video controls width="80%;" src="witch-render-20001-0600.mp4"></video>
+                <br><br>
+                Thoughts:
+                <ul>
+                    <li>Shadows on light card are really not great during the crumble</li>
+                    <li>Ice animation in now too long - notice flicker at end</li>
+                    <li>The color here could also be stronger</li>
+                    <li>The fire big explosion is a bit to fast</li>
+                </ul>
+
+                <h3>Third Render</h3>
+                <video controls width="80%;" src="witch-render-30001-0600.mp4"></video>
+                <br><br>
+                Thoughts:
+                <ul>
+                    <li>Ice splash is still wonky (doesn't fade soon enough this time)</li>
+                    <li>Light animation is still a bit too large</li>
+                </ul>
+
+                <h3>Fifth Render</h3>
+                <video controls width="80%;" src="witch-render-60001-0600.mp4"></video>
+                <br><br>
+                After the fifth render, I was fairly happy with the effects and started working on camera animation and overall turning this into a video 
+                for showcasing the animations as a collection. I also added a soft gradient to the background.
+                <br><br>
+                I really liked the spin and circular framing; for some reason it held onto the theme of magic. 
+                Maybe because SOOOO many representations of magic use circles? 
+                Maybe the camera emphasized passing on the torch from one animation to the next and added some cohesive element.
+                <br><br>
+                And then I published this version to youtube, because I thought I hit the top as far what I could do. 
+                But I wasn't very happy with this result - working with each animation individually had a lot of feeling and was very exciting to see come together. 
+                Yet, together there wasn't feeling in it. 
+                The context of each animation in an environment was dull. Simply playing the animation wasn't enough,
+                there had to exist a reason or context for it to play.
+                <br><br>
+                In the Art book of Howl's Moving Castle by Hayao Miyazaki, Michiyo Yasuda mentioned that he changed the hues in detail in every scene according to emotional development.
+                I thought about the nearly grey background here0 and decided if those colors were truly right. 
+                Light, flowers, fire all at least have some essense of warmth or life - a warm background and more contrast lighting should help to bring that feeling out.
+                I then tried to incorperate the common color schemes from the original animation into the background.
+                <br><br>
+                Another idea I (maybe) took from Studio Ghibli's Moving Castle is the dial - the mood of the door location changing in the movie was the exact effect I had in mind
+                when considering a trigger for activating the spells. At first I thought of adding a moving particle emitter like a fairy which would pass through each card - although then there would be two
+                movements on the screen which I didn't want.
+                <br>
+
+                <h3>Eighth Render</h3>
+                <video controls width="80%;" src="witch-render-80001-0600.mp4"></video>
+                <br><br>
+                This was the first draft on my full composition. 
+                During this render I had already begun working on the next iteration, making the shader for the blinking eye. This render was to
+                test out color/lighting on the background, timing of the changes/dial switch, framing, and such.
+                <br><br>
+                My takeaways here were:
+                <ul>
+                    <li>Dial animation takes away from the climax of individual animations</li>
+                    <li>Light could contrast more</li>
+                </ul>
+
+                <h3>Ninth Render</h3>
+                <video controls width="80%;" src="witch-render-90001-0600.mp4"></video>
+                <br><br>
+                This was more along the right track.
+                New takeaways form this render and tenth render:
+                <ul>
+                    <li>More contrast in lighting</li>
+                    <li>Add in lighting from fire and light ball</li>
+                    <li>Space out eye blinks more</li>
+                    <li>Shade smooth edges on dial</li>
+                    <li>Fix the fire shadow mode to 'alpha clip' (notice how it makes a small shadow on the plant card)</li>
+                    <li>Bring out the colors in the ice more/ rotate the geometry to a more interesting angle</li>
+                </ul>
+
+                
+            </div>
         </div>
 
         <!-- FOOTER -->

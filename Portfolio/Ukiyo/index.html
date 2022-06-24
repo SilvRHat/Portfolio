@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <td><strong>Media:</strong></td>
-                            <td><small>Indie Animation, Ukiyo-e</small></td>
+                            <td><small>Indie Animation</small></td>
                         </tr>
                         <tr>
                             <td><strong>Tech:</strong></td>
@@ -90,7 +90,7 @@
                         </tr>
                         <tr>
                             <td><strong>Links:</strong></td>
-                            <td><small>Blender file on request</small></td>
+                            <td><small>N/A</small></td>
                         </tr>
                     </table>
 
@@ -146,21 +146,23 @@
                 <br><br>
 
                 This project was completed as part of a final for "Early Modern Literature: The Floating World of Play and Passion", 
-                a course taught by Prof. Clarence Lee at University of Colorado, Boulder. <br><br>
+                a course taught by Professor Clarence Lee at University of Colorado, Boulder. <br><br>
                 Adapted from Asai Ryoi's "Hand Puppet's",  Project::Ukiyo「浮世」 is a modern haunting of the peony lantern.
-                Here the lantern decorated with peonys represents the presence of the ghost from the "original" work.
+                Here the lantern decorated with peonys represents the presence of the ghost from the "original" piece.
 
                 <h2 id="concept">Concept</h2>
                 <img style="width:50%;" src="img/peonylanternconcept.png">
                 
                 <h1 id="breakdown">Breakdown</h1>
-                I've included a thorough breakdown containing images, concepts, and code to better help the reader understand the process of Project::Ukiyo「浮世」's making.
+                As with all my projects, I've included a detailed breakdown on the making of this animation.
+                This includes: design considerations, code, renders, reference analysis, and more.
                 
                 <h2 id="scene">Scene Breakdown</h2>
                 <img src="img/scene.png">
                 <img style="width:40%;" src="img/lantern.png">
                 <img style="width:47%;" src="img/cam_rig.png">
-                <br><br>
+                <br>
+
                 <h3>Object [Parent-Child] Heirarchy</h3>
                 <ul>
                     <li>Background</li>
@@ -184,30 +186,29 @@
                         </ul>
                     </li>
                 </ul>
-                The following showcases the object heirarchy, which is responsible for what coordinate systems objects are relative to.
-                Children will move relative to their parent object. Here I have two 'rigs' for the camera setup and lantern. 
+                The object heirarchy provided is used to show how object coordinate systems relate to each other.
+                Children will move relative to their parent object. Here I have setups for the camera rig and lantern. 
                 The lantern is a rigid body, so the children of the lantern move with the lantern. <br><br>
-                The camera system includes a variety of elements, first the pink text is parented onto the camera so that it stays in the same window position through different camera positions.
-                An empty is added to this system, where a modifier is applied to constrain the camera pointing towards it- this gives freedom in adjusting camera angles.<br><br>
+                Similarly, the 2D text is parented under the camera to remain in the same position between various shots.
+                An empty is also added to the camera system, where a modifier is applied to constrain the camera pointing towards it- thus the focus of the camera can be easily animated.<br><br>
                 Finally, the background and smoke are layered visual elements and are not dynamic- although the background is repositioned per camera angle.
 
-                <br><br>
+                <br>
                 <h2 id="shaders">Shaders</h2>
-                Shaders drive nearly every visual aspect of this project. 
-                I've included breakdowns for shaders on the lantern-body, fabric, and smoke.
-
+                The following shader breakdown goes through the making of the smoke, lantern, and cloth materials.
                 <h3 id="lantern">Lantern</h3>
                 <img src="img/lantern-shader-mini.gif">
                 <br><br>
-
-                The "original" peony lantern is described as hand-painted; thus it was important to also include a 'hand-painted' (stylus-pen-painted) quality to the lantern's look.
-                Thus, the base diffuse color is from a texture painted in substance painter.<br>
-                <img style="width:40%;" src="img/texture.png">
+                    
+                The base diffuse color here is a texture painted in substance painter. 
+                This was to replicate the hand-painted quality noted in the referenced story.
                 <br><br>
-                Next, we want the edges to be transparent to suggest the 'ghostly' qualities of this japanese ghost lantern. 
+                <img style="width:30%;" src="img/texture.png">
+
+                <br><br>
+                Next, the edges are made transparent to suggest the 'ghostly' qualities of this japanese ghost lantern. 
                 Since the object is round, a fresnel effect is perfect for this. 
-                But, we want some varience in the fresnel so that the transparency-fade doesn't appear to uniform.
-                This can be done by mixing some noise with the true normal vector (left).
+                So that the transparency-fade doesn't appear to uniform, some variance via noise is added onto the normal passed into the fresnel node (left).
                 Passing this into a fresnsel then gives (middle). 
                 Finally, to emphaisze the effect we pass that through a float curve and map-range (right).
                 <br><br>
