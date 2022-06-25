@@ -128,18 +128,13 @@
                 Each card contains a glyph/symbol on them responsible for performing a spell,
                 with four base symbols for: light, ice, plant, and fire magic.
                 <br><br>
-                These effects are recreated entirely procedurally in Blender using both Shader Nodes and Geometry Nodes.
-                A handle (empty object) is then mapped to the Z-axis of each card, which is used as a custom timeline for the animation (Z Position = time).
-                This makes queuing an animation customizable and also allows the user to move the timeline themselves for fun.
-                In both shader and geometry programs, float curve nodes are used for each individual animation component including
-                movements, sizing, instancing and more.
+                These effects are created entirely procedurally from modeling to animation to texturing. 
 
                 <h1 id="breakdown">Breakdown</h1>
-                As with all my projects, I've included a detailed breakdown on the making of this animation.
-                The breakdown includes: various design choices, methods of approach, code, concept images, math notes, 
-                and a technical explanation of key components. <br><br>
-                At the very bottom is a new section on the iteration of test renders - as it explains how I approach rendering
-                and iteration in this step of the project.
+                As with all my projects, I've included a detailed breakdown behind the making of this animation.
+                This writeup is a collection of design choices, technical methods, code, concept images, mathmatical notes and designs, and everything inbetween.
+                <br><br>
+                At the bottom is a new section on rendering workflow - describing what went wrong in early renders and how iterations built up the final animation here.
                 <br><br>
                 If you as a reader have any questions about the process or content here then please don't hesitate to ask.
                 <br><br>
@@ -148,16 +143,311 @@
                 <h2 id="vfx">VFX Storyboards</h2>
 
                 <br><br>
-                <img width="47%;" src="img/light-st.png">
+                <img class="img-border" style="width:calc(45% - 10px);" src="img/light-st.png">
+                <p class="img-id">1</p>
                 <div style="display: inline-block; width: 5%;"></div>
-                <img width="47%;" src="img/ice-st.png">
+                <img class="img-border" style="width:calc(45% - 10px);" src="img/ice-st.png">
+                <p class="img-id">2</p>
                 <br><br>
-                <img width="47%;" src="img/plant-st.png">
+                <img class="img-border" style="width:calc(45% - 10px);" src="img/plant-st.png">
+                <p class="img-id">3</p>
                 <div style="display: inline-block; width: 5%;"></div>
-                <img width="47%;" src="img/fire-st.png">
+                <img class="img-border" style="width:calc(45% - 10px);" src="img/fire-st.png">
+                <p class="img-id">4</p>
+
+                <ol>
+                    <li>Storyboard/ Notes for Light Spell</li>
+                    <li>Storyboard/ Notes for Ice Spell</li>
+                    <li>Storyboard/ Notes for Plant Spell</li>
+                    <li>Storyboard/ Notes for Fire Spell</li>
+                </ol>
+
+                Drawing quick storyboards for each effect proved to be very useful conceptualizing the work to be done.
+                Each board includes components of the effect, a timing reference (primary action for animation), and initial procedural design ideas.
+                <br>
+                Not all initial ideas (such as particles on the flower) made it into the final version, nor did the final version only have initial ideas.
+
+                <h2>Material Shaders</h2>
+                <img style="width: 99%;" src="img/materials.png">
+                <p class="img-id">1</p>
+                <br><br>
+
+                There are a total of 15 shaders for the background, magic cards, eyeball dial thing, and elemental materials.
+                This section covers the making of those elemental materials and the eyeball. I also reference notes on geometry,
+                as geometric shape plays an important part in each material - they are not simply UV dependent.
+                
+                <h3>Eyeball</h3>
+                The dial object with the eyeball printed on it wasn't thought of until halfway through the formal rendering process. In fact,
+                it was completely coded while another computer was working on the latest render to see if the concept would even fit.
+                <br><br>
+                The shader setup is relatively simple, two principled BSDFs (Blender's PBR shader) were mixed together by a "blinking" factor (boolean). 
+                These BSDF's were configured to look like metal and an eyeball by adjusting specular, metallic, clearcoat, roughness, and emissive parameters.
+                <br><br>
+                <img style="width: 35%;" src="img/metal-nd.png">
+                <p class="img-id">2</p>
+                <img style="width: 61%;" src="img/eye-nd.png">
+                <p class="img-id">3</p>
+                <br><br>
+                <ol>
+                    <li>Materials on Sphere</li>
+                    <li>Metal Shader</li>
+                    <li>Eyeball Shader</li>
+                </ol>
+
+                For simplicity, the blinking animation is driven by the frame number. 
+                The animation started off as periodic, where the frame was divided by the frequency (frames per blink). 
+                The fraction component of this value has then shaped like an absolute triangle wave, and then into thin spikes. 
+                This was used as a space multiplier, which is then passed into a 3D space multiplier which affects the result of a length comparison which is then used as the factor.
+                1D voronoi noise is added so to the frame input to offset each blink into a semi-random cycle. 
+                <br><br>
+                <img style="width: 99%;" src="img/blink-nd.png">
+                <p class="img-id-side">4</p>
+                <img style="width: 99%;" src="img/blink2-nd.png">
+                <p class="img-id-side">5</p>
+                <br><br>
+                <ol start="4">
+                    <li>Shaping Time into blink signals; final power node is number of units to multiply X-axis space by</li>
+                    <li>Checking length to shape eyelids; note maximum is used such that if the blink signal is at its max value then all everything is eyelid</li>
+                    <li>Light parented to eyeball for custom specular reflection</li>
+                </ol>
+                Finally, a small light was parented the the eye for the custom specular. 
+                <br><br>
+                <img style="width: 50%;" src="img/eye-spec.png">
+                <p class="img-id">6</p>
 
 
 
+                
+                
+
+                <h3>Ice</h3>
+                The ice material makes some assumptions about the geometry - in that it expects the geometry to be shaded flat and for vertices to be sparse.
+                <br><br>
+                For the actual geometry, noise is added/subtracted along the normals of vertices on a detailed object. 
+                The object is then tesselated to lower detail (and vertices).
+                <br><br>
+
+                As far as shading, the layers/blending get pretty fun here.
+                <br><br>
+
+                <img style="width: 24%;" src="img/ice-m1.png">
+                <p class="img-id">1</p>
+                <img style="width: 21%;" src="img/ice-m2.png">
+                <p class="img-id">2</p>
+                <img style="width: 51%;" src="img/ice-r-1-2.png">
+                <p class="img-id">3</p>
+                <br><br>
+                <ol>
+                    <li>The base color is driven by noise from the normal</li>
+                    <li>Refraction color is blended with base color</li>
+                    <li>Node network of 1 + 2</li>
+                </ol>
+
+                This covers the base diffuse color.
+                For scratches and extra details, we'll blend in some distored wave texture with a fresnel.
+                <br><br>
+                <img style="width: 32%;" src="img/ice-ma.png">
+                <p class="img-id">4</p>
+                <img style="width: 32%;" src="img/ice-mb.png">
+                <p class="img-id">5</p>
+                <img style="width: 32%;" src="img/ice-mab.png">
+                <p class="img-id">6</p>
+                <br><br>
+                <img style="width: 60%;" src="img/ice-ab-nd.png">
+                <p class="img-id">7</p>
+                <br><br>
+                <ol start="4">
+                    <li>Fresnel Blending Value</li>
+                    <li>Distored Wave Texture</li>
+                    <li>Fresnel on Distorted Wave</li>
+                    <li>Node Setup</li>
+                </ol>
+                The fresnel effect is to emphasize the scratches on surfaces pointing away from the camera, as is the case
+                in reality.
+                <br><br>
+                The final touches involve noding this scratched ice look into a shader which processes scene lighting info.
+                The ice ejects from an emissive surface, so adding some emission at the bottom may be nice. Here, this emission
+                is also multiplied with the value of the base color.
+                <br><br>
+                <img style="width: 23%;" src="img/ice-e1.png">
+                <p class="img-id">8</p>
+                <img style="width: 24%;" src="img/ice-e2.png">
+                <p class="img-id">9</p>
+                <img style="width: 50%;" src="img/ice-full-nd.png">
+                <p class="img-id">10</p>
+                <br><br>
+                <ol start="8">
+                    <li>Value derived from up axis</li>
+                    <li>Emission</li>
+                    <li>Full Node Tree</li>
+                </ol>
+
+                <h3>Flower; Stem, Leaf, and Petal</h3>
+                The flower materials unlike the others are UV driven materials, 
+                meaning that instead of 3D coordinates a 2D UV Map is required here. 
+                This is important to point out, because it can be difficult to reuse these materials across multiple objects.
+                Yet, that isn't a concern here as leaves generally look alike (and we're not in a production environment).
+                <br><br>
+                The most difficult bit with these materials is color and lighting. 
+                It's really something you need to go outside and study and maybe draw a brief sketch to feel out the colors.<br><br>
+                <img style="width: 50%;" src="img/plant-color-study.png">
+                <p class="img-id">1</p>
+                <br><br>
+                <ol>
+                    <li>Color Study</li>
+                </ol>
+                Similar to human skin, plants have layers of material which are translucent or semi-transparent. 
+                Light passes through these layers, bounces, a while, and exits which is known as subsurface scattering.
+                
+                
+                <br><br>
+                <img style="width: 35.5%;" src="img/no-ss.png">
+                <p class="img-id">2</p>
+                <img style="width: 40%;" src="img/ss.png">
+                <p class="img-id">3</p>
+                <br><br>
+                <ol start="2">
+                    <li>Without Subsurface Scattering</li>
+                    <li>With Subsurface Scattering</li>
+                </ol>
+                Notice that the shadows are much softer in subsurface scattering. 
+                By altering which color is allowed to pass best through subsurface scattering, this smooth taper can have a color gradient.
+                The detault is set to a reddish hue, however here I found that a blue green one to best reflect what I observed in nature.
+                
+                For the details on the leaf, it is largely shuffling with the UV map space. 
+                X and Y make up the depth and width of the leaf respectively. 
+                Rotating this space toward the center, provides a useful coordinate system for the veins of the leaf. 
+                <br><br>
+                <img style="width: 18%;" src="img/leaf1.png">
+                <p class="img-id">4</p>
+                <img style="width: 18%;" src="img/leaf2.png">
+                <p class="img-id">5</p>
+                <img style="width: 18.5%;" src="img/leaf3.png">
+                <p class="img-id">6</p>
+                <img style="width: 19%;" src="img/leaf4.png">
+                <p class="img-id">7</p>
+                <img style="width: 19%;" src="img/leaf5.png">
+                <p class="img-id">8</p>
+                <br><br>
+                <img style="width: 70%;" src="img/voronoi-secret.png">
+                <p class="img-id">9</p>
+                <br><br>
+                <ol start="4">
+                    <li>Rotated Space with Voronoi for distance from vein</li>
+                    <li>SDF from Stem</li>
+                    <li>Smooth Minnimum of 4 and 5</li>
+                    <li>Remapped Values</li>
+                    <li>Value mapped to Color Ramp</li>
+                    <li>Nodes for getting vein SDF</li>
+                </ol>
+
+                The petals are similar, but are naturally less patterned. 
+                The node setup for this one is realtively small, though had not initially been. 
+                This setup, although lacking an eloquent method, matches detail with the rest of the scene and fits within the color scheme.
+                <br><br>
+
+                <img style="width: 24.1%;" src="img/petal1.png">
+                <p class="img-id">10</p>
+                <img style="width: 24.5%;" src="img/petal2.png">
+                <p class="img-id">11</p>
+                <img style="width: 23%;" src="img/petal3.png">
+                <p class="img-id">12</p>
+                <img style="width: 23%;" src="img/petal4.png">
+                <p class="img-id">13</p>
+                <br><br>
+                <img style="width: 97.5%;" src="img/petal-nd.png">
+                <p class="img-id">14</p>
+                <br><br>
+                <ol start="10">
+                    <li>Noise</li>
+                    <li>Voronoi with noise added onto coordinates</li>
+                    <li>Remapped values for greater contrast</li>
+                    <li>Color Ramp</li>
+                    <li>Full shader tree for petals</li>
+                </ol>
+
+                <h3>Fire</h3>
+                The ways for making fire are limitless.<br><br>
+                The most common approach involves passing in some fire texture to a particle emitter and shaping the particles motion path
+                to look like fire. 
+                There are also fire simulation technology similar to fluid simulation- which might use a volume or surface shading technique.
+                <br><br>
+                This approach however assumes the geometry for our fire is a mesh (mostly) in the shape of fire. 
+                For this section, I will use a sphere to breakdown the fragment shader.
+                <br><br>
+                To create this fire visual, I especially wanted to recreate the look of calcifer from Howl's Moving Castle by Studio Ghibli.
+                I imagined this would pair well with the existing animations which had all already been completed.
+                <br><br>
+                <img style="width: 60%;" src="https://c.tenor.com/o7St1LoMu1MAAAAC/calcifer-studio-ghibli.gif">
+                <p class="img-id">1</p>
+                <img style="width: 34%;" src="img/fire-study.png">
+                <p class="img-id">2</p>
+                <br><br>
+                <ol>
+                    <li>Calcifer</li>
+                    <li>Color/blending study</li>
+                </ol>
+                A key component in fire is the tendrils which move up along the edge of the shape. 
+                This is actually very difficult to create well in a 3D setting opposed to a 2D setting, due to variation in perpsective.
+                However, a custom fresnel effect and some noise can get pretty close to creating the effect.
+                <br><br>
+                <img style="width: 19%;" src="img/fire1.png">
+                <p class="img-id">3</p>
+                <img style="width: 19%;" src="img/fire2.png">
+                <p class="img-id">4</p>
+                <img style="width: 19%;" src="img/fire3.png">
+                <p class="img-id">5</p>
+                <img style="width: 19%;" src="img/fire4.png">
+                <p class="img-id">6</p>
+                <img style="width: 19%;" src="img/fire5.png">
+                <p class="img-id">7</p>
+                <br><br>
+                <img style="width: 50%;" src="img/fire-alpha.gif">
+                <p class="img-id">8</p>
+                <br><br>
+                <ol start="3">
+                    <li>Normal</li>
+                    <li>Normal blended with driven noise</li>
+                    <li>Fresnel with new normal (dot with camera)</li>
+                    <li>Remapped values</li>
+                    <li>Flipped values/ Remapped More</li>
+                    <li>Noise moves along Z (up) axis, to drive the tendrils up</li>
+                </ol>
+
+                This mask is now the alpha value or transparency of the fire. 
+                And the same trick is used for each layer of color, using different mixes of noise. 
+                The middle color barely mixes any noise into the normal. 
+                I also plugged in an exponent operation here to customize the falloff of the fresnel effect.
+                <br><br>
+                <img style="width: 22%;" src="img/fire-orangered.png">
+                <p class="img-id">9</p>
+                <img style="width: 23%;" src="img/fire-yellow.png">
+                <p class="img-id">10</p>
+                <img style="width: 50%;" src="img/fire-bd.png">
+                <p class="img-id">11</p>
+                <br><br>
+                <ol start="9">
+                    <li>Blend between Dark Red/Pink (Outer) and Orange (Middle)</li>
+                    <li>Yellow (Inner)</li>
+                    <li>Node Breakdown</li>
+                    <li>Blended Colors</li>
+                    <li>Color with Transparency</li>
+                </ol>
+                Working with the colors here required a live render/viewing with the final shader output which was responsible for emission.
+                Emission would blow up the darker colors to brighter and more contrast values- so getting this right required a bit of fine tuning.
+                <br><br>
+                <img style="width: 40%;" src="img/fire-color.gif">
+                <p class="img-id">12</p>
+                <img style="width: 46%;" src="img/fire-mat.gif">
+                <p class="img-id">13</p>
+
+                <h2>Glyph Shaders</h2>
+                <img style="width: 99%;" src="img/sdf.png">
+                <p class="img-id">1</p>
+                <br><br>
+                To be written :)
+                
+                <!---
                 <h2 id="sdf">Magic Card SDFs</h2>
                 This first step is to create the cards themselves. 
                 The geometry here is fairly simple - and only requires a plane (which may be subdivided later for deforming the card).
@@ -379,18 +669,12 @@
                 <img width="50%" src="img/geom-bd9.png">                
                 <br><br>
                 And thats the first effect.
-
+            -->
 
 
 
 
                 <br><br><br>
-                <h2 id="lm">Ice Magic</h2>
-
-                <h3 id="i-concept">Concept Breakdown</h3>
-                <h3 id="i-frag">Shaders (Fragment)</h3>
-                <h3 id="i-geom">Geometry</h3>
-                
                 <!--
                 <h2 id="lm">Plant Magic</h2>
                 <h3 id="p-concept">Concept Breakdown</h3>
@@ -402,7 +686,7 @@
                 <h3 id="f-geom">Geometry</h3>
                 -->
 
-                <h3>Rendering</h3>
+                <h2>Rendering</h2>
                 This section is fairly unique across my projects and explains what I did between test renders, what I thought could be improved, why, and how I attempted to correct it in the next iteration.
                 I think this skill is especially important to demonstrate - as it gives some context in how one spots short-comings and handles them.
                 <br><br>

@@ -297,7 +297,7 @@ body {
     width: calc(100% - 320px);   
 }
 .scroll img {
-    max-width: 90%;
+    max-width: 100%;
 }
 code {
     background: lightgray;
@@ -314,3 +314,27 @@ code {
 
 }
 
+.img-id {
+    position: relative;
+    left:-16px;
+    bottom:-20px;
+    margin:0;
+    width:0;
+    display:inline-block;
+    text-align: right;
+    font-size: small;
+}
+.img-id-side {
+    position: relative;
+    left:6px;
+    margin:0;
+    width:0;
+    display:inline-block;
+    text-align: right;
+    font-size: small;
+}
+
+.img-border {
+    padding:5px;
+    border: solid 1px;
+}
