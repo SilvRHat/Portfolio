@@ -108,13 +108,13 @@
                                 <li><a href="#material">Material Shaders</a>
                                     <ul>
                                         <li><a href="#mat-eye">Eye</a></li>
-                                        <li><a href="#mat-">Ice</a></li>
-                                        <li><a href="#mat-fire">Flower</a></li>
+                                        <li><a href="#mat-ice">Ice</a></li>
+                                        <li><a href="#mat-flower">Flower</a></li>
                                         <li><a href="#mat-fire">Fire</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#glyphs">Glyph Shaders</a></li>
-                                <li><a href="#anim_set">Animation Setup</a></li>
+                                <li><a href="#anim-set">Animation Setup</a></li>
                                 <li><a href="#anim">Procedural Geometry and Animation</a>
                                     <ul>
                                         <li><a href="#anim-light">Light</a></li>
@@ -674,44 +674,114 @@
                 <h3 id="anim-fire">Fire</h3>
                 <img style="width: 99%;" src="img/fire-gnd.png">
                 <p class="img-id">1</p>
+                Animating the paper for the fire had a similar implemntation as the light animation.
+                Some noise displaces the paper for a wavy effect, it floats upward, and the transformation is scaled up to replace the paper.
+                <br><br>
+                One difference was that instead of fire being scaled over the magic paper, the magic paper dissolved by heat of the fire and went in all types of directions.
+                This effect was achieved by first subdividing the plane once and splitting the mesh on its edges, which resulted in 4 mesh islands.
+                The positions of the vertices from each island was then averaged to produce a (normalized) vector for the direction the island should travel along.
+                <br><br>
+                <img style="width: 54%;" src="img/fire-split.gif">
+                <p class="img-id">2</p>
+                <img style="width: 42%;" src="img/fire-split2.gif">
+                <p class="img-id">3</p>
+                <br><br>
+                <ol>
+                    <li>Full Node Tree</li>
+                    <li>Along initial vector</li>
+                    <li>Along animated vector</li>
+                </ol>
+                Since the flame took longer to reach the verticle ends, the paper had to be split in half first before the flame reached far enough to split again. 
+                Do get this right, an additional animation parameter was added to multiple the X component of the vector noted above.
+                <br><br>
+                <img style="width: 45%;" src="img/fire-split3.gif">
+                <p class="img-id">4</p>
+                <img style="width: 48%;" src="img/fire-split4.gif">
+                <p class="img-id">5</p>
+                <br><br>
+                <ol start="4">
+                    <li>Noise added to direction vector</li>
+                    <li>Noise added to vertice position</li>
+                    <li>Torus Curve before profiling</li>
+                </ol>
+
+                The noise shown in picture 5 is similar to how the light paper was deformed. 
+                This noise is also reused with the expanding torus. 
+                <br><br>
+                The torus is a circle curve profiled along another circle curve. 
+                The radii of both are animated over time. 
+                Before the curves are used to generate a mesh, the position of the curve (non-profile one) is offset using the noise mentioned above.
+                <br><br>
+                <img style="width: 60%;" src="img/torus-curve.gif">
+                <p class="img-id">6</p>
+                <br><br>
+
+                The method I used here for making a mesh shaped like fire was initially the byproduct of random experimenting with asteroids on another project of mine.
+                The trick is to use some 3D noise as displacement on a sphere and to move that noise along the Z axis. 
+                You then use the initial Z (up) coordinates to scale how much noise is applied.
+                <br><br>
+                <img style="width: 28.5%;" src="img/fire-mesh0.png">
+                <p class="img-id">7</p>
+                <img style="width: 32%;" src="img/fire-mesh1.gif">
+                <p class="img-id">8</p>
+                <img style="width: 32%;" src="img/fire-mesh2.gif">
+                <p class="img-id">9</p>
+                <br><br>
+                <img style="width: 30%;" src="img/fire-mesh3.gif">
+                <p class="img-id">10</p>
+                <img style="width: 31%;" src="img/fire-mesh4.gif">
+                <p class="img-id">11</p>
+                <img style="width: 32%;" src="img/fire-mesh5.gif">
+                <p class="img-id">12</p>
+                <br><br>
+                <ol start="7">
+                    <li>IcoSphere</li>
+                    <li>Musgrave noise as displacement</li>
+                    <li>Displacement scaling by initial Z position</li>
+                    <li>Scaling Animation and Upward Positioning</li>
+                    <li>Animating the scaling parameter on the 3D noise</li>
+                    <li>Shading</li>
+                </ol>
+
+                Note the jump between pictures 10 and 11. 
+                This was by animating the scaler for the noise, which is internally multiplied with the texture coordinate input.
+                By changing this a little, the space of noise grows and shrinks which is used to make this effect. Because,
+                the space itself is being multiplied by some factor, this is very dependent on the positions passed into the noise being close to zero.
+                If that is not the case, then the positions change drastically.
+                <br><br>
+                Getting the detail for the fire was also quite difficult. 
+                There needed to be enough detail so that the fire edges weren't visible, but there couldn't be too much detail that it was difficult to use a fresnel effect in the fragment shader.
+                Thus, normals are taken at a lower-resolution and transferred to higher-detailed geometry.
 
 
                 <h2 id="render">Rendering</h2>
-                This section is fairly unique across my projects and explains what I did between test renders, what I thought could be improved, why, and how I attempted to correct it in the next iteration.
-                I think this skill is especially important to demonstrate - as it gives some context in how one spots short-comings and handles them.
-                <br><br>
                 The timeline for this project largely put rendering towards the very end. 
                 The majority of time was spent making each VFX look great in realtime and not until each effect was done had I thoroughly
                 explored composition, layout, camera animation, background, etc. 
                 Thus, rendering was in a short enough timeline that documenting a comprehensive outline on this iterative process was very easy.
                 <br><br>
-                
-                <h3>Roughly Halfway</h3>
-                <video controls width="80%;" src="witchcraft-6-1-progress.mov"></video>
+                Here I've compiled a run with most of the renders chronologically, some didn't change greatly and are omitted. 
+                Below are sections on the takeaways of each render, mostly on what could be improved for the next render.
+
                 <br><br>
-                First, here is an early screen recording of the development process. 
-                You can see that I'm currently working on the plant animation. 
-                The general process was to create the magic card, then animate the geometry, then color that geometry, and return to animating the geometry with color, and repeating.
-                <br>
+                <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/IzlrGA7qJtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
 
                 <h3>First Render</h3>
-                <video controls width="80%;" src="witch-render-1.mp4"></video>
-                <br><br>
-                Here's what I thought wasn't great:
+                Takeaways:
                 <ul>
-                    <li>The light is just a bit overscaled compared to the other animations</li>
-                    <li>The splash on the ice dissipates to quick</li>
+                    <li>The light is a bit overscaled compared to the other animations</li>
+                    <li>The splash on the ice dissipates too quick</li>
                     <li>The stem color on the flower was too faded (same with leaf)</li>
-                    <li>The subsurface radius/color did not match the petal colors at all</li>
+                    <li>The subsurface radius/color clashed with the petal colors</li>
                     <li>Petals are overdetailed compared to other components</li>
-                    <li>The edges on the fire had to much fade and the noise on these edges was to fine and the moving of this noise was to fast</li>
+                    <li>The edges on the fire had too much fade</li>
+                    <li>The noise on the fire edges was too fine and the moving of this noise was too fast</li>
                 </ul>
                 <br>
 
                 <h3>Second Render</h3>
-                <video controls width="80%;" src="witch-render-20001-0600.mp4"></video>
-                <br><br>
-                Thoughts:
+                Takeaways:
                 <ul>
                     <li>Shadows on light card are really not great during the crumble</li>
                     <li>Ice animation in now too long - notice flicker at end</li>
@@ -720,58 +790,44 @@
                 </ul>
 
                 <h3>Third Render</h3>
-                <video controls width="80%;" src="witch-render-30001-0600.mp4"></video>
-                <br><br>
-                Thoughts:
+                Takeaways:
                 <ul>
                     <li>Ice splash is still wonky (doesn't fade soon enough this time)</li>
                     <li>Light animation is still a bit too large</li>
                 </ul>
 
                 <h3>Fifth Render</h3>
-                <video controls width="80%;" src="witch-render-60001-0600.mp4"></video>
-                <br><br>
                 After the fifth render, I was fairly happy with the effects and started working on camera animation and overall turning this into a video 
                 for showcasing the animations as a collection. I also added a soft gradient to the background.
                 <br><br>
-                I really liked the spin and circular framing; for some reason it held onto the theme of magic. 
-                Maybe because SOOOO many representations of magic use circles? 
-                Maybe the camera emphasized passing on the torch from one animation to the next and added some cohesive element.
+                I really liked the spin and circular framing; which seemed to add anticipation from one effect to the next.
                 <br><br>
-                And then I published this version to youtube, because I thought I hit the top as far what I could do. 
+                I then published this version to youtube, because I thought I hit the top as far what I could do. 
                 But I wasn't very happy with this result - working with each animation individually had a lot of feeling and was very exciting to see come together. 
-                Yet, together there wasn't feeling in it. 
-                The context of each animation in an environment was dull. Simply playing the animation wasn't enough,
-                there had to exist a reason or context for it to play.
+                Yet, together there wasn't much feeling in it. 
+                The context of each animation in the environment as a whole was dull. Simply playing the animation wasn't enough,
+                ultimately there had to exist a reason or context for it to play.
                 <br><br>
-                In the Art book of Howl's Moving Castle by Hayao Miyazaki, Michiyo Yasuda mentioned that he changed the hues in detail in every scene according to emotional development.
-                I thought about the nearly grey background here0 and decided if those colors were truly right. 
+                In the Art book of Howl's Moving Castle by Hayao Miyazaki, Michiyo Yasuda mentioned that he changed the color hues in every scene according to emotional development.
+                I thought about the nearly grey background here and wondered if those colors were truly right - which had first seemed favorable for a demo/portfolio piece. <br><br>
                 Light, flowers, fire all at least have some essense of warmth or life - a warm background and more contrast lighting should help to bring that feeling out.
                 I then tried to incorperate the common color schemes from the original animation into the background.
                 <br><br>
-                Another idea I (maybe) took from Studio Ghibli's Moving Castle is the dial - the mood of the door location changing in the movie was the exact effect I had in mind
-                when considering a trigger for activating the spells. At first I thought of adding a moving particle emitter like a fairy which would pass through each card - although then there would be two
-                movements on the screen which I didn't want.
+                I also decided to add some dial which would play with the animations, which would add some narrative.
                 <br>
 
                 <h3>Eighth Render</h3>
-                <video controls width="80%;" src="witch-render-80001-0600.mp4"></video>
-                <br><br>
-                This was the first draft on my full composition. 
                 During this render I had already begun working on the next iteration, making the shader for the blinking eye. This render was to
                 test out color/lighting on the background, timing of the changes/dial switch, framing, and such.
                 <br><br>
-                My takeaways here were:
+                Takeaways:
                 <ul>
                     <li>Dial animation takes away from the climax of individual animations</li>
                     <li>Light could contrast more</li>
                 </ul>
 
-                <h3>Ninth Render</h3>
-                <video controls width="80%;" src="witch-render-90001-0600.mp4"></video>
-                <br><br>
-                This was more along the right track.
-                New takeaways form this render and tenth render:
+                <h3>Ninth + Tenth Renders</h3>
+                Takeaways:
                 <ul>
                     <li>More contrast in lighting</li>
                     <li>Add in lighting from fire and light ball</li>
@@ -780,8 +836,6 @@
                     <li>Fix the fire shadow mode to 'alpha clip' (notice how it makes a small shadow on the plant card)</li>
                     <li>Bring out the colors in the ice more/ rotate the geometry to a more interesting angle</li>
                 </ul>
-
-                
             </div>
         </div>
 
