@@ -369,7 +369,7 @@
                     <li>UV map on geometry</li>
                     <li>Node setup for Coordinate values</li>
                 </ol>
-                To give some characteristic to the smoke, the center follows a smooth zig-zag motion almost as if its folding onto itself.
+                To give some characteristic to the smoke, the center follows a smooth zig-zag motion almost as if it's folding onto itself.
                 Seeing this effect really increased the dynamics of the animation.
                 <br><br>
                 This was made possible by plugging the rolling vertical position (X + time) into a 1D noise function. 
@@ -469,7 +469,7 @@
                 <p class="img-id">7</p>
                 <br><br>
                 Three values are calculated for the rotation vector (roll, pitch, and yaw).
-                Here roll is very small since flowers don't curve that way.
+                Here the roll angle is very small since flowers don't curve that way.
                 Pitch uses a similar float curve as the Z offset, and is mapped to a [10, -85] degree range.
                 Finally, yaw simply uses the arctangent-squared result of the x and y positional inputs. 
                 All these values are then plugged into the 'rotate euler' node to give the final rotation.
@@ -575,7 +575,7 @@
                 Beyond emission, the scene contains two small light sources parented under the lantern. 
                 The first is colored pink-red and the second is colored light blue. 
                 Together these form the light gradient on the flower.<br><br>
-                The flower uses a translucent shader which allow these lights to bleed through layers of petals.
+                The flower uses a translucent shader which allows these lights to bleed through layers of petals.
                 To prevent light being occluded by too few layers, a bias parameter was customized.
                 
 
@@ -593,7 +593,7 @@
                 The wind angle is pointed to the top-left and is perpendicular to the camera angle. 
                 This is done so that the motion of the cloth is clear and visible for the viewer.
                 <br><br>
-                After the physics were properly tuned the simulation was baked, since the simulation is not performant in realtime.
+                After the physics were properly tuned the simulation was baked, since the simulation is not performant in real time.
                 
 
                 <h2 id="camera_anim">Animation</h2>
@@ -601,14 +601,14 @@
                 The lantern is the subject and main character of this animation. 
                 But the lantern had to also appear as something exotic, interesting, and as an extension of nature (supernatural).
                 <br><br>
-                Thus the camera angles were setup to "document" the lantern from a distanced and excluded perspective.
+                Thus the camera angles were set up to "document" the lantern from a distanced and excluded perspective.
                 This perspective would have been lost if the camera was animated between angles, as the camera would have become an additional character in the animation.
                 This was realized after attempting to animate the camera, which I had initially wanted to use to showcase the dynamic look on the materials.
                 <br><br>
                 Discrete camera angles allowed for sudden transitions in the animation and offset the various visual aspects so that the animation never became boring.
                 The primary visual of the first shot is the smoke coming from the lantern.
                 Then in the second shot, the viewer notices the subtle details of the flower and lantern which were too small before.
-                Finally in the last shot, we get a side profile of the scene which better place it in 3D and contribute to the full "documentation" of the peony lantern.
+                Finally in the last shot, we get a side profile of the scene which better places it in 3D and contributes to the full "documentation" of the peony lantern.
                 
                 
                 <h3 id="anim">Lantern Keyframe</h3>
@@ -616,7 +616,7 @@
                 This was to showcase its physical nature pivoting on the handle. 
                 <br><br>
                 Without this animation the stationary object would have been confusing. 
-                The presence of some physics suggest that it is where it should be, that the floating nature is physically correct.
+                The presence of some physics suggests that it is where it should be, that the floating nature is physically correct.
                 Of course a Ghibli-style hand holding the handle and fading out at the wrist would have also been a nice touch for this quality, but ultimately was out of my animation skill set.
                 
 
@@ -633,7 +633,7 @@
                 
 
                 <h1 id="wrap_up">Wrap Up / Final Notes</h1>
-                I'm personally very impressed and proud with this project.
+                I'm personally very impressed and proud of this project.
                 This was my first production project.
                 Here I was able to implement simulation, animation, post-processing, and lighting with my knowledge of animation production as a whole.
                 <br><br>
