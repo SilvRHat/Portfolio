@@ -123,7 +123,7 @@
                 <br><br>
                 <h1 id="about">README / About</h1>
                 This was completed as part of the "Advanced Computer Graphics" course taught at University of Colorado, Boulder by Willem A. (Vlakkies) Schreüder.
-                The final project was to create a substantial creative project with OpenGL utilizing concepts from the course including:
+                The final project was to create a substantial creative program with OpenGL utilizing concepts from the course including:
                 lighting, image processing, stored textures/ noise, geometry/tesselation shaders, and procedural textures. 
                 <br><br>
                 All of which were done from scratch; 
@@ -144,9 +144,9 @@
                 The idea behind creating an asteroid is to 'layer' noise on top of some existing geometry as a displacement. 
                 Essentially the noise adds some height extended along the normal of that existing geometry.
                 <br><br>
-                For this project all asteroids first start off as an icosphere, since vertices are equally spaced for uniform detail.
+                For this project, all asteroids first start off as an icosphere since vertices are equally spaced for uniform detail.
                 The vertex shader simply passes all relevant information along in the shader pipeline.
-                <br>
+                <br><br>
                 This includes:
                 <ul>
                     <li>Vertex Position (object-space position)</li>
@@ -166,27 +166,28 @@
                 Both the inner and outer tessellation levels are set to the same level of detail.<br><br>
                 That level of detail depends on how much screen space the object is taking, which works dynamically.
                 This is accomplished by remapping the distance*scale of an object to the tesselation level, which is clamped by macros specifying the min and max tess level.
-                A curve is also applied during the remap, this is to better optimize the level of detail with customization on the falloff.
+                A curve is also applied during the remap to better optimize the level of detail with customization on the falloff.
                 <br><br>
                 Additional optimizations are also performed at this time, including camera culling. 
                 If the object is not in view of the camera, then the tess level is set to 0.
-                This is done by calculating the NDC coords of an object's center and compared against some range.
+                This is done by calculating the NDC coords of an object's center and checking if it is viewable (between -1 and 1).
                 <br><br>
                 Individual patches are also culled during this step. 
-                However, since the geometry will be extruded randomly and the normals will change slightly, only patches that are extremely back-facing are culled.  
+                However, since the geometry will be extruded randomly and the normals will change slightly, so only patches that are extremely back-facing are culled.  
                 <br><br>
 
                 <h2 id="tese">Tessellation Evaluation</h2>
-                A lot goes on in the tessellation evaluation stage.<br><br>
+                A lot happens during the tessellation evaluation stage.<br><br>
                 This is where the extra detail is specified, where the position of each vertex is set and new vertex normals are identified.
                 Obtaining the new vertex position is done by applying some noise along the normal (as a displacement).
                 <br><br>
                 Here I used a ridged-multifractal Musgrave texture which gives a ridged terrain look.
                 <br><br>
-                When I had first implemented this, I had sourced a GLSL function on the internet. And it worked very well,
+                When I had first implemented this I had sourced a GLSL function on the internet. And it worked very well,
                 until I upped the number of asteroids.
-                Within the function there was a loop which was written with the conditional statement written at the bottom, and was so obscure that the GPU could not perform its loop-unrolling optimization.
-                After reworking the function a bit to make this optimization happen, there was a real increase in speed (at least on my newer laptop).
+                Within the function there was a loop, and the conditional statement written at the bottom. 
+                This was so obscure that the GPU compiler could not perform its loop-unrolling optimization.
+                So after reworking the function a bit to make this optimization happen, there was a real increase in speed (at least on my newer laptop).
                 <br><br>
                 For the Musgrave texture, I changed up the lacunarity parameter to be less than 1. Which is a bit odd if you think about it.
                 Lacunarity is the scale between octaves on the texture, so when it's less than 1 the scale grows instead of shrinks.
@@ -217,10 +218,10 @@
                 </ol>
                 A final note on this procedural texture is that it uses simplex noise under the hood.
                 Calculating noise is often a relatively expensive process, which isn't great for rendering say 400 asteroids.
-                A fairly cool optimization which was made, was replacing the GLSL simplex noise calculation with 3d texture sampling.
+                A fairly cool optimization which was made, was replacing the GLSL simplex noise calculation with 3D texture sampling.
                 3D textures can get pretty big memory wise fast, so the pre-computed texture was only 1.278451... world space units long in each direction.
                 The obscure unit was to prevent repetition in the sampling which had actually worked very well except at the origin.
-                For this texture to be continuous the OpenGL wrapping parameter is set to mirror-repeat.
+                For this texture to be continuous, the OpenGL wrapping parameter is set to mirror-repeat.
                 <br><br>
                 For normals, there wasn't a derivative or mathematically correct way to do this. So Gouraud shading is implemented here. 
                 This means that more vertices are 'created' around the original vertex, creating polygons where the normal can be calculated with dot products. 
