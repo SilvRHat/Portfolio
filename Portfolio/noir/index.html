@@ -73,11 +73,11 @@
 
                     <table style="text-align: center; margin: auto;">
                         <tr>
-                            <td><strong>Producers:</strong></td>
+                            <td><strong>People:</strong></td>
                             <td><small>Gavin Zimmerman</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Developed:</strong></td>
+                            <td><strong>Timeline:</strong></td>
                             <td><small>May 2021 - Aug 2021</small></td>
                         </tr>
                         <tr>
@@ -89,7 +89,7 @@
                             <td><small>ROBLOX, Rojo</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Links:</strong></td>
+                            <td><strong>Link:</strong></td>
                             <td><small>
                                 <a href="https://www.roblox.com/games/6842303525/Noir">Game</a><br>
                                 <a href="https://github.com/SilvRHat/Noir">Github</a>
@@ -112,15 +112,15 @@
 
                 <h1 id="control">Controls & Movement</h1>
                 The character verbs I've designed for Noir allow her to fly, hover (walk) on walls, jump and slide, step back in time, sprint, and various chimera states of those. 
-                So, it is not ideal to use Roblox's default Camera or Character controller.
+                So it wasn't ideal to use Roblox's default camera or character controller.
                 <br><br>
                 What is shown in the video above is the implementation of a custom character controller which is non-physics based. 
-                Instead each nearby surface is surveyed and compared to the last selected surface, and camera and directional input. 
+                Each nearby surface is surveyed and compared to the last selected surface and camera and directional input. 
                 A spring allows the player to hover at a certain height (lowered when sprinting).
                 <br><br>
                 Currently in implementation, the flying mode will be active when that distance is greater than (~20 units). While any distance from the best surface under that gives a blended mode of hovering and flying (using a sigmoid).
                 <br><br>
-                Inputs are fed into a flying controller and hovering controller which then add velocities to work with Roblox's existing phyiscs engine.
+                Inputs are fed into a flying controller and hovering controller which then add velocities to work with Roblox's existing physics engine.
                 <br><br>
                 This results in a smooth change of movement style- where jumping acts as a kickstart to flying.
                 <br><br>
