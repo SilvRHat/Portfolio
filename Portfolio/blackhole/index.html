@@ -73,11 +73,11 @@
 
                     <table style="text-align: center; margin: auto;">
                         <tr>
-                            <td><strong>Producers:</strong></td>
+                            <td><strong>People:</strong></td>
                             <td><small>Gavin Zimmerman</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Developed:</strong></td>
+                            <td><strong>Timeline:</strong></td>
                             <td><small>May 2022</small></td>
                         </tr>
                         <tr>
@@ -89,7 +89,7 @@
                             <td><small>Blender 3.1</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Links:</strong></td>
+                            <td><strong>Link:</strong></td>
                             <td><small>N/A</small></td>
                         </tr>
                     </table>
@@ -104,7 +104,7 @@
                         </li>
                         <li><a href="#breakdown">Breakdown</a>
                             <ul>
-                                <li><a href="#hole">Blackhole Refraction</a></li>
+                                <li><a href="#hole">Black Hole</a></li>
                                 <li><a href="#disk">Accretion Disk</a></li>
                             </ul>
                         </li>
@@ -118,72 +118,102 @@
 
                 <h2 id="background">Background</h2>
                 This project was completed as part of a final for the "Black Holes" course at University of Colorado, Boulder taught by Professor Ann-Marie Madigan.
-                This simulation is not physically accurate was created to illustrate the effects of gravitational lensing and how accretion disks behave around a blackhole.
-                As a project for communicating characteristics of blackholes and their science, I've also attached the brief report of this project below.
+                This simulation was created to illustrate the effects of gravitational lensing and how accretion disks behave around a black hole.
+                As a project for communicating characteristics of black holes and the science behind them, I've attached a brief blurb about black holes and the gravitational lensing effect.
                 <br><br>
-                Blackholes, mysterious and daunting, are quite incredible cosmic objects of various sizes
-                throughout the universe and of immense size in every galaxy. These bodies are so massive and
-                dense that the gravitational pull they exert even bends light. This phenomenon gives blackholes
-                their key characteristic, in that they are dark due to light not even being able to escape past the
-                blackhole surface known as the event horizon. Yet, beyond that horizon immense gravity is still
-                present around the blackhole and will bend light rays showcasing a lensing effect.
+                Black holes are quite incredible cosmic objects of various immense sizes, throughout the universe. 
+                These bodies are so massive and dense that the gravitational pull they exert even bends light. 
+                Below whats known as the 'event horizon', light itself is not able to escape due to the immense gravity - which is why black holes appear black.
+                Beyond the horizon gravity, less, but still very power bends light rays around the black hole producing a lensing effect.
                 <br><br>
-                From our perspective the area immediately surrounding the blackhole has the most
-                significant distortion which bends along the curvature of its surface. From this nature we are then
-                capable of seeing what is behind the blackhole, including the occluded section of its accretion
-                disk, which notably bubbles over the top. In actuality the accretion disks, made of highly
-                energetic gas (plasma), are disk shaped and rotate around the blackhole maintaining angular
-                momentum. The scale of accretion disks is variable and not
-                all blackholes may contain one, making them that much harder to spot. Although the lensing
-                effect may still be utilized to detect these bodies, since the way in which black holes bend light
-                symmetrically will increase luminosity of blocked stars.
+                From our perspective the area immediately surrounding the black hole has the most
+                significant distortion bent along the curvature of its surface. By this effect, we are actually
+                capable of seeing what is behind the black hole. 
+                For example, the accretion disk which sometimes forms around a black hole is completely visible although part of it would normally be occluded by the black hole.
+                
+                These accretion disks are also interesting objects, made of highly energetic gas (plasma) and spin like rings around the black hole.
+                The scale of these disks is variable and not every black hole may have one. However, when they do exist black holes are easy to identify in space.
+                The lensing effect can also be utilized to identify these bodies, since the way in which black holes bend light will double the luminosity of starts behind them.
 
                 <h1 id="breakdown">Breakdown</h1>
-                I've attached a breakdown here for anyone else wishing to create their own supermassive blackhole effect.
-                Although, this is just one of the ways for making blackholes in Blender - there are many different approaches.
-                <br><br>
-                <h2 id="hole">BlackHole</h2>
-                First we want seemingly 'accurate' light-bending or 'gravitational-lensing' from our blackhole. 
-                A common approach I've seen outside Blender (on 3 accounts) is ray-tracing, where the developer has free control on where light-rays point.
-                Once the final ray path is calculated, they can sample a <a target="_blank" src="https://www.khronos.org/opengl/wiki/Cubemap_Texture">cubemap texture</a>.
-                Typically, the light ray bends smoothly/ continuously near the blackhole and such backwards ray-tracing implementations acknowledge that and bend the ray
-                multiple times. Unfortunately, this is only available in cycles rendering mode and we also would like our implementation to be REALTIME.
-                <br><br>
-                For gravitational-lensing to be done in realtime, we'll use the Eevee rendering engine and bend light only once towards a correct final path.
-                <br><br>
-                To do this, we enable Screen Space refractions in our visual settings.<br><br>
-                <img src="img/ssr.png" style="width: 42%;">
-                <img src="img/ssr2.png" style="width: 35%;">
-                <br><br>
+                I've attached a breakdown here for anyone else looking to create their own supermassive black hole effect.
                 
-                Now to perform refractions, a 'Refraction BSDF' shader must be used which performs the ray-bounce calculations internally.
-                When light hits the object is bent near/away the normal depending on the Index of Refraction ratio between both mediums the light travels through.
                 <br><br>
-                <img src="https://lateasusual.com/b/_images/ssr_refraction_photo.png" style="width: 35%;">
+                <h2 id="hole">Black Hole</h2>
+                The first part of this breakdown cover's the actual black hole object. 
+                This object should create seemingly accurate light bending effects, as well as be very very dark in the middle.
                 <br><br>
-                We can use ANY geometry to perform this; a plane could be used as a post-processing filter or a cube or any mesh (as long as we customize the normals appropriately).
-                However, for this implementation we don't want to worry about staging or camera angles affecting the visual effect.
-                So, what looks the same from all (euclidean) directions? A sphere. The normals on the sphere may also be customized quite easily.
+                I've seen a few approaches to this by other Blender artists, a classmate, a guest lecturer, and an unreal developer. 
+                Needless to say many people enjoy black hole 3D projects.
+                Most of these approaches all employed ray-tracing techniques, usually by adjusting the direction or velocity of the light ray in small increments.
+                This is also the approach to dynamic and chaotic systems, which may use Runge-Kutta techniques for extremely precise calculations. 
+                Depending on the platform technology this may involve coding your own tools to some degree.
+                <br><br>
+                Blender is capable of bending light rays multiple times, provided that cycles is the selected rendering engine.
+                However, for my approach I wanted the black hole to be real time performant and use Blender's realtime engine 'Eevee', where light can only be bent or refracted once. 
+                So to recreate the gravitational lensing effect, light could not curve around the hole but instead simply be bent towards the final location.
+                <br><br>
+                So that 3D objects in the scene could also appear distorted, Screen Space refractions were enabled.
+                <br><br>
+                <img src="img/ssr.png" style="width: 42%;">
+                <p class="img-id">1</p>
+                <img src="img/ssr2.png" style="width: 35%;">
+                <p class="img-id">2</p>
+                <br><br>
+                <ol>
+                    <li>SSR enabled in Rendering options</li>
+                    <li>SSR enabled in Material options</li>
+                    <li>Light refracting through glass</li>
+                </ol>
+
+                To perform light bending in Eevee, a Refraction BSDF shader is used to perform the necessary ray-tracing bounce internally.
+                For context, when light passes through an object it refracts and is bent near/away from the normal depending on the index of refraction ratio between the mediums the light travels through.
+                <br><br>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Refraction_photo.png" style="width: 35%;">
+                <p class="img-id">3</p>
+                <br><br>
+                Any 3D geometry can be used with the refraction shader. Planes combined with this shader are useful for post-processing filters in some use cases.
+                For this case, a sphere is used since it looks the same from every angle and black hole's are already sphere like. 
                 <br><br>
                 <img src="img/sphere.png" style="width: 40%;">
+                <p class="img-id">4</p>
                 <br><br>
-                Unfortunately, the spheres normals are set up so that the sides will have the most refraction.
-                This is because the normals are at a large angle to the incoming vector (vector from our viewport to geometry).
-                Whereas, the normal of the sphere pointing towards us is at a very low angle with the incoming vector.
-                We want to flip that, with an IOR&#60;1 we can angle the normals like mirrors which point in the desired direction.
-                The idea can roughly be described like:
+                <ol start="4">
+                    <li>Geometry of black hole effect</li>
+                </ol>
+                Unfortunately, the normals on the sphere don't initially line up to bend light in the desired direction. 
+                Normals on the edges face away from the viewing angle and cause light to bend a lot - where they should bend a little.
+                Likewise, the normal in the center is parallel with the viewing angle and barely causes light to bend.
                 <br><br>
-                <img src="img/light.png" style="width: 30%;">
-                <img src="img/refract.png" style="width: 30%;">
+                To flip that, the normals need to be recalculated so that they bend light inwards.
+                If the Index of Refraction is less than 1, that would roughly look like:
                 <br><br>
-                This can be done by rotating each exisiting normal on the sphere by 90 degrees inwards to the center. 
-                For this, we'll use axis-angle rotation where the axis is the vector perpendicular to the existing normal and the normal at the center which we want to rotate towards.
-                Thus to get the axis, we only need a cross product of these two vectors followed by a normalize operation.
-                For the vector we rotate, we want it in camera space - because the normals we construct all dependent on the camera angled as it is.
+                <img class="img-border" src="img/light.png" style="width: 45%;">
+                <p class="img-id">5</p>
+                <img class="img-border" src="img/refract.png" style="width: 45%;">
+                <p class="img-id">6</p>
                 <br><br>
-                <img src="img/n1.png" style="width: 60%;">
-                <img src="img/ex1.png" style="width: 30%;">
+                <ol start="5">
+                    <li>Desired light bending effect</li>
+                    <li>Normal derivation for light bending effect</li>
+                </ol>
+
+                <!-- HERE -->
+                This was done by rotating the existing normals by 90 degrees inwards towards the center of the sphere from where the camera was looking.
+                To apply the correct rotation, the normals given in world-space coordinates were transformed to camera space coordinates. 
+                In these coordinates the Z-axis aligns with the forward/out direction. 
+                The cross product of this vector (0,0,1) and the initial normal give the axis for an axis-angle rotation towards the center.
+
                 <br><br>
+                <img src="img/n1.png" style="width: 60.7%;">
+                <p class="img-id">7</p>
+                <img src="img/ex1.png" style="width: 31%;">
+                <p class="img-id">8</p>
+                <br><br>
+                <ol start="7">
+                    <li>Desired light bending effect</li>
+                    <li>Normal derivation for light bending effect</li>
+                </ol>
                 Next, well add some customization for how much light gets bent by manipulating the IOR.
                 A fairly helpful calculation is the angle from the incoming vector. 
                 This can be obtained with a dot product, followed by an arccosine function.
