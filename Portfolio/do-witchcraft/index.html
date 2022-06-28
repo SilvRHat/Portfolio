@@ -177,7 +177,7 @@
 
                 Drawing quick storyboards for each effect proved to be very useful conceptualizing the work to be done.
                 Each board includes components of the effect, a timing reference (primary action for animation), and initial procedural design ideas.
-                <br>
+                <br><br>
                 Not all initial ideas (such as particles on the flower) made it into the final version, nor did the final version only have initial ideas.
 
                 <h2 id="material">Material Shaders</h2>
@@ -186,12 +186,11 @@
                 <br><br>
 
                 There are a total of 15 shaders for the background, magic cards, eyeball dial thing, and elemental materials.
-                This section covers the making of those elemental materials and the eye. I also reference notes on geometry,
-                as the geometric shape plays an important part in each material shader which are not all UV-map dependent.
+                This section covers the making behind some of these shader. 
                 
                 <h3 id="mat-eye">Eyeball</h3>
                 The dial object with the eyeball printed on it wasn't thought of until halfway through the formal rendering process. In fact,
-                it was completely coded while another computer was working on the latest render, run to see if the concept would fit.
+                it was completely coded while another computer was working on the latest render, which was to see if the concept would fit.
                 <br><br>
                 The shader setup is relatively simple; two principled BSDFs (Blender's PBR shader) were mixed together by a "blinking" factor (boolean). 
                 These BSDF's were configured to look like metal and an eyeball by adjusting specular, metallic, clearcoat, roughness, and emissive parameters.
@@ -210,7 +209,7 @@
                 For simplicity, the blinking animation is driven by the frame number. 
                 The animation started off as periodic, where the frame was divided by the frequency (frames per blink). 
                 The fraction component of this value was then shaped like an absolute triangle wave and then into thin spikes. 
-                This was used as a space multiplier, which affects the result of a length comparison that is then used as the blinking factor.
+                This was used as a space multiplier, which affects the result of a length comparison operation that is then used as the blinking factor.
                 1D Voronoi noise is added on the frame input to offset each blink into a semi-random cycle. 
                 <br><br>
                 <img style="width: 99%;" src="img/blink-nd.png">
@@ -322,7 +321,7 @@
                     <li>With Subsurface Scattering</li>
                 </ol>
                 Notice that the shadows are much softer in subsurface scattering. 
-                The smooth taper on the shadow can have a color gradient, when the color depth parameters on the subsurface scattering are adjusted.
+                The shadow can have a color gradient when the color depth parameters on the subsurface scattering are adjusted.
                 The default is set to a reddish hue, however here I found that a blue green hue best reflected what I observed in nature.
                 <br><br>
                 For making the details on the leaf, it is largely shuffling with the UV map space. 
@@ -382,10 +381,10 @@
                 to look like fire. 
                 There is also fire simulation technology similar to fluid simulation, which might use a volume or surface shading technique. It warrants some research on my part.
                 <br><br>
-                This approach however assumes the geometry for our fire is a mesh (mostly) in the shape of fire. 
-                For this section I will use a sphere to break down the fragment shader.
+                This approach however assumes the geometry for the fire is a mesh, (mostly) in the shape of fire. 
+                But for this section I will show the shader breakdown on a sphere.
                 <br><br>
-                To create this fire visual, I especially wanted to recreate the look of Calcifer from "Howl's Moving Castle" by Studio Ghibli.
+                I especially wanted to recreate the look of Calcifer from "Howl's Moving Castle" by Studio Ghibli for my fire.
                 I imagined this would pair well with the existing animations which had all already been completed.
                 <br><br>
                 <img style="width: 60%;" src="https://c.tenor.com/o7St1LoMu1MAAAAC/calcifer-studio-ghibli.gif">
@@ -397,7 +396,7 @@
                     <li>Calcifer</li>
                     <li>Color/blending study</li>
                 </ol>
-                A must-have component of fire is the tendrils which move up along the edge of the shape. 
+                The tendrils which move up along the edge of the shape was the first challenge. 
                 This is actually very difficult to create well in a 3D setting opposed to a 2D setting (without using a physically based approach).
                 However, a custom fresnel effect and some noise can get pretty close to creating the effect.
                 <br><br>
@@ -424,8 +423,8 @@
                     <li>Noise moves along Z (up) axis to drive the tendrils up</li>
                 </ol>
 
-                This mask is now the alpha value or transparency of the fire. 
-                And the same trick is used for each layer of color, using different mixes of noise. 
+                This mask is acts as the transparency of the fire. 
+                The same trick is also used for each layer of color with different mixes of noise. 
                 The innermost color barely mixes any noise into the normal. 
                 I also plugged in an exponent operation here to customize the falloff of the fresnel effect.
                 <br><br>
@@ -456,7 +455,7 @@
                 <p class="img-id">1</p>
                 <br><br>
                 Creating the glyphs on each card employed the use of custom SDFs (signed distance fields). 
-                "Atomic" or basic SDFs such as for circles, lines, triangles, rectangles, and quadratic bezier lines were joined to produce the complete glyph.
+                Basic SDFs such as for circles, lines, triangles, rectangles, and quadratic bezier lines were joined together to produce the complete glyph.
                 <br><br>
                 <img style="width: 11%;" src="img/sdf1.png">
                 <p class="img-id">2</p>
@@ -486,7 +485,7 @@
                     <li>Colored</li>
                 </ol>
 
-                The full SDF trees were grouped (collapsed in a single node in Blender), 
+                The full SDF trees were collapsed into a single group node, 
                 which allowed for reuse and abstracted away a large subprocess in the node viewer. 
                 Translating the SDF into color was fairly easy using a compare operation with very small noise added for a pencil type effect.
                 <br><br>
@@ -497,7 +496,7 @@
                 <ol start="10">
                     <li>Full Glyph Shader w/ SDFs grouped</li>
                 </ol>
-                Note the framed section masked with the glyph outline and plugged into emission. This animates the emission changing over time.
+                Note the section labeled 'Animated Emission', this animates the emission changing over time.
                 The setup uses two remaps as inverse-lerp and lerp functions respectively, with a float curve in between to customize how values change. 
                 The green node simply does nothing but organize the setup. As for the attribute labeled 'timeline', that will be covered in the next section.
 
@@ -506,11 +505,11 @@
                 <p class="img-id">1</p>
                 <br><br>
                 The attribute labeled timeline from above is driven by the Z position of an empty object per magic spell object.
-                This tool proved to be a very useful method of animating as the procedural animations were not dependent on frames or the 'real' timeline.
-                Timing when each animation played and for how long could be easily controlled by adjusting the animation of the empty without changing any of the code which made up the geometry at any moment. 
+                This tool proved to be a very useful method of animating, since the procedural effects would not depend on frames or the 'real' timeline.
+                Timing when each animation played and for how long could be easily controlled by adjusting the animation of the empty without changing any code. 
                 <br><br>
-                A standard timeline also came out of this which timed each animation similarly over an abstract range of t=[-1,3] (or z=[2,-2]). 
-                Around 2.8 was where most animations played the big transformation motion.
+                A standard timeline also came out of this which timed each animation similarly over an abstract range of t=[-1,3]. 
+                Around t=2.8 was where most animations played the big transformation motion.
                 <br><br>
                 <img style="width: 99%;" src="img/timeline-nd.png">
                 <p class="img-id">2</p>
@@ -519,8 +518,8 @@
                     <li>Geometry Nodes calculating arbitrary time for animations</li>
                 </ol>
                 Mapping the empty's Z position to some time value was done in the geometry node setup. 
-                This setup was so that the geometry nodes, which programmed how the animated geometry looked, needed reference to the timeline as well.
-                They are also able to output attributes (essentially synonymous with OpenGL attributes) which can then be read by the (fragment) shaders.
+                This was set up so that the geometry nodes, which programmed how the animated geometry looked, had reference to the timeline as well.
+                They are also able to output attributes which can then be read by the (fragment) shaders.
                 
                 <h2 id="anim">Procedural Geometry and Animation</h2>
                 This section covers a breakdown on how the animations/models are created procedurally. 
@@ -626,10 +625,10 @@
                     <li>Stem Curve Node Tree</li>
                 </ol>
                 There are 4 unique curve instances (stem, leaves, petal, and antenna). 
-                For simplicity on the petal and leaves, only 1 curve is generated and then instanced and rotated around the tangent vector (along curve) of the stem curve.
+                For simplicity on the petal and leaves, only 1 curve is generated and then instanced and rotated around the tangent vector for the stem.
                 <br><br>
                 The stem is fairly simple, made from a simple line curve. 
-                A noise texture is used to reposition each control point (no vertices for curves). 
+                A noise texture is used to reposition each control point. 
                 Some value X is animated over time, this value can be thought of as an offset for the noise. This allows noise to change over time in a nonlinear fashion.
                 <br><br>
                 <img style="width: 99%;" src="img/stem-gnd.png">
@@ -672,6 +671,7 @@
                 <h3 id="anim-fire">Fire</h3>
                 <img style="width: 99%;" src="img/fire-gnd.png">
                 <p class="img-id">1</p>
+                <br><br>
                 Animating the paper for the fire had a similar implementation as the light animation.
                 Some noise displaces the paper for a wavy effect, it floats upward, and the transformation is scaled up to replace the paper.
                 <br><br>
@@ -713,8 +713,7 @@
                 <img style="width: 60%;" src="img/torus-curve.gif">
                 <p class="img-id">6</p>
                 <br><br>
-
-                The method I used here for making a mesh shaped like fire was initially the byproduct of randomly experimenting with asteroids on another project of mine.
+                For creating a mesh shaped like fire, the method I used was initially the byproduct of randomly experimenting with asteroids on a former project.
                 The trick is to use some 3D noise as displacement on a sphere and to move that noise along the Z axis. 
                 You then use the initial Z (up) coordinate to scale how much noise is applied.
                 <br><br>
@@ -744,10 +743,10 @@
                 Note the jump between pictures 10 and 11. 
                 This was by animating the scaler for the noise, which is internally multiplied with the texture coordinate input.
                 By changing this a little, the space of noise grows and shrinks which is used to make this effect. Because
-                the space itself is being multiplied by some factor, this is very dependent on the positions passed into the noise being close to zero.
-                If that is not the case, then the positions change more dramatically.
+                the space itself is multiplied by some factor, this is very dependent on the assumption that all positions are close to zero.
+                If that is not the case, then the positions change more dramatically when scaled resulting in a quicker change in the noise output.
                 <br><br>
-                Getting the details for the fire was also quite difficult. 
+                Getting the detail level right for the fire was also quite difficult. 
                 There needed to be enough detail so that the fire edges weren't visible, but there couldn't be too much detail that it was difficult to use a fresnel effect in the fragment shader.
                 Thus, normals are taken at a lower-resolution and transferred to higher-detailed geometry.
 
@@ -776,15 +775,14 @@
                     <li>The edges on the fire had too much fade</li>
                     <li>The noise on the fire edges was too fine and the moving of this noise was too fast</li>
                 </ul>
-                <br>
 
                 <h3>Second Render</h3>
                 Takeaways:
                 <ul>
-                    <li>Shadows on light card are really not great during the crumble</li>
+                    <li>Shadows on light card aren't great during the crumble</li>
                     <li>Ice animation in now too long - notice flicker at end</li>
                     <li>The color here could also be stronger</li>
-                    <li>The fire big explosion is a bit to fast</li>
+                    <li>The fire explosion is a bit to fast</li>
                 </ul>
 
                 <h3>Third Render</h3>
@@ -800,8 +798,8 @@
                 <br><br>
                 I really liked the spin and circular framing; which seemed to add anticipation from one effect to the next.
                 <br><br>
-                I then published this version to youtube, because I thought I hit the top as far as I could do. 
-                But I still wasn't very happy with this result - working with each animation individually had a lot of feeling and was very exciting to see come together. 
+                I then published this version to youtube, because I thought I hit the top of what I could do. 
+                But I still wasn't very happy with the result - working with each animation individually had a lot of feeling and was very exciting to see come together. 
                 Yet together there wasn't much feeling in it. 
                 The context of each animation in the environment as a whole was dull. Simply playing the animation wasn't enough,
                 there had to exist a reason or context for it to play in.
@@ -809,9 +807,9 @@
                 In the Art book of Howl's Moving Castle by Hayao Miyazaki, Michiyo Yasuda mentioned that he changed the color hues in every scene according to emotional development.
                 I thought about the nearly grey background here and wondered if those colors were truly right - which had first seemed favorable for a demo/portfolio piece. <br><br>
                 Light, flowers, fire all at least have some essence of warmth or life - a warm background and more contrast lighting should help to bring that feeling out.
-                I then tried to incorporate the common color schemes from the original animation into the background.
+                I then tried to incorporate the common color schemes from the original animation series into the background.
                 <br><br>
-                I also decided to add some dial which would play with the animations and add some narrative.
+                I also decided to add some dial which would move with the animations and add some narrative.
                 <br>
 
                 <h3>Eighth Render</h3>

@@ -199,18 +199,18 @@
                         </ul>
                     </li>
                 </ul>
-                The object hierarchy provided is used to show how object's coordinate systems relate to each other.
-                Child objects move relative to their parent object.
+                The object hierarchy provided is used to show how the objects' coordinate systems relate to each other, where
+                child objects move relative to their parent object.
                 <br><br>
-                The lantern is a rigid body, so the children of the lantern move with the lantern. 
+                The lantern is a rigid body, so the objects parented under the lantern move with it. 
                 Similarly, the 2D UI text is parented under the camera to remain in the same position between various shots.
                 An empty is also added to the camera system, where a modifier is applied to constrain the camera pointing towards it. This allows the focus of the camera to be easily animated.
                 <br><br>
-                Finally, the background and smoke are layered visual elements and are not dynamic- although the background is repositioned per camera angle.
+                Finally, the smoke visual and background are stationary elements- although the background is repositioned per camera angle.
 
                 <br>
                 <h2 id="shaders">Materials and Shaders</h2>
-                Shaders are small graphic programs which determine the color of each pixel individually. 
+                Shaders are small graphical programs which determine the color of each pixel individually. 
                 In Blender, shaders are node-based and used extensively to create the visuals for this project.
                 <h3 id="lantern">Lantern</h3>
                 <img style="width:49%;" src="img/lantern-shader-mini.gif">
@@ -248,16 +248,16 @@
                 <p class="img-id">8</p>         
                 <br><br>
                 <ol start="3">
-                    <li>Normal w/ Noise</li>
+                    <li>Normal w/ noise</li>
                     <li>Fresnel</li>
                     <li>Remapping</li>
-                    <li>Second Fresnel clamped with greater than operation</li>
-                    <li>Combined Fresnels</li>
+                    <li>Second fresnel clamped with greater than operation</li>
+                    <li>Combined fresnels</li>
                     <li>Colored</li>
                 </ol>
 
                 Another procedural effect was creating the illusion that this material is lit from the inside. 
-                A highlight went a long way into achieving this effect, which used a similar technique as above using a fresnel node.
+                A highlight went a long way into achieving this effect, which used a similar technique as above.
                 <br><br>
                 <img style="width:58%;" src="img/glossy-lantern.gif">  
                 <p class="img-id">9</p> 
@@ -269,10 +269,10 @@
                     <li>Highlight Blending Mask from Fresnel</li>
                 </ol>
                 Unfortunately the highlight also had the effect of making the material look too smooth or polished like a glossy piece of pottery.
-                To mitigate, ring details were added to complete the look that the lantern was made of paper and had an underlying wire-like structure. 
+                To mitigate, ring details were added to demonstrate that the lantern was made of paper and had an underlying wire-like structure. 
                 <br><br>
                 The added shadows/occlusion of the inner rings create the illusion that the material is thin and non-smooth.
-                This detail is achieved by drawing geometric data (not UV-mapped data), multiplying the Z (up) coordinate by the ring frequency and taking the sine value of that.
+                This was achieved by sampling geometric data, multiplying the Z (up) coordinate by the ring frequency and taking the sine value of that.
                 <br><br>
                 For the lighting to look physically right, this operation needed to be performed twice with an offset applied to the Z coordinate on one. 
                 One set would act as the shadow and another would act as the highlight, which would illuminate the lantern as if the lighting was at an angle.
@@ -291,9 +291,9 @@
                 <p class="img-id">15</p>  
                 <br><br>
                 <ol start="11">
-                    <li>sine(Z*44)</li>
-                    <li>Remapped w/ power operation</li>
-                    <li>Two ring maps combined for shadow/highlight</li>
+                    <li>Highlight</li>
+                    <li>Shadow</li>
+                    <li>11 and 12 combined for full occluded light effect</li>
                     <li>Used as blending factor on original color</li>
                     <li>Node tree for fake ring lighting</li>
                 </ol>
@@ -309,14 +309,14 @@
                 which inspired the emissive blue-purple gradient. Although the original lantern itself wasn't described this way, here it would serve as
                 a symbolic symbol for the ghost character itself.
                 <br><br>
-                Geometry-based data could not be used for this since the material would be deformed by cloth simulation, so a UVMap is used to provide height data.
+                Geometry-based data could not be used for this since the material would be deformed by cloth simulation, so a UV map is used to provide height data.
                 <br><br>
                 <img style="width:40%;" src="img/fmap.png">
                 <p class="img-id">2</p>
                 <br><br>
                 <ol>
-                    <li>Final Fabric Material</li>
-                    <li>UVMap as height data</li>
+                    <li>Final fabric material</li>
+                    <li>UV map as height data</li>
                 </ol>  
 
                 A wave texture is then applied on top of the existing height data to create variation/angled tapering.
@@ -327,8 +327,8 @@
                 <p class="img-id">4</p>  
                 <br><br>
                 <ol start="3">
-                    <li>Wave Texture</li>
-                    <li>Height data w/ Wave offset</li>
+                    <li>Wave texture</li>
+                    <li>Height data w/ wave offset</li>
                 </ol>
                 The new height data is then mapped to a [0,1] range and plugged into the alpha channel for driving the material's transparent gradient.
                 Finally some noise was layered in with the height data, and is then used for the color gradient.
@@ -343,7 +343,7 @@
                 <ol start="5">
                     <li>Generated noise</li>
                     <li>Noise on height data</li>
-                    <li>Color Gradient</li>
+                    <li>Color gradient</li>
                 </ol>
 
                 <h3 id="smoke">Smoke</h3>
@@ -353,12 +353,12 @@
                 <p class="img-id">2</p>  
                 <br><br>
                 <ol>
-                    <li>Final Smoke Material</li>
+                    <li>Final smoke material</li>
                     <li>Geometry generated from extruding a bezier curve</li>
                 </ol>
                 To create the smoke the geometry will be curved to follow the path of the smoke.
                 The desired coordinates for the shader also need to follow this pattern. 
-                Luckily, when applying a cross-section curve to a spline curve, UV coordinates are generated based on the factor of both splines.
+                Luckily when applying a cross-section curve to a spline curve, UV coordinates are generated based on the factor of both splines.
                 <br><br>
                 <img style="width:31.5%;" src="img/smoke-uv.png">
                 <p class="img-id">3</p>  
@@ -367,7 +367,7 @@
                 <br><br>
                 <ol start="3">
                     <li>UV map on geometry</li>
-                    <li>Node setup for Coordinate values</li>
+                    <li>Node setup for coordinate values</li>
                 </ol>
                 To give some characteristic to the smoke, the center follows a smooth zig-zag motion almost as if it's folding onto itself.
                 Seeing this effect really increased the dynamics of the animation.
@@ -385,12 +385,12 @@
                 <p class="img-id">7</p>  
                 <br><br>
                 <ol start="5">
-                    <li>1D Noise for center displacement</li>
-                    <li>Displace Center</li>
-                    <li>Node Setup</li>
+                    <li>1D noise for center displacement</li>
+                    <li>Displace center</li>
+                    <li>Node setup</li>
                 </ol>
-                Something that really made the smoke pop was splitting the smoke into two, with a transparent center.
-                This nonrealistic effect matched style wise with some techniques from original ukiyo-e artworks that made great use of shape and form over limited colors.
+                Something that really made the smoke pop was splitting the smoke into two, leaving the center transparent.
+                This nonrealistic effect matched style wise with some techniques from original Ukiyo-e artworks that made great use of shape and form over limited colors.
                 <br><br>
                 For making the center transparent, two centers are offset from the original for the smoke to follow along. 
                 This was done by taking the sign value of the Y position and multiplying that by a float curve responsible for the desired offset. 
@@ -405,9 +405,9 @@
                 <p class="img-id">10</p>  
                 <br><br>
                 <ol start="8">
-                    <li>Y Sign Value</li>
+                    <li>Y sign Value</li>
                     <li>Two centers</li>
-                    <li>Node Setup</li>
+                    <li>Node setup</li>
                 </ol>
 
                 The above setup is then used as a distance field. Noise is overlaid on this field and finally a threshold is taken to obtain the transparency mask. 
@@ -424,7 +424,7 @@
                 <ol start="11">
                     <li>Absolute value of two center coordinates to create a distance field</li>
                     <li>Noise generated from rolling coordinates (X+T, Y, T)</li>
-                    <li>Noise + Distance field (11)</li>
+                    <li>Noise + distance field (11)</li>
                     <li>Check if distance is greater than some threshold</li>
                 </ol>
 
@@ -457,7 +457,7 @@
                 <p class="img-id">6</p>
                 <br><br>
                 <ol start="5">
-                    <li>Phyllotaxis Algorithm</li>
+                    <li>Phyllotaxis algorithm</li>
                     <li>Algorithm plugged into positions for cube instances</li>
                     <lI>Positions with Z (Up) offset based on factor</lI>
                 </ol>
@@ -489,11 +489,11 @@
                 To make this project come together, I had to source assets produced by other artists. 
                 This included the background and sound effects used.
                 <br><br>
-                The background texture is a background cel taken from Studio Ghibli's Spirited Away and is painted by Kazuo Oga.<br>
+                The background texture is a background cel taken from Studio Ghibli's Spirited Away and is painted by Kazuo Oga.
                 I omitted the mini house statues from the original illustration and recolored some areas slightly to better fit the project's color scheme.
                 <br><br>
                 For sounds, I wanted traditional Japanese instruments to accompany the animation.<br>
-                But I could not find anything googling with English searches. After a search using the Japanese language,
+                But I could not find anything googling with English searches. However with a localized search,
                 I quickly found a beautiful sound repository at: <a href="https://otologic.jp/free/se/instruments-japanese01.html">otologic.jp</a>
                 and at <a href="https://commons.nicovideo.jp/">commons.nicovideo.jp</a>.
 
@@ -537,7 +537,7 @@
                 Many objects in the scene are lit in some form with emission light [Background, Fabric, Smoke, Lantern, and textual elements].
                 <br><br>
                 This served two purposes: to saturate the colors and provide a bloom effect. 
-                The bloom effect here was desired to emphasize the object as supernatural and ghostly. 
+                The bloom effect here was made to emphasize the object as supernatural and ghostly. 
                  
                 Looking at original Ukiyo-e depictions of the lantern, the artists here chose to contrast the lantern against the background by value. 
                 This illuminates the lantern and smoke like emissive objects, something the bloom effect takes to another level.<br><br>
@@ -552,7 +552,7 @@
                 </ol>
 
                 <h3 id="color">Color Scheme</h3>
-                The color scheme from these references also used color as a way to contrast the peony lantern against the background. 
+                The color scheme from these references also uses color as a way to contrast the peony lantern against the background. 
                 This inspired the color scheme behind my own animation.<br><br>
                 For the background I choose to exhibit [greens, green-yellows, blues, browns, greys] which would pair with the [red, pinks, purples, and blues] in the foreground.
                 This is roughly close to complimentary colors on the color spectrum, especially with pinks on dark greens.<br>
@@ -567,9 +567,9 @@
                 This is used in both the smoke and fabric to add texture to both elements.
                 <br><br>
                 Alpha-blending was alternatively used on the lantern. 
-                This is why the lantern is not visible in the render passes, as transparent objects are deferred after the first render. 
-                Whereas alpha-hashing can provide a gradient unlike alpha-clipping - it cannot be used jointly with emission; for example, you can see above that the smoke isn't very transparent but is emissive.<br>
-                The lantern uses both emission and transparency of equal proportions, thus alpha-blending was required here.
+                This is why the lantern is not visible in the render passes, as these transparent objects are deferred after the first render. 
+                Whereas alpha-hashing can provide a gradient (unlike alpha-clipping), it cannot be used jointly with emission. For example, you can see above that the smoke isn't very transparent but is emissive.
+                Since the lantern uses both emission and transparency of equal proportions, alpha-blending was required here.
 
                 <h3 id="light">Lighting</h3>
                 Beyond emission, the scene contains two small light sources parented under the lantern. 
