@@ -73,11 +73,11 @@
 
                     <table style="text-align: center; margin: auto;">
                         <tr>
-                            <td><strong>Producers:</strong></td>
+                            <td><strong>People:</strong></td>
                             <td><small>Gavin Zimmerman</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Developed:</strong></td>
+                            <td><strong>Timeline:</strong></td>
                             <td><small>Mar 2022 - Apr 2022</small></td>
                         </tr>
                         <tr>
@@ -91,7 +91,7 @@
                             </small></td>
                         </tr>
                         <tr>
-                            <td><strong>Links:</strong></td>
+                            <td><strong>Link:</strong></td>
                             <td><small><a href="https://github.com/SilvRHat/gr-v-f-UX" target="_blank">Github</small></td>
                         </tr>
                     </table>
@@ -104,11 +104,11 @@
                                 <li><a href="#about">README / About</a></li>
                             </ul>
                         </li>
-                        <li><a href="#pipeline">Astroid Shader Pipeline</a>
+                        <li><a href="#pipeline">Asteroid Shader Pipeline</a>
                             <ul>
                                 <li><a href="#vert">Vertex</a></li>
-                                <li><a href="#tesc">Tesselation Control</a></li>
-                                <li><a href="#tese">Tesselation Evaluation</a></li>
+                                <li><a href="#tesc">Tessellation Control</a></li>
+                                <li><a href="#tese">Tessellation Evaluation</a></li>
                                 <li><a href="#geom">Geometry</a></li>
                                 <li><a href="#frag">Fragment</a></li>
                             </ul>
@@ -123,29 +123,28 @@
                 <br><br>
                 <h1 id="about">README / About</h1>
                 This was completed as part of the "Advanced Computer Graphics" course taught at University of Colorado, Boulder by Willem A. (Vlakkies) Schreüder.
-                The project outline was to create a substantial creative project with OpenGL utilizing concepts from the course including:
-                lighting, image processing stored textures/ noise, geometry/tesselation shaders, and procedural textures. 
+                The final project was to create a substantial creative project with OpenGL utilizing concepts from the course including:
+                lighting, image processing, stored textures/ noise, geometry/tesselation shaders, and procedural textures. 
                 <br><br>
                 All of which were done from scratch; 
-                that is <strong>NO game engine, animation software, meshes, painted textures were used in the making of this gravitational field project.</strong>
+                where no game engine, animation software, meshes, and painted textures were used in the making of this gravitational field.
                 This project does utilize a custom rendering-pipeline framework developed off the OpenGL library, 
-                which has a seperate <a href="../MvRE/" target="_blank">page</a> on my website.
+                which has its own page <a href="../MvRE/" target="_blank">here</a> on my website.
                 <br><br>
-                Thus, the beauty of this project is the entire procedural creation of an asteroid field filled with unique asteroid geometry.
-                Which I made, so that I could one day fire a laser whose path is unknown because the surrounding gravity is in all sorts of directions.
+                The beauty of this project is the fully procedural creation of an asteroid field filled with unique geometry.
                 <br><br>
 
-                <h1 id="pipeline">Astroid Shader Pipeline</h1>
-                I've provided an explanation of each step in the shader pipeline for the concepts behind this project. 
-                Here I talk about the methods employeed, necessary optimizations, cautions to readers, and sublities of various techniques.
-                This commentary is on the shader code here: <a href="https://github.com/SilvRHat/gr-v-f-UX/tree/master/shdr/AZ" target="_blank">AZtroid shader pipeline</a>.
+                <h1 id="pipeline">Asteroid Shader Pipeline</h1>
+                I've provided an explanation on each step in the shader pipeline for the concepts behind this project. 
+                Here I talk about the methods used, necessary optimizations, cautions to developers, and additional various notes.
+                This commentary is on the code available for viewing <a href="https://github.com/SilvRHat/gr-v-f-UX/tree/master/shdr/AZ" target="_blank">here</a>.
                 <br><br>
 
                 <h2 id="vert">Vertex</h2>
-                The idea behind creating a meteor is to 'layer' noise ontop of some existing geometry. 
-                The noise essentially is some height extended along the normal of that existing geometry.
+                The idea behind creating an asteroid is to 'layer' noise on top of some existing geometry as a displacement. 
+                Essentially the noise adds some height extended along the normal of that existing geometry.
                 <br><br>
-                Thus, for this project all meteors first start off as an icosphere.
+                For this project all asteroids first start off as an icosphere, since vertices are equally spaced for uniform detail.
                 The vertex shader simply passes all relevant information along in the shader pipeline.
                 <br>
                 This includes:
@@ -161,88 +160,94 @@
                 </ul>
                 <br><br>
 
-                <h2 id="tesc">Tesselation Control</h2>
-                Now a bit more happens in the tesselation control shader.
-                This is where extra detail is allocated (but not specified) on the icospheres. 
-                Both the inner tess level and outer tess level are set to the same level of detail.<br><br>
-                What is that level of detail? It depends on how much screen space the object is taking, thus it uses dynamic tesselation.
-                To do so, we remap the distance*scale of an object to units of our tesselation level - and make sure the remap clamps these values.
-                A curve is also applied during the remap, this is to better optimize the level of detail with customization on the falloff of detail.
+                <h2 id="tesc">Tessellation Control</h2>
+                A bit more happens in the tesselation control shader.
+                This is where extra detail is allocated (but not specified) on the icospheres.
+                Both the inner and outer tessellation levels are set to the same level of detail.<br><br>
+                That level of detail depends on how much screen space the object is taking, which works dynamically.
+                This is accomplished by remapping the distance*scale of an object to the tesselation level, which is clamped by macros specifying the min and max tess level.
+                A curve is also applied during the remap, this is to better optimize the level of detail with customization on the falloff.
                 <br><br>
                 Additional optimizations are also performed at this time, including camera culling. 
-                If the object is not in view of the camera, then set its tess level to 0.
-                We check this by calculating the NDC coords of an object's center and check if they are out of some range.
+                If the object is not in view of the camera, then the tess level is set to 0.
+                This is done by calculating the NDC coords of an object's center and compared against some range.
                 <br><br>
-                We can also cull some patches by their normal similar to backface culling. 
-                Since we are extruding the geometry, not all backface patches now will remain that way - so we simply check if its an EXTRA backface patch (dot product > .6) which probabily will never be seen.
+                Individual patches are also culled during this step. 
+                However, since the geometry will be extruded randomly and the normals will change slightly, only patches that are extremely back-facing are culled.  
                 <br><br>
 
-                <h2 id="tese">Tesselation Evaluation</h2>
-                Now a lot happens here.
-                This is where the extra detail is specified, where we set the position of each vertex and identify the new vertex normals.
-                The vertex position is fairly easy, what we do is apply some noise along the normals of our sphere.
+                <h2 id="tese">Tessellation Evaluation</h2>
+                A lot goes on in the tessellation evaluation stage.<br><br>
+                This is where the extra detail is specified, where the position of each vertex is set and new vertex normals are identified.
+                Obtaining the new vertex position is done by applying some noise along the normal (as a displacement).
                 <br><br>
-                Here I used a ridged-multifractal musgrave texture which gives nice ridges ironically.
+                Here I used a ridged-multifractal Musgrave texture which gives a ridged terrain look.
                 <br><br>
-                Now real quick, I caution copying a glsl function of this noise blindly from the internet.
-                The one I found worked amazingly well, but the loop setup was so obsure that the GPU should not perform loop unrolling.
-                What I want readers to take away here, is that its useful to learn how shaders are compiled specifically to run fast,
-                and how writing things certain ways will get in the way of powerful optimizations by the compiler.
+                When I had first implemented this, I had sourced a GLSL function on the internet. And it worked very well,
+                until I upped the number of asteroids.
+                Within the function there was a loop which was written with the conditional statement written at the bottom, and was so obscure that the GPU could not perform its loop-unrolling optimization.
+                After reworking the function a bit to make this optimization happen, there was a real increase in speed (at least on my newer laptop).
                 <br><br>
-                For the musgrave texture, I changed up the lucanarity parameter to be less than 1. Why is this weird?
-                Lucanity is the scale between octaces of the texture. So when its less than 1, the scale grows, which is not common in fBMs.
-                Another obsurity is that the range of this particular noise function is not always bound between [0,1]. Below I showcase, the
+                For the Musgrave texture, I changed up the lacunarity parameter to be less than 1. Which is a bit odd if you think about it.
+                Lacunarity is the scale between octaves on the texture, so when it's less than 1 the scale grows instead of shrinks.
+                Interestingly, the range of this particular noise function is also not always bound between [0,1]. Below is the
                 layering of multiple octaves to its full scale.
                 <br><br>
                 <img style="width: 30%;" src="img/az1.png">
+                <p class="img-id">1</p>
                 <img style="width: 30%;" src="img/az2.png">
+                <p class="img-id">2</p>
                 <img style="width: 30%;" src="img/az3.png">
+                <p class="img-id">3</p>
+                <br><br>
                 <img style="width: 30%;" src="img/az4.png">
+                <p class="img-id">4</p>
                 <img style="width: 30%;" src="img/az5.png">
+                <p class="img-id">5</p>
                 <img style="width: 30%;" src="img/az6.png">
+                <p class="img-id">6</p>
                 <br><br>
-                A final note on this noise function, is that it uses simplex noise under the hood.
-                Calculating noise from scratch is an expensive process, so instead of samplign 'true' simplex noise.
-                We pass in a 3D texture of simplex noise for sampling instead. For sampling, we use the mirror repeat paramtere,
-                so that is seems continuous no matter where we sample. However, this can cause 'mirroring' so the scale of this noise
-                should be different than the scale/positioning of the asteroids.
+                <ol>
+                    <li>1 Octave</li>
+                    <li>3 Octaves</li>
+                    <li>5 Octaves</li>
+                    <li>6 Octaves</li>
+                    <li>7 Octaves</li>
+                    <li>7.5 Octaves</li>
+                </ol>
+                A final note on this procedural texture is that it uses simplex noise under the hood.
+                Calculating noise is often a relatively expensive process, which isn't great for rendering say 400 asteroids.
+                A fairly cool optimization which was made, was replacing the GLSL simplex noise calculation with 3d texture sampling.
+                3D textures can get pretty big memory wise fast, so the pre-computed texture was only 1.278451... world space units long in each direction.
+                The obscure unit was to prevent repetition in the sampling which had actually worked very well except at the origin.
+                For this texture to be continuous the OpenGL wrapping parameter is set to mirror-repeat.
                 <br><br>
-                Now onto normals. There's not really a derivative or mathmatical way to do this. 
-                For this, we can implement something similar to Gouraud Shading. 
-                We sample around the vertex and calculate normals of various triangles from these sampled points. 
-                Then, we average those normals for a final vertex normal.
-                <br><br>
-                This step has two parameters, vertices to sample and distance away of sample. Both are magic numbers.
-                The more samples means finer precision but more expensive computation. The larger the distance means
-                smoother surfaces.
-                <br><br>
-                These are then calculated in NDC space and passed onto the geometry shader. 
-                Along with all other information needed by the fragment shader.
+                For normals, there wasn't a derivative or mathematically correct way to do this. So Gouraud shading is implemented here. 
+                This means that more vertices are 'created' around the original vertex, creating polygons where the normal can be calculated with dot products. 
+                Then all those normals are averaged to produce a final one.
 
                 <h2 id="geom">Geometry</h2>
-                The geometry shader simply does nothing useful. 
-                I've included this step here, because it was useful early in tesselation to recalculate the normals. 
-                This would allow a clear different between triangles which was useful in ensuring previous stages/ early work was correct.
-                <br><br>
+                The geometry shader is an optional process. 
+                I've included this step here, because it was useful early in development as a way to check if tessellation was correctly implemented by providing normals for flat shading. 
 
                 <h2 id="frag">Fragment</h2>
-                The fragment shader is very simple.<br>
+                Finally, the fragment shader is very simple.<br><br>
                 A lighting calculation is performed by a dot product on the light offset vector and normal.
                 It is then multiplied by the asteroid diffuse color. 
-                Then, the colors are down-sampled so that there are only 3 colors for meteors.<br><br>
-                Afterwards, blue is added using a fresnel effect for flare. 
-                Then noise and a red-hue are applied in a post-processing step.
+                The colors are then down-sampled so that there are only 4-5 shades.<br><br>
+                Afterwards, blue is added using a fresnel effect for visual flare. 
+                Noise and a red hue are finally applied in a post-processing step.
                 <br><br>
-                This was to emulate cel-shading, or the look of traditional animation. 
-                Traditional animation was limited to very few colors (a couple hundred all-together), which drove this unique style.
+                This was to emulate cel-shading or the look of traditional animation. 
+                Traditional animation was once limited to very few colors (a couple hundred all-together), which drove this unique style.
                 <br><br>
 
                 <h1 id="process">Process</h1>
-                Along the development of this project, I took a few recordings which document the process. I've included them below.
-                As the project got more and more developed, the video naming scheme got more and more obscure.
+                Along the development of this project, I took a few recordings which roughly document the process. Those are included here.
+                However, as the project got more and more developed the video naming scheme got more and more obscure.
                 <br><br>
 
-                <h3>"Reactive Tesselation"</h3>
+                <h3>"Reactive Tessellation"</h3>
                 <video controls width="80%;" src="img/reactive-tesselation.mov"></video>
                 <br><br>
 
@@ -261,8 +266,6 @@
                 <h3>"Aztroid But Fire"</h3>
                 <video controls width="80%;" src="img/aztroid-but-fire.mov"></video>
                 <br><br>
-
-                Knowing enough about normals, to turn any geometry into fire is a powerful ability I have come to realize.
             </div>    
         </div>
 
