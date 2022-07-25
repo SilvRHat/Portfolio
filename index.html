@@ -26,20 +26,20 @@
             </a>
             <div class="content">
                 <div class="dropdown">
-                    <a href=""><h3>Tech Art</h3></a>
+                    <a href=""><h3>Animation</h3></a>
                     <div class="dropdown-content">
                         <a href="Portfolio/do-witchcraft/">Do Witchcraft</a><br>
                         <a href="Portfolio/Ukiyo/">Project::Ukiyo「浮世」</a><br>
                         <a href="Portfolio/grav-flux/">AZtroid</a><br>
                         <a href="Portfolio/blackhole/">BlackH01e</a><br>
-                        <a href="Portfolio/SPdr/">SP//dr_wbs</a><br>
                         <a href="Portfolio/Ramen/">Ⓣ光Ramen</a><br>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href=""><h3>Project</h3></a>
+                    <a href=""><h3>Code</h3></a>
                     <div class="dropdown-content">
                         <a href="Portfolio/MvRE/">Mv:RE(Rendering Engine)</a><br>
+                        <a href="Portfolio/SPdr/">SP//dr_wbs</a><br>
                         <a href="Portfolio/noir/">Noir~ Game</a><br>
                         <a href="Portfolio/Diced/">Diced</a><br>
                         <a href="Portfolio/light-stealer/">Light Stealer</a><br>
@@ -72,7 +72,7 @@
                 <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/KJCOutvCY1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             
-            
+            <!--
             <div class="album">
                 <h1>Technical Direction・Art Reel</h2>
                 <h2>DISK ZERO / GAVIN ZIMMERMAN</h3>
@@ -87,100 +87,131 @@
                 </div>
                 <img class="disk-cover" src="img/disk-cover.png">
             </div>
+            -->
             
             <div class="content">
-                <h2>Reel Breakdown</h2>
-                Here I go into some more detail on the creation behind these projects. Each project is also complete
-                with a full animation (or game link) and technical writeup if interested.
-                Note that all work is my own, other than concept and background illustration credited appropriately.
-                <br><br><br>
+                <h1>Reel Breakdown</h1>
+                
 
-                <h3 id="witchcraft" style="margin-bottom: 2px;">Do Witchcraft</h3>
+                <h3 id="ramen" style="margin-bottom: 2px;">Ⓣ光Ramen</h3>
                 <h5 style="margin-top: 6px;">
-                    Procedural Geometry (All Model Animations),
-                    Procedural Shading (All)
+                    Blender 3.2 [Cycles Engine], Adobe Illustrator
                 </h5>
                 <div style="display: inline-block; width: 100%;">
-                    <div style="padding: 24px; width: 50%; float:right;">
-                        Short film produced entirely from procedural programming; 
-                        3D modeling and animation are programmed with Blender's geometry nodes feature and
-                        all materials/textures are done with custom node-based shaders.
-                        <br><br>
-                        <a href="./Portfolio/do-witchcraft/">Full Writeup, Breakdown, and Animation</a>
+                    <div style="padding: 0; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Procedurally modeled all food assets with artistic parameters to change look/ random seed</li>
+                            <li>Shaded physically based materials for all food assets (no textures involved)</li>
+                            <li>Keyframed shader parameters on 2D animation for holographic elements and
+                                programmed SDF helper functions for these animations</li>
+                            <li>Designed Penguin Sticker and shrink-wrapped geometry on top of bowl</li>
+                            <li>Created compositing program (node-based) for bloom and partial denoising</li>
+                        </ul>
                     </div>
-                    <img width="40%;" src="img/witchcraft.png">
+                    <img width="40%;" src="Portfolio/Ramen/7-18-render.png">
                 </div>
                 <br><br>
 
-
-                <h3 id="ukiyo" style="margin-bottom: 2px;">Project::Ukiyo「浮世」</h3>
+                <h3 id="witchcraft" style="margin-bottom: 2px;">Do Witchcraft</h3>
                 <h5 style="margin-top: 6px;">
-                    Procedural Shading (Smoke, Lantern, Cloth), Modeling (All), 
-                    Composition + Layout, Simulation (Cloth)
+                    Blender [Eevee Engine]
                 </h5>
                 <div style="display: inline-block; width: 100%;">
-                    <div style="padding: 24px; width: 50%; float:right;">
-                        Short film developed for a great course on Japanese Literature, adapting an early ghost story.
-                        Materials, composition, lighting, color, and framing here reference the "original" work, historical context,
-                        and literary influence. 
-                        <br><br>
-                        A broad use of technology is used here including: cloth simulation, substance painter,
-                        procedural textures (node-based), geometry shaders (node-based), grease pencil (2D/3D text), and various lighting setups.
-                        <br><br>
-                        <a href="./Portfolio/Ukiyo/">Full Writeup, Breakdown, and Video</a>
+                    <div style="padding: 0px; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Procedurally shaded all materials (No textures involved)</li>
+                            <li>Programmed geometry for all animated models (No bones, rigs, or keyframes involved besides spinning dial)
+                                <ul>
+                                    <li>Developed (fake) crumbling simulation for paper</li>
+                                    <li>Modeled entire flower from splines</li>
+                                    <li>Developed mesh-based fire effect using displacement on sphere</li>
+                                </ul>
+                            </li>
+                            <li>Created attributes describing scene time and procedural UV maps as texture coordinates for fragment shaders</li>
+                        </ul>
+                        <br>
+                    </div>
+                    <img width="40%;" src="img/witchcraft.png">
+                    <br><br>
+                    <a href="./Portfolio/do-witchcraft/" style="font-size: large;" target="_blank">Full Technical Breakdown Here</a>
+                </div>
+                <br><br>
+                
+                
+                <h3 id="ukiyo" style="margin-bottom: 2px;">Project::Ukiyo「浮世」</h3>
+                <h5 style="margin-top: 6px;">
+                    Blender [Eevee Engine], Adobe Substance Painter 
+                </h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 0px; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Procedurally shaded all materials, including smoke VFX
+                                <ul>
+                                    <li>Lantern uses texture for base diffuse color made in substance painter; 
+                                        ring details, lighting, and transparency are added on procedurally
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Created geometry tool for generating flowers with parameters to control petal number, falloff, scale, and rotation</li>
+                            <li>Performed cloth simulation with wind field and gravity</li>
+                            <li>Performed all modeling and animation</li>
+                            <li>Framed all three shots for clear animation</li>
+                        </ul>
+                        <br>
                     </div>
                     <img width="40%;" src="img/ukiyo.png">
+                    <br><br>
+                    <a href="./Portfolio/Ukiyo/" style="font-size: large;" target="_blank">Full Technical Breakdown Here</a>
                 </div>
                 <br><br>
 
                 <h3 id="blackhole" style="margin-bottom: 2px;">Blackh01e</h3>
-                <h5 style="margin-top: 6px;">Procedural Shading (Black hole, Accretion Disk)
+                <h5 style="margin-top: 6px;">
+                    Blender [Eevee Engine]
                 </h5>
                 <div style="display: inline-block; width: 100%;">
-                    <div style="padding: 24px; width: 50%; float:right;">
-                        The black hole is entirely shader-based, realtime, and reactive to the scene. Normals are reconstructed on a sphere
-                        based on viewing angle for accurate refractions. 
-                        The accretion disk is created procedurally with parameters for color, speed, accretion amount, and sharpness.
-                        <br><br>
-                        <a href="./Portfolio/blackhole/">Full Writeup, Breakdown, and Video</a>
+                    <div style="padding: 0px; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Recalculated sphere normals for correct refraction to simulate a black hole's lensing effect</li>
+                            <li>Procedurally shaded accretion disk for real-time VFX</li>
+                            <li>Animated Camera</li>
+                        </ul>
+                        <br>
                     </div>
                     <img width="40%;" src="img/blackhole.png">
+                    <br><br>
+                    <a href="./Portfolio/blackhole/" style="font-size: large;" target="_blank">Full Technical Breakdown Here</a>
                 </div>
                 <br><br>
 
 
                 <h3 id="gravity" style="margin-bottom: 2px;">AZtroid</h3>
-                <h5 style="margin-top: 6px;">Rendering Pipeline, Shaders, Procedural Geometry, Post Processing Shaders, Optimization</h5>
-                <div style="display: inline-block; width: 100%;">
-                    <div style="padding: 24px; width: 50%; float:right;">
-                        Completely coded from OpenGL, C, and GLSL to create an asteroid field without mesh or texture assets.
-                        Full vertex-processing pipeline is utilized to tessellate icospheres into desired shape.
-                        A ridged multifractal Musgrave texture is utilized for displacement, with Gouraud method to recalculate normals. 
-                        All shaders here were programmed from scratch (vertex, tessellation control+evaluation, and fragment).
-                        <br><br>
-                        Optimizations include camera-culling, dynamic level of detail on tessellation, backface culling, and 3D texture sampling of simplex noise for procedural Musgrave texture function (opposed to a GLSL function).
-                        <br><br>
-                        <a href="./Portfolio/grav-flux/">Full Breakdown and Video</a>
-                    </div>
-                    <img width="40%;" src="img/gravity.png">
-                </div>
-                <br><br>
-
-                <h3 id="ramen" style="margin-bottom: 2px;">Ⓣ光Ramen</h3>
                 <h5 style="margin-top: 6px;">
-                    Procedural Geometry (All food, Sticker), 
-                    Procedural Shading (Food, Utensils), Light Rig
+                    C, OpenGL 4.1, glfw3, GLSL
                 </h5>
                 <div style="display: inline-block; width: 100%;">
-                    <div style="padding: 24px; width: 50%; float:right;">
-
-                        Ray-traced snapshot of 3D ramen model; modeling is done procedurally with Blender's Geometery Nodes feature. 
-
-                        This uses blender's cycles rendering engine, but also draws techniques from RenderMan workflows.
-                        <br><br>
-                        <a href="./Portfolio/Ramen/">Concept, (Full breakdown coming soon)</a>
+                    <div style="padding: 0px; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Programmed Rendering Engine in C/OpenGL for this and other projects; limited libraries used (glfw3, standard C)
+                                <ul>
+                                    <li>Rendering Pipeline</li>
+                                    <li>Object Framework</li>
+                                    <li>Portion of Custom Matrix/ Vector Library</li>
+                                </ul>
+                            </li>
+                            <li>Procedurally modeled all geometry</li>
+                            <li>Created a dynamic tesselation shader based on object position and scale relative to camera</li>
+                            <li>Optimized program: performed object and face culling, object instancing, simplex 3D texture sampling (rather than calculating completely) within musgrave texture function</li>
+                            <li>Perform all lighting calculations from scratch</li>
+                            <li>Performed post-processing from framebuffer to achieve traditional cel animation look</li>
+                        </ul>
+                        <br>
                     </div>
-                    <img width="40%;" src="Portfolio/Ramen/Ramen-render.png">
+                    <img width="40%;" src="img/gravity.png">
+                    <br><br>
+                    <a href="./Portfolio/blackhole/" style="font-size: large;" target="_blank">GLSL Shaders Breakdown Here</a>
+                    <br>
+                    <a href="https://github.com/SilvRHat/gr-v-f-UX" style="font-size: large;" target="_blank">Full Code and Github Here</a>
                 </div>
                 <br><br>
             </div>
