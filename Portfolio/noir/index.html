@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Noir~</title>
+        <title>RAMEN</title>
         <link rel="icon" href="../../favicon.ico">
         <link rel="stylesheet" href="../../style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +29,9 @@
                     <a href=""><h3>LookDev</h3></a>
                     <div class="dropdown-content">
                         <a href="../Ramen/">Ⓣ光:Ramen</a><br>
+                        <a href="../starx/">STAR x Dumpling</a><br>
                         <a href="../koi/">KOい</a><br>
-                        <a href="../noir/">N01R</a><br>
+                        <a href="../noir-coffee/">N01R</a><br>
                         <a href="../Ukiyo/">Project::Ukiyo「浮世」</a><br>
                     </div>
                 </div>
@@ -60,9 +61,9 @@
 
         <!-- COVER -->
         <div class="cover-fit">
-            <img src="../../img/cover.png">
+            <img src="cover.png">
             <div class="vert_title">
-                <h2 style="color:rgb(16, 16, 16);">Noir~</h2>
+                <h2 style="color:white;">Ⓣ光Ramen</h2>
             </div>
         </div>
 
@@ -72,70 +73,57 @@
             <!-- youtube -->
             <div class="content-2">
                 <div class="info-box">
-                    <h2>Noir~</h2>
+                    <h2>Ⓣ光Ramen</h2>
                     <img><br>
 
                     <table style="text-align: center; margin: auto;">
                         <tr>
-                            <td><strong>People:</strong></td>
+                            <td><strong>Directors:</strong></td>
                             <td><small>Gavin Zimmerman</small></td>
                         </tr>
                         <tr>
                             <td><strong>Timeline:</strong></td>
-                            <td><small>May 2021 - Aug 2021</small></td>
+                            <td><small>Upcoming [2]</small></td>
                         </tr>
                         <tr>
-                            <td><strong>Media:</strong></td>
-                            <td><small>Indie Game</small></td>
+                            <td><strong>Focus:</strong></td>
+                            <td><small>Look Development</small></td>
                         </tr>
                         <tr>
                             <td><strong>Tech:</strong></td>
-                            <td><small>ROBLOX, Rojo</small></td>
+                            <td><small></small></td>
                         </tr>
                         <tr>
-                            <td><strong>Link:</strong></td>
-                            <td><small>
-                                <a href="https://www.roblox.com/games/6842303525/Noir">Game</a><br>
-                                <a href="https://github.com/SilvRHat/Noir">Github</a>
-                            </small></td>
+                            <td><strong>Links:</strong></td>
+                            <td><small>N/A</small></td>
                         </tr>
                     </table>
 
                     <h3>Table of Contents</h3>
                     <ul>
-                        <li><a href="#noir">Noir~</a></li>
-                        <li><a href="#control">Controls & Movement</a></li>
-                        <li><a href="#concept">Concept</a></li>
+                        <li><a href="#project_ukiyo">Ⓣ光Ramen</a>
+                            <ul>
+                                <li><a href="#test-render">Test Render</a></li>
+                                <li><a href="#concept">Concept</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
-                <h1 id="noir">Noir~</h1>
-                <div id="video" class="project-reel">
-                    <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/-BWKzk4RtUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <h1 id="project_ukiyo">Ⓣ光Ramen</h1>
+                The animation for this project is a work in progress, so please feel free check back for updates!<br><br>
+                Ⓣ光Ramen translates to "transmitted-light ramen", referring to the technique used in traditional cel animation with multi-plane cameras.
+                Here, "Ⓣ光" refer to its written style in the design notes for Neon Genesis Evangelion. This effect describes the technological component on this animation.
+                <h2 id="test-render">Test Render</h2>
+                <video controls width="60%;" src="ramen-render-2_0000001-0336.mp4"></video>
                 <br><br>
-
-                <h1 id="control">Controls & Movement</h1>
-                The character verbs I've designed for Noir allow her to fly, hover (walk) on walls, jump and slide, step back in time, sprint, and various chimera states of those. 
-                So it wasn't ideal to use Roblox's default camera or character controller.
+                The test render above to show off the direction for this project and will certainly undergo several iterations before being finalized and portfolio-ready. 
+                In place, below is a render on the (mostly) finalized ramen model.
                 <br><br>
-                What is shown in the video above is the implementation of a custom character controller which is non-physics based. 
-                Each nearby surface is surveyed and compared to the last selected surface and camera and directional input. 
-                A spring allows the player to hover at a certain height (lowered when sprinting).
+                <img style="width: 95%;" src="7-18-render.png">
                 <br><br>
-                Currently in implementation, the flying mode will be active when that distance is greater than (~20 units). While any distance from the best surface under that gives a blended mode of hovering and flying (using a sigmoid).
+                <h2 id="concept">Concept</h2>
+                <img style="width: 90%;" src="concept.png">
                 <br><br>
-                Inputs are fed into a flying controller and hovering controller which then add velocities to work with Roblox's existing physics engine.
-                <br><br>
-                This results in a smooth change of movement style- where jumping acts as a kickstart to flying.
-                <br><br>
-
-                <h1 id="concept">Concept</h1>
-                <img style="width:99%; filter: brightness(1.2) contrast(1.2);" src="noir-concept1.jpg">
-                <p class="img-id">1</p>
-                <br><br>
-                <ol>
-                    <li>Character Poses signalling various movement modes</li>
-                </ol>
             </div>    
         </div>
 
@@ -156,7 +144,7 @@
             <div class="project-links">
                 <a href="../do-witchcraft/">Do Witchcraft</a>
                 <a href="../Ukiyo/">Project::Ukiyo「浮世」</a>
-                <!--<a href="../Portfolio/Ramen/">Ⓣ光Ramen</a>-->
+                <!--<a href="../Portfolio/Ramen/">Ⓣ光　Ramen Bowl</a>-->
                 <a href="../grav-flux/">AZtroid</a>
                 <a href="../blackhole/">BlackH01e</a>
                 <a href="../SPdr/">SP//dr_wbs</a>
