@@ -22,43 +22,47 @@
         <div class="navbar">
             <a class="home" href="">
                 <h1>Gavin Zimmerman<img class='logo' src="img/logo.png"></h1>
-                <h2>Technical Director - Rendering // Illustrator</h2>
+                <h2>Render ・ Lighting ・ Illustration</h2>
             </a>
             <div class="content">
                 <div class="dropdown">
-                    <a href=""><h3>Tech Art</h3></a>
+                    <a href=""><h3>Animations</h3></a>
                     <div class="dropdown-content">
                         <a href="Portfolio/Ramen/">Ⓣ光:Ramen</a><br>
-                        <a href="Portfolio/MvRE/">Mv:RE(Rendering Engine)</a><br>
                         <a href="Portfolio/Ukiyo/">Project::Ukiyo「浮世」</a><br>
                         <a href="Portfolio/do-witchcraft/">Do Witchcraft</a><br>
                         <a href="Portfolio/blackhole/">BlackH01e</a><br>
-                        <a href="Portfolio/grav-flux/">AZtroid</a><br>
-                        <a href="Portfolio/SPdr/">SP//dr_wbs</a><br>
                     </div>
                 </div>
                 <div class="dropdown">
                     <a href=""><h3>Games</h3></a>
                     <div class="dropdown-content">
-                        <a href="Portfolio/noir/">Noir~ Game</a><br>
                         <a href="Portfolio/Diced/">Diced</a><br>
                         <a href="Portfolio/light-stealer/">Light Stealer</a><br>
+                        <a href="Portfolio/noir/">Noir~ Game</a><br>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href=""><h3>Illustration</h3></a>
+                    <a href="Portfolio/2023-illustration/"><h3>Illustration</h3></a>
+                </div>
+                <div class="dropdown">
+                    <a href=""><h3>Software</h3></a>
                     <div class="dropdown-content">
-                        <a href="Portfolio/2023-illustration/">Illustration (2023)</a><br>
+                        <a href="Portfolio/MvRE/">Mv:RE(Rendering Engine)</a><br>
+                        <a href="Portfolio/grav-flux/">AZtroid</a><br>
+                        <a href="Portfolio/SPdr/">SP//dr_wbs</a><br>
                     </div>
                 </div>
+                <!--
                 <div class="dropdown">
                     <a href=""><h3>Comic</h3></a>
                     <div class="dropdown-content">
                         <a href="Portfolio/ggn">Ghost Glass Noir (Upcoming)</a><br>
                     </div>
                 </div>
+                -->
                 <div class="dropdown">
-                    <a href="Profile/"><h3>Profile</h3></a>
+                    <a href="Profile/"><h3>About</h3></a>
                 </div>
             </div>
         </div>
@@ -77,8 +81,10 @@
         <div class="scroll">
             <!-- youtube -->
             <div class="reel">
-                <!--<video style="width: 100%;" controls src="su22-reel-2.mov"></video>-->
+                <!-- YOUTUBE
                 <iframe style="aspect-ratio: 560/315; width: 100%;" src="https://www.youtube.com/embed/KJCOutvCY1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                -->
+                <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1001361018?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Demo Reel 2024 - Render, Lighting, LookDev"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             </div>
             
             <!--
@@ -101,20 +107,52 @@
             <div class="content">
                 <h1>Reel Breakdown</h1>
                 
-
-                <h3 id="ramen" style="margin-bottom: 2px;">Ⓣ光Ramen</h3>
+                <h3 id="ramen" style="margin-bottom: 2px;">Drums</h3>
                 <h5 style="margin-top: 6px;">
-                    Blender 3.2 [Cycles Engine], Adobe Illustrator
+                    Personal project [2024]: Testing out final look for short film story<br>
+                    Focus: Lighting, LookDev, Composition and Color
                 </h5>
                 <div style="display: inline-block; width: 100%;">
                     <div style="padding: 0; width: 50%; float:right;">
                         <ul style="font-size: small; margin:0; padding: 0;">
-                            <li>Procedurally modeled all food assets with artistic parameters to change look/ random seed</li>
-                            <li>Shaded physically based materials for all food assets (no textures involved)</li>
-                            <li>Keyframed shader parameters on 2D animation for holographic elements and
-                                programmed SDF helper functions for these animations</li>
-                            <li>Designed Penguin Sticker and shrink-wrapped geometry on top of bowl</li>
-                            <li>Created compositing program (node-based) for bloom and partial denoising</li>
+                            <li>
+                                Modeling: Mix of procedurally modeled objects (node graph with heavy math) and standard modeling.
+                                This enables easy tuning of drums for character rigs post-modeling. 
+                                It also allows the cymbal stands to retract as they would on a real kit.
+                            </li>
+                            <li>
+                                Look Dev: All procedural shader networks optimized for quick sampling.
+                            </li>
+                            <li>
+                                Lighting: Features a key and fill light (no backlight) set in blue to create the overall ambience.
+                                The yellow high lights are actually hidden mesh lights resembling drum sticks - the idea being that those drum sticks bring the energy into this scene.
+                                I hid the emitting drum sticks for clarity on stills here, but I imagine in an animation form they would work very well.
+                            </li>
+                        </ul>
+                    </div>
+                    <img width="40%;" src="img/drums.png">
+                </div>
+                <br><br>
+
+
+                <h3 id="ramen" style="margin-bottom: 2px;">Ⓣ光Ramen</h3>
+                <h5 style="margin-top: 6px;">
+                    Personal project [2022]: Testing out emissive and animated shader objects<br>
+                    Focus: LookDev / Shading, Lighting, Modeling
+                </h5>
+                <div style="display: inline-block; width: 100%;">
+                    <div style="padding: 0; width: 50%; float:right;">
+                        <ul style="font-size: small; margin:0; padding: 0;">
+                            <li>Modeling: Most geometry here is modeled procedurally in a node graph.</li>
+                            <li>Look Dev: All shaders here are procedural materials (except table wood material). A custom SDF (signed distance library)
+                                was made to create and animate the HUD like materials lit above the bowl.
+                            </li>
+                            <li>
+                                Lighting: The lighting was motivated so that the bowl would feature many emissive elements, for a futuristic look.
+                                Style wise I wanted these elements to reflect Japanese arcade games, so they are very geometric. And I wanted
+                                this to resemble transmitted light (2D animation lighting technique before digital rendering).<br>
+                                The key, fill (2x), and backlights were tuned so not to overpower those emissive elements. 
+                            </li>
                         </ul>
                     </div>
                     <img width="40%;" src="Portfolio/Ramen/7-18-render.png">
@@ -123,20 +161,21 @@
 
                 <h3 id="witchcraft" style="margin-bottom: 2px;">Do Witchcraft</h3>
                 <h5 style="margin-top: 6px;">
-                    Blender [Eevee Engine]
+                    Personal project [2022]: To learn procedural shader, fx and animation<br>
+                    Focus: Procedural Modeling, LookDev, FX, Animation<br>
+                    Note: This piece was intended more for asset development than shot development.
                 </h5>
                 <div style="display: inline-block; width: 100%;">
                     <div style="padding: 0px; width: 50%; float:right;">
                         <ul style="font-size: small; margin:0; padding: 0;">
-                            <li>Procedurally shaded all materials (No textures involved)</li>
-                            <li>Programmed geometry for all animated models (No bones, rigs, or keyframes involved besides spinning dial)
-                                <ul>
-                                    <li>Developed (fake) crumbling simulation for paper</li>
-                                    <li>Modeled entire flower from splines</li>
-                                    <li>Developed mesh-based fire effect using displacement on sphere</li>
-                                </ul>
+                            <li>
+                                Modeling / Animation / FX: All geometry (except dial w/ eyeball) was modeled and animated procedurally in node graphs.
+                                Careful thought was put into how things should move and look (from an animators perspective).
+                                The approach was then, how can I use math to do that? My full breakdown includes a more in-depth look into that exact process.
                             </li>
-                            <li>Created attributes describing scene time and procedural UV maps as texture coordinates for fragment shaders</li>
+                            <li>
+                                Lookdev: Also all procedurally done. Shader's here often informed the modeling/animation step, so I would jump between both.
+                            </li>
                         </ul>
                         <br>
                     </div>
@@ -149,7 +188,8 @@
                 
                 <h3 id="ukiyo" style="margin-bottom: 2px;">Project::Ukiyo「浮世」</h3>
                 <h5 style="margin-top: 6px;">
-                    Blender [Eevee Engine], Adobe Substance Painter 
+                    Personal project [2022]<br>
+                    Focus: Shot composition and framing, Shading, Rendering, FX Simulation (cloth)
                 </h5>
                 <div style="display: inline-block; width: 100%;">
                     <div style="padding: 0px; width: 50%; float:right;">
@@ -174,6 +214,7 @@
                 </div>
                 <br><br>
 
+                <!--
                 <h3 id="blackhole" style="margin-bottom: 2px;">Blackh01e</h3>
                 <h5 style="margin-top: 6px;">
                     Blender [Eevee Engine]
@@ -222,6 +263,7 @@
                     <br>
                     <a href="https://github.com/SilvRHat/gr-v-f-UX" style="font-size: large;" target="_blank">Full Code and Github Here</a>
                 </div>
+                -->
                 <br><br>
             </div>
         </div>
